@@ -4,6 +4,34 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ShieldCheck } from "lucide-react";
 
+function CampaignVideo({ src, title, onShop }: { src: string; title: string; onShop: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !reducedMotion) void video.play().catch(() => {});
+      else video.pause();
+    }, { threshold: 0.15 });
+    observer.observe(video);
+    return () => { observer.disconnect(); video.pause(); };
+  }, []);
+  return <div className="campaign-panel">
+    <video ref={videoRef} muted loop playsInline preload="metadata" aria-label={`Authera ${title} campaign`} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
+      <source src={src} type="video/mp4" />
+    </video>
+    <div className="campaign-caption"><h2>{title}</h2><a href="#collection" onClick={onShop}>Shop now<span className="screen-reader-only"> — {title}</span></a></div>
+    <button className="campaign-play" aria-label={`${playing ? "Pause" : "Play"} ${title} video`} onClick={() => {
+      const video = videoRef.current;
+      if (!video) return;
+      if (video.paused) void video.play().catch(() => {});
+      else video.pause();
+    }}><span aria-hidden="true">{playing ? "Ⅱ" : "▶"}</span></button>
+  </div>;
+}
+
 function FacebookIcon() {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 22v-9h3l.5-4H14V7c0-1.2.4-2 2-2h2V1.4A25 25 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v9h4Z" /></svg>;
 }
@@ -151,6 +179,11 @@ export default function Home() {
     </nav>
     {searchOpen && <div className="search-panel"><label htmlFor="search">Search the collection</label><input id="search" autoFocus placeholder="Search a brand or product…" value={query} onChange={e => {setQuery(e.target.value);setTab("Featured products");setBrand("");}}/><a href="#collection">View results</a><button className="icon-button" aria-label="Close search" onClick={() => {setSearchOpen(false);setQuery("");}}><X size={19}/></button></div>}
     <main>
+      <section className="campaign-hero" aria-label="Discover Authera">
+        <CampaignVideo src="/videos/authera-campaign-1.mp4" title="Skincare & Rituals" onShop={() => {setBrand(""); chooseTab("Face care");}} />
+        <CampaignVideo src="/videos/authera-campaign-2.mp4" title="Beauty & Essentials" onShop={() => {setBrand(""); chooseTab("Featured products");}} />
+        <div className="campaign-wordmark" aria-label="Authera">Authera</div>
+      </section>
       <section className="shop-section" id="collection" aria-labelledby="shop-title">
         <div className="shop-intro"><h1 id="shop-title">FIND YOUR EVERYDAY <strong>GLOW!</strong></h1><p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—<strong>made for you.</strong></p></div>
         <div className="shopping-tabs" role="tablist" aria-label="Shop by category">{tabs.map(t => <button id={`tab-${t.replaceAll(" ","-")}`} key={t} role="tab" aria-selected={tab === t} aria-controls="product-panel" tabIndex={tab === t ? 0 : -1} className={tab === t ? "active" : ""} onClick={() => chooseTab(t)} onKeyDown={e => {const index=tabs.indexOf(t); const next=e.key==="ArrowRight" ? (index+1)%tabs.length : e.key==="ArrowLeft" ? (index-1+tabs.length)%tabs.length : e.key==="Home" ? 0 : e.key==="End" ? tabs.length-1 : -1;if(next>=0){e.preventDefault();chooseTab(tabs[next]);document.getElementById(`tab-${tabs[next].replaceAll(" ","-")}`)?.focus();}}}>SHOP {t === "Featured products" ? "THE EDIT" : t.toUpperCase()}</button>)}</div>
