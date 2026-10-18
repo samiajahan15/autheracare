@@ -1,0 +1,2 @@
+Built-in image generation edit prompt:
+Remove the white background; preserve the black serif Authéra lettering, acute accent, SKINCARE subtitle, spacing, and hierarchy. Clean edges and use a wide frame with modest transparent padding for website use.
