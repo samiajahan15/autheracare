@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><ViewTransition name="page" default="page-fade">{children}</ViewTransition></body></html>;
 }

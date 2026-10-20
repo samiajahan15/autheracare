@@ -1,5 +1,11 @@
 # AutheraCare website development
 
+## Supabase connection
+
+Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` in `.env.local` (see `.env.example`). Browser and server clients live in `src/lib/supabase/client.ts` and `server.ts`. `src/proxy.ts` refreshes cookie-based Auth sessions using verified claims and excludes static media. Protected routes must check identity and permissions themselves; the proxy does not restrict access.
+
+The storefront now reads published products from Supabase, with an explicitly labeled local preview when the database is unavailable. `/admin` provides email/password login and product editing; `/api/admin/products` verifies admin membership before access. Apply the schema and catalog import using [the backend setup guide](supabase/README.md) before these features can use the live database. Checkout is not implemented. The existing `pg` helper separately requires `DATABASE_URL` for direct SQL access. Never use a secret/service-role key in public environment variables.
+
 Stack: Next.js App Router, React, TypeScript, Tailwind CSS, PostgreSQL driver, Zod validation, and Lucide icons.
 
 ## Commands
