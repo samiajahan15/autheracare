@@ -18,4 +18,16 @@ The public Storage bucket `product-images` permits only approved admins to uploa
 
 Validation: `node --experimental-strip-types --test scripts/backend.test.mjs`, `npm run typecheck`, `npm run lint`, `npm run build`.
 
-Checkout and payment processing are not implemented. Inventory is editable but is not reserved by the preview bag. Real order creation must validate server-side prices and reserve stock transactionally before checkout is enabled.
+Cash on Delivery checkout validates server-side prices. Stock quantities are informational and do not block or change during new orders. The preview bag itself does not reserve inventory. Enable ordering only after configuring the order database and confirming catalog prices.
+
+## Order management
+
+Open **Orders** in the admin sidebar or visit `/admin/orders`. This page supports customer name, phone and order ID search, fulfillment/payment filters, 20 orders per page, store-wide totals, and order details with saved product prices and delivery information.
+
+Setup: apply `payment-foundation.sql` to the same project's database and configure the server-only `DATABASE_URL` with that database's Postgres or Supabase pooler connection string. Use the project's connection settings for SSL and credentials. Never put the connection string in a `NEXT_PUBLIC_` variable. Restart the development server after changing environment variables. Keep `COD_ENABLED=false` until checkout is ready; existing orders can still be managed while new ordering is disabled.
+
+Fulfillment follows placed → confirmed → shipped → delivered. Placed and confirmed orders can be cancelled; new orders do not reserve stock, so cancellation leaves inventory unchanged. Legacy orders that reserved stock restore it once in the cancellation transaction. Shipped/delivered orders cannot be cancelled here. COD can be marked collected when delivering an order or afterwards. Collected payments cannot be reset or cancelled through this interface; returns/refunds are outside this workflow.
+
+All order reads and writes require verified admin membership. Orders stay in the private `payments` schema. Updates lock the order row, reject stale status/payment values, and roll back stock changes if any update fails. No extra database migration is required beyond the existing payment foundation.
+
+Checks: `node scripts/order-management.test.mjs`, `node scripts/payments.test.mjs`, and `npm run typecheck`. Live save/cancellation verification requires the configured database and an admin session.

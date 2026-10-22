@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -69,7 +70,7 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
 
   return <main className={styles.page}>
     <section className={styles.story}>
-      <Link href="/" className={styles.wordmark} aria-label="Authéra homepage">Authéra<span>SKINCARE</span></Link>
+      <Link href="/" className={styles.wordmark} aria-label="Authéra homepage"><Image src="/brand/authera-logo.png" alt="Authéra Skincare" width={1983} height={793} priority /></Link>
       <div><p className={styles.eyebrow}>YOUR EVERYDAY RITUAL</p><h1>A little care.<br />All yours.</h1><p>Discover your favorite brands and make space for the things that feel good.</p><span className={styles.flower} aria-hidden="true">✳</span></div>
       <Link href="/">← Back to the collection</Link>
     </section>
