@@ -3,11 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { shuffleProducts, prioritizePopular } from "@/lib/catalog/discovery";
+import { isWinterCareProduct } from "@/lib/catalog/winter-care";
 import { sectionHref } from "@/lib/catalog/sections";
 import { normalizeSearch, searchProducts } from "@/lib/catalog/search";
 import seed from "@/lib/catalog/seed.json";
 import brandLogos from "@/lib/catalog/brand-logos.json";
 import CategoryMenu from "./category-menu";
+import PriceFilter from "./price-filter";
+import WinterCareDropdown from "./winter-care-dropdown";
+import ProductPrice from "./product-price";
+import FlavorGallery, { hasFlavorGallery } from "./flavor-gallery";
+import SkinTypeFilter from "./skin-type-filter";
+import { matchesSkinTypes, type SkinType } from "@/lib/catalog/skin-types";
 import CartContents from "./cart-contents";
 import Journal from "./journal";
 import type { Product } from "@/lib/catalog/types";
@@ -64,6 +72,9 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
   const [brand, setBrand] = useState(initialBrand);
   const [query] = useState(initialQuery);
   const [searchSort, setSearchSort] = useState("relevance");
+  const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
+  const [selectedSkinTypes, setSelectedSkinTypes] = useState<SkinType[]>([]);
+  const maximumPrice = Math.max(10000, ...products.map(product => Math.ceil(product.price ?? 0)));
   const [brandQuery, setBrandQuery] = useState("");
   const brandCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => () => { if (brandCloseTimer.current) clearTimeout(brandCloseTimer.current); }, []);
@@ -142,15 +153,60 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
     if (modal) { dialog.showModal(); const before = document.body.style.overflow; document.body.style.overflow = "hidden"; return () => { dialog.close(); document.body.style.overflow = before; }; }
     dialog.close();
   }, [modal]);
+  const [discoveryProducts, setDiscoveryProducts] = useState(products);
+  const [popularity, setPopularity] = useState<Record<string, number>>({});
+  const isHomepage = !categoryPage && !blogPage && !selectedProduct && !searchPage;
+  useEffect(() => {
+    if (!isHomepage) return;
+    const controller = new AbortController();
+    const shuffled = shuffleProducts(products);
+    setDiscoveryProducts(shuffled);
+    fetch("/api/products/popularity", { signal: controller.signal }).then(async response => {
+      if (!response.ok) return;
+      const data = await response.json();
+      const counts: Record<string, number> = {};
+      for (const [id, count] of Object.entries(data.counts ?? {})) {
+        if (typeof count === "number" && Number.isSafeInteger(count) && count > 0) counts[id] = count;
+      }
+      if (!controller.signal.aborted) { setPopularity(counts); setDiscoveryProducts(prioritizePopular(shuffled, counts)); }
+    }).catch(() => {});
+    return () => controller.abort();
+  }, [products, isHomepage]);
   const searching = query.trim().toLowerCase();
-  const filtered = searchProducts(products, query).filter(p => (!brand || p.brand === brand) && (tab === "Featured products" || p.category === tab));
+  const filtered = searchProducts(isHomepage ? discoveryProducts : products, query).filter(p => (!brand || p.brand === brand) && (tab === "Featured products" || p.category === tab) && (!priceRange || (p.price != null && p.price >= priceRange[0] && p.price <= priceRange[1])) && matchesSkinTypes(p, selectedSkinTypes));
   if (searchSort === "price-low" || searchSort === "price-high") filtered.sort((first, second) => first.price == null ? (second.price == null ? 0 : 1) : second.price == null ? -1 : searchSort === "price-low" ? first.price - second.price : second.price - first.price);
   if (searchSort === "name") filtered.sort((first, second) => first.name.localeCompare(second.name));
-  const shown = !categoryPage && tab === "Featured products" && !brand && !searching ? filtered.slice(0,4) : filtered;
+  const shown = !categoryPage && tab === "Featured products" && !brand && !searching && !priceRange ? filtered.slice(0,4) : filtered;
   const count = Object.values(cart).reduce((total, n) => total + n, 0);
   function chooseTab(value: Tab) { setMenuOpen(false); router.push(sectionHref(value)); }
   function chooseBrand(value: string) {  setMenuOpen(false); router.push(`/shop/collection${value ? `?brand=${encodeURIComponent(value)}` : ""}`); }
   function adjust(id: string, delta: number) { setCart(prev => ({...prev,[id]:Math.max(0,(prev[id] || 0) + delta)})); }
+  const [winterCategory, setWinterCategory] = useState("");
+  const winterRowRef = useRef<HTMLDivElement>(null);
+  const [winterEdges, setWinterEdges] = useState({ start: true, end: false });
+  const winterProducts = discoveryProducts.filter(isWinterCareProduct);
+  const winterCategories = Array.from(new Set(winterProducts.map(product => product.category)));
+  const visibleWinterProducts = winterProducts.filter(product => !winterCategory || product.category === winterCategory);
+  useEffect(() => {
+    const row = winterRowRef.current;
+    if (!row) return;
+    const update = () => setWinterEdges({ start: row.scrollLeft <= 2, end: row.scrollLeft + row.clientWidth >= row.scrollWidth - 2 });
+    row.scrollTo({ left: 0, behavior: "instant" });
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(row);
+    row.addEventListener("scroll", update, { passive: true });
+    return () => { observer.disconnect(); row.removeEventListener("scroll", update); };
+  }, [winterCategory, discoveryProducts, categoryPage, blogPage, selectedProduct, searchPage]);
+  function scrollWinter(direction: number) {
+    const row = winterRowRef.current;
+    if (row) row.scrollBy({ left: direction * row.clientWidth, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }
+  const popularIds = new Set(prioritizePopular(products, popularity).filter(product => popularity[product.id] > 0).slice(0, 4).map(product => product.id));
+  const renderProduct = (p: Product) => <article className="product-card" key={p.id}>
+            <div className="product-photo">{isHomepage && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <Image src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
+            <div className="product-card-content"><div className="product-card-meta"><span className="product-card-brand">{p.brand}</span><span className="product-card-category">{p.category}</span></div><h3 className="product-card-title"><Link className="product-name" href={`/products/${encodeURIComponent(p.id)}`}>{p.name}</Link></h3><p className="product-size">{p.size || "See product details"}</p><ProductPrice product={p}/><button className="preview-button" aria-label={`Add ${p.name} to cart`} onClick={() => adjust(p.id,1)}>{cart[p.id] ? `In cart (${cart[p.id]}) · Add another` : "Add to cart"}<Plus size={16}/></button></div>
+          </article>;
   return <>
     {catalogUnavailable && <p role="status" style={{ padding: 12, textAlign: "center" }}>Live catalog temporarily unavailable. Showing a catalog preview; prices and availability must be confirmed.</p>}
     <div ref={navigationRef} className={`site-navigation${navigationCompact ? " navigation-compact" : ""}${navigationScrolling && !menuOpen ? " navigation-scrolling" : ""}`}>
@@ -164,7 +220,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       <Link href="/shop/lip-makeup" onClick={() => setMenuOpen(false)}>LIP & MAKEUP</Link>
       <Link href="/shop/perfume" onClick={() => setMenuOpen(false)}>PERFUME</Link>
       <Link href="/blog" aria-current={blogPage ? "page" : undefined} onClick={() => setMenuOpen(false)}>BLOG</Link>
-      <div className="nav-account-actions"><Link className="header-login" href="/signin" prefetch>Log in</Link><button className="icon-button" aria-label={`Open bag, ${count} items`} aria-haspopup="dialog" aria-expanded={modal === "bag"} onClick={() => setModal("bag")}><ShoppingBag size={21}/><span className="bag-count">{count}</span></button></div>
+      <div className="nav-account-actions"><Link className="header-login" href="/signin" prefetch>Log in</Link><button className="icon-button" aria-label={`Open cart, ${count} items`} aria-haspopup="dialog" aria-expanded={modal === "bag"} onClick={() => setModal("bag")}><ShoppingBag size={21}/><span className="bag-count">{count}</span></button></div>
     </nav>
     </div>
     <main>
@@ -176,30 +232,41 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       {blogPage ? <Journal standalone/> : selectedProduct ? <section className="product-page" aria-labelledby="product-title">
         <nav className="product-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link><span>/</span><span aria-current="page">{selectedProduct.name}</span></nav>
         <div className="product-page-grid">
-          <div className="product-page-photo">{selectedProduct.image ? <Image src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
+          <div className="product-page-photo">{hasFlavorGallery(selectedProduct) ? <FlavorGallery product={selectedProduct} products={products} priority/> : selectedProduct.image ? <Image src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
           <div className="product-page-info"><Link className="product-page-brand" href={`/shop/collection?brand=${encodeURIComponent(selectedProduct.brand)}`}>{selectedProduct.brand}</Link><h1 id="product-title">{selectedProduct.name}</h1><Link className="category-label" href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link>
-            <p className="product-price">{selectedProduct.price != null ? `৳${selectedProduct.price.toLocaleString("en-US")}` : "Price coming soon"}</p>
+            <ProductPrice product={selectedProduct}/>
             <p className="product-page-size">Size: <strong>{selectedProduct.size || "Details coming soon"}</strong></p>
             <div className="product-offer"><ShoppingBag size={21}/><div><strong>Your everyday care, from {selectedProduct.brand}</strong><p>Ask us about current availability and delivery options.</p></div></div>
-            <div className="product-purchase"><div className="product-quantity" role="group" aria-label="Product quantity"><button aria-label="Decrease quantity" disabled={productQuantity === 1} onClick={() => setProductQuantity(quantity => Math.max(1, quantity - 1))}><Minus size={16}/></button><output aria-live="polite" aria-label="Quantity">{productQuantity}</output><button aria-label="Increase quantity" disabled={productQuantity === 99} onClick={() => setProductQuantity(quantity => Math.min(99, quantity + 1))}><Plus size={16}/></button></div><button className="product-page-add" onClick={() => adjust(selectedProduct.id, productQuantity)}>ADD TO PREVIEW BAG <ShoppingBag size={18}/></button></div><p className="product-page-note" role="status">{cart[selectedProduct.id] ? `${cart[selectedProduct.id]} added to your preview bag. Checkout is coming soon.` : "Checkout is coming soon. Contact us to confirm availability."}</p>
+            <div className="product-purchase"><div className="product-quantity" role="group" aria-label="Product quantity"><button aria-label="Decrease quantity" disabled={productQuantity === 1} onClick={() => setProductQuantity(quantity => Math.max(1, quantity - 1))}><Minus size={16}/></button><output aria-live="polite" aria-label="Quantity">{productQuantity}</output><button aria-label="Increase quantity" disabled={productQuantity === 99} onClick={() => setProductQuantity(quantity => Math.min(99, quantity + 1))}><Plus size={16}/></button></div><button className="product-page-add" onClick={() => adjust(selectedProduct.id, productQuantity)}>ADD TO CART <ShoppingBag size={18}/></button></div><p className="product-page-note" role="status">{cart[selectedProduct.id] ? `${cart[selectedProduct.id]} added to your cart. Checkout is coming soon.` : "Checkout is coming soon. Contact us to confirm availability."}</p>
             <details className="product-description-panel" open><summary>Brief description <ChevronDown size={17}/></summary><p className="product-page-description">{selectedProduct.description || "We’re preparing the full description for this product. Contact us for more information."}</p></details>
             <dl className="product-facts"><div><dt>Product ID</dt><dd>{selectedProduct.id}</dd></div><div><dt>Categories</dt><dd><Link href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link></dd></div><div><dt>Brand</dt><dd><Link href={`/shop/collection?brand=${encodeURIComponent(selectedProduct.brand)}`}>{selectedProduct.brand}</Link></dd></div></dl>
             <a className="product-enquiry" href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer">Enquire on Facebook</a>
           </div>
         </div>
-        <div className="product-service-strip"><div><ShieldCheck size={25}/><span><strong>Product information</strong><small>Brand, size and details in one place</small></span></div><div><ShoppingBag size={25}/><span><strong>Your preview bag</strong><small>Save your selection before checkout launches</small></span></div><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer"><Heart size={25}/><span><strong>Need a little help?</strong><small>Contact the Authéra team</small></span></a></div>
+        <div className="product-service-strip"><div><ShieldCheck size={25}/><span><strong>Product information</strong><small>Brand, size and details in one place</small></span></div><div><ShoppingBag size={25}/><span><strong>Your cart</strong><small>Save your selection before checkout launches</small></span></div><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer"><Heart size={25}/><span><strong>Need a little help?</strong><small>Contact the Authéra team</small></span></a></div>
       </section> : <section className="shop-section" id="collection" aria-labelledby="shop-title">
-        <div className="shop-intro"><h1 id="shop-title">{categoryPage ? brand || title : <>FIND YOUR EVERYDAY <strong>GLOW!</strong></>}</h1><p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—<strong>made for you.</strong></p></div>
+        <div className="shop-intro"><span className="section-kicker">{categoryPage || searchPage ? "THE AUTHÉRA COLLECTION" : "YOUR EVERYDAY CARE, CONSIDERED"}</span><h1 id="shop-title">{categoryPage ? brand || title : searchPage ? "Find your next essential" : <>Find your everyday <em>glow.</em></>}</h1><p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p></div>
+        {!categoryPage && !searchPage && <><nav className="collection-category-links" aria-label="Explore care categories">{(["Face care", "Body care", "Hair care", "Lip care", "Perfume"] as const).map(category => <Link key={category} href={sectionHref(category)}>{category}<ChevronRight size={14}/></Link>)}</nav><div className="collection-section-heading"><div><span className="section-kicker">THE EVERYDAY EDIT</span><h2>Discover your daily essentials</h2></div><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
         {searchPage ? <><form action="/search" role="search" className="search-page-form"><label className="screen-reader-only" htmlFor="search-page-query">Search products</label><input id="search-page-query" name="q" defaultValue={query} maxLength={160} placeholder="Search products, brands or categories…"/><button type="submit"><Search size={18}/> Search</button></form><div className="search-filters"><label>Category<select value={tab} onChange={event => setTab(event.target.value as Tab)}>{tabs.map(category => <option key={category} value={category}>{category === "Featured products" ? "All categories" : category}</option>)}</select></label><label>Brand<select value={brand} onChange={event => setBrand(event.target.value)}><option value="">All brands</option>{Array.from(new Set(products.map(product => product.brand))).sort().map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={searchSort} onChange={event => setSearchSort(event.target.value)}><option value="relevance">Best match</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option></select></label><p role="status">{shown.length} {shown.length === 1 ? "product" : "products"}</p></div></> : null}
         {brand && <div className="active-filter"><span>{brand}{tab !== "Featured products" && <> <span aria-hidden="true">›</span> {tab}</>}</span><button onClick={() => setBrand("")} aria-label="Clear brand filter"><X size={14}/></button></div>}
+        <div className={categoryPage || searchPage ? "product-listing-layout" : undefined}>
+        {(categoryPage || searchPage) && <div className="product-filter-sidebar"><PriceFilter key={maximumPrice} maximum={maximumPrice} active={priceRange !== null} onApply={setPriceRange} onReset={() => setPriceRange(null)}/><SkinTypeFilter selected={selectedSkinTypes} onChange={setSelectedSkinTypes}/></div>}
         <div id="product-panel" aria-label={`${brand || tab} products`}>
-          <div className="product-grid">{shown.map(p => <article className="product-card" key={p.id}>
-            <div className="product-photo"><Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <Image src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link><button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
-            <span className="category-label">{p.category.toUpperCase()}</span><h2>{p.brand.toUpperCase()}</h2><Link className="product-name" href={`/products/${encodeURIComponent(p.id)}`}>{p.name}</Link>{p.size && <p className="product-size">{p.size}</p>}<p className={p.price ? "product-price" : "price-pending"}>{p.price ? `৳${p.price.toLocaleString("en-US")}` : "Price coming soon"}</p><button className="preview-button" onClick={() => adjust(p.id,1)}>{cart[p.id] ? `In preview bag (${cart[p.id]})` : "Add to preview bag"}<Plus size={14}/></button>
-          </article>)}</div>
+          {selectedSkinTypes.length > 0 && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} for {selectedSkinTypes.join(", ")} skin</p>}
+          {priceRange && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} from ৳{priceRange[0].toLocaleString()} to ৳{priceRange[1].toLocaleString()}</p>}
+          <div className="product-grid">{shown.map(renderProduct)}</div>
           {!shown.length && <div className="empty-state"><h2>{searchPage ? "No products match your search." : brand ? `${brand} products are coming soon.` : "No matching products."}</h2><p>{searchPage ? "Try another spelling or choose a different category or brand." : brand ? "We’re preparing the product details for this brand." : "Try another brand or product name."}</p>{searchPage ? <button onClick={() => {setBrand("");setTab("Featured products");}}>Clear category and brand filters</button> : <button onClick={() => {setBrand("");chooseTab("Featured products");}}>View featured products</button>}<Link className="search-browse-all" href="/shop/collection">Browse all products</Link></div>}
         </div>
-        <p className="catalog-note">Explore our opening collection. Sizes, prices, and checkout will be available soon.</p>
+        </div>
+        <p className="catalog-note">Save your favorites to the cart. Contact us to confirm availability and delivery.</p>
+      </section>}
+      {!categoryPage && !blogPage && !selectedProduct && !searchPage && winterProducts.length > 0 && <section className="winter-care-section" id="winter-care" aria-labelledby="winter-care-title">
+        <div className="winter-care-heading"><span className="section-kicker">THE COLD-WEATHER EDIT</span><h2 id="winter-care-title">Winter Care</h2><p>Comfort for colder days. Explore moisturizers, hydrating serums, lip balm, and nourishing care for skin and hair.</p></div>
+        <div className="winter-care-toolbar">
+          <WinterCareDropdown value={winterCategory} categories={winterCategories} onChange={setWinterCategory}/>
+          <div className="winter-care-navigation"><span role="status">{visibleWinterProducts.length} items</span><button aria-label="Previous winter care products" aria-controls="winter-care-products" disabled={winterEdges.start} onClick={() => scrollWinter(-1)}><ChevronRight size={22} style={{ transform: "rotate(180deg)" }}/></button><button aria-label="Next winter care products" aria-controls="winter-care-products" disabled={winterEdges.end} onClick={() => scrollWinter(1)}><ChevronRight size={22}/></button></div>
+        </div>
+        <div className="winter-care-row" id="winter-care-products" ref={winterRowRef} tabIndex={0} aria-label="Winter care products">{visibleWinterProducts.map(renderProduct)}</div>
       </section>}
       {!categoryPage && !blogPage && <><section className="spotlight-section" aria-labelledby="spotlight-title">
         <h2 id="spotlight-title">SKIN CARE SPOTLIGHT</h2>
@@ -284,7 +351,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
           <Link href="/signup">Create account</Link>
           <Link href="/account/orders">Order History</Link>
           <details><summary>My Wishlist{saved.length ? ` (${saved.length})` : ""}</summary>{saved.length ? <ul className="footer-wishlist">{products.filter(p => saved.includes(p.id)).map(p => <li key={p.id}><Link href={`/products/${encodeURIComponent(p.id)}`}>{p.brand} — {p.name}{p.size ? ` · ${p.size}` : ""}</Link></li>)}</ul> : <p>Tap the heart on a product to save it here. Saved items are kept for this preview session.</p>}</details>
-          <button className="footer-text-button" onClick={() => setModal("bag")}>My Preview Bag{count ? ` (${count})` : ""}</button>
+          <button className="footer-text-button" onClick={() => setModal("bag")}>My Cart{count ? ` (${count})` : ""}</button>
         </div>
         <div className="footer-column">
           <h2>Services</h2>
@@ -298,7 +365,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       <p className="footer-copyright">Copyright © {new Date().getFullYear()} AutheraCare. All rights reserved.</p>
       <a className="back-to-top" href="#" aria-label="Back to top"><ChevronUp size={26}/></a>
     </footer>
-    <dialog ref={dialogRef} className={`shop-dialog${modal === "bag" ? " cart-drawer" : ""}`} aria-labelledby="shop-dialog-title" onCancel={() => setModal(null)} onClick={e => {if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-heading"><h2 id="shop-dialog-title">{modal === "bag" ? "Shopping cart" : modal ? modal.brand : ""}</h2><button className="icon-button" aria-label="Close dialog" onClick={() => setModal(null)}><X/></button></div>{modal === "bag" ? <CartContents products={products} cart={cart} onAdjust={adjust} onClose={()=>setModal(null)}/> : modal && <div className="product-detail">{modal.image && <div className="detail-photo"><Image src={modal.image} alt={modal.name} fill sizes="400px"/></div>}<span className="category-label">{modal.category}</span><h3>{modal.name}</h3>{modal.description && <p className="product-description">{modal.description}</p>}{modal.size && <p className="product-size">{modal.size}</p>}<p className={modal.price ? "product-price" : "price-pending"}>{modal.price ? `৳${modal.price.toLocaleString("en-US")}` : "Price coming soon"}</p>{!modal.size && <p>Available sizes will be added soon.</p>}{modal.editedImage && <p className="campaign-note">Product image prepared from supplied artwork.</p>}<button className="detail-add" onClick={()=>adjust(modal.id,1)}>{cart[modal.id] ? `In preview bag (${cart[modal.id]})` : "Add to preview bag"}</button><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer">Enquire on Facebook</a></div>}</dialog>
+    <dialog ref={dialogRef} className={`shop-dialog${modal === "bag" ? " cart-drawer" : ""}`} aria-labelledby="shop-dialog-title" onCancel={() => setModal(null)} onClick={e => {if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-heading"><h2 id="shop-dialog-title">{modal === "bag" ? "Shopping cart" : modal ? modal.brand : ""}</h2><button className="icon-button" aria-label="Close dialog" onClick={() => setModal(null)}><X/></button></div>{modal === "bag" ? <CartContents products={products} cart={cart} onAdjust={adjust} onClose={()=>setModal(null)}/> : modal && <div className="product-detail">{modal.image && <div className="detail-photo"><Image src={modal.image} alt={modal.name} fill sizes="400px"/></div>}<span className="category-label">{modal.category}</span><h3>{modal.name}</h3>{modal.description && <p className="product-description">{modal.description}</p>}{modal.size && <p className="product-size">{modal.size}</p>}<ProductPrice product={modal}/>{!modal.size && <p>Available sizes will be added soon.</p>}{modal.editedImage && <p className="campaign-note">Product image prepared from supplied artwork.</p>}<button className="detail-add" onClick={()=>adjust(modal.id,1)}>{cart[modal.id] ? `In cart (${cart[modal.id]})` : "Add to cart"}</button><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer">Enquire on Facebook</a></div>}</dialog>
   </>;
 }
 

@@ -482,14 +482,70 @@
       "size": "236 mL"
     },
     {
+      "id": "eos-vanilla-bean-single",
+      "brand": "EOS",
+      "name": "Shea Natural Smooth Lip Balm – Vanilla Bean (Single)",
+      "category": "Lip care",
+      "image": "/products/eos-vanilla-bean-single.png",
+      "editedImage": true,
+      "size": "1 lip balm · 4 g",
+      "price": 320,
+      "description": "One cream Vanilla Bean lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
+    },
+    {
+      "id": "eos-raspberry-rose-single",
+      "brand": "EOS",
+      "name": "Shea Natural Smooth Lip Balm – Raspberry Rosé (Single)",
+      "category": "Lip care",
+      "image": "/products/eos-raspberry-rose-single.png",
+      "editedImage": true,
+      "size": "1 lip balm · 4 g",
+      "price": 320,
+      "description": "One pink Raspberry Rosé lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
+    },
+    {
+      "id": "eos-strawberry-limoncello-single",
+      "brand": "EOS",
+      "name": "Shea Natural Smooth Lip Balm – Strawberry Limoncello (Single)",
+      "category": "Lip care",
+      "image": "/products/eos-strawberry-limoncello-single.png",
+      "editedImage": true,
+      "size": "1 lip balm · 4 g",
+      "price": 320,
+      "description": "One yellow Strawberry Limoncello lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
+    },
+    {
+      "id": "eos-pistachio-gelato-single",
+      "brand": "EOS",
+      "name": "Shea Natural Smooth Lip Balm – Pistachio Gelato (Single)",
+      "category": "Lip care",
+      "image": "/products/eos-pistachio-gelato-single.png",
+      "editedImage": true,
+      "size": "1 lip balm · 4 g",
+      "price": 320,
+      "description": "One green Pistachio Gelato lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
+    },
+    {
+      "id": "eos-tangerine-spritz-single",
+      "brand": "EOS",
+      "name": "Shea Natural Smooth Lip Balm – Tangerine Spritz (Single)",
+      "category": "Lip care",
+      "image": "/products/eos-tangerine-spritz-single.png",
+      "editedImage": true,
+      "size": "1 lip balm · 4 g",
+      "price": 320,
+      "description": "One coral Tangerine Spritz lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
+    },
+    {
       "id": "eos-spritz-lip-balm",
       "brand": "EOS",
-      "name": "Spritz Shea Natural Smooth Lip Balm 9-Pack",
+      "name": "Spritz Shea Natural Smooth Lip Balm 9-Pack Combo",
       "category": "Lip care",
       "image": "/products/eos-spritz-lip-balm.png",
       "editedImage": true,
       "size": "9 × 4 g",
-      "description": "A nine-piece lip balm set with five flavors shown on the packaging: Tangerine Spritz, Strawberry Limoncello, Raspberry Rosé, Vanilla Bean, and Pistachio Gelato."
+      "description": "Nine lip balms in five flavors: Tangerine Spritz, Strawberry Limoncello, Raspberry Rosé, Vanilla Bean, and Pistachio Gelato. Regular total: 9 × ৳320 = ৳2,880. Save ৳150 with the combo: ৳2,730.",
+      "price": 2730
     },
     {
       "id": "nutiva-mct-oil",
