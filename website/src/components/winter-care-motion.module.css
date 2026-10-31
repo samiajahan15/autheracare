@@ -1,0 +1,91 @@
+.scene{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:340px;padding:38px 70px 32px;margin:0 0 32px;border-radius:18px;color:#fff;text-align:center;background:radial-gradient(ellipse at 12% -12%,#fff 0%,#ffffffb3 13%,transparent 35%),radial-gradient(ellipse at 96% 105%,#fff 0%,#ffffff91 18%,transparent 44%),linear-gradient(165deg,#3698c4 0%,#76c3e0 50%,#c9e5ed 100%);box-shadow:inset 0 0 70px #ffffff45}
+.kicker{position:relative;z-index:1;font-size:10px;letter-spacing:2px;font-weight:700;margin:0 0 9px;text-shadow:0 1px 6px #256080}
+.scene h3{position:relative;z-index:1;font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin:0 0 28px;text-shadow:0 2px 10px #326a8440}
+.bar{position:relative;z-index:1;width:min(100%,690px);height:68px;border:3px solid #fff;border-radius:13px;background:#ffffff19;box-shadow:0 3px 15px #35657d1a;overflow:visible}
+.fill{position:absolute;inset:0;background:#ffffff45;border-radius:9px;transform-origin:left;animation:load 4.2s linear both}
+.traveller{position:absolute;top:-21px;left:0;width:100px;height:104px;animation:travel 4.2s linear both;filter:drop-shadow(0 4px 5px #2f607740)}
+.traveller img{object-fit:contain!important}
+.caption{position:relative;z-index:1;display:grid;gap:3px;align-content:start;min-height:70px;max-width:650px;margin-top:25px;color:#17465d;text-decoration:none}
+.caption span{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.caption strong{font-size:14px;line-height:1.4;font-weight:600}.caption small{font-size:12px}
+.caption:hover strong{text-decoration:underline}.caption:focus-visible,.toggle:focus-visible{outline:2px solid #17465d;outline-offset:4px}
+.toggle{position:absolute;z-index:2;right:16px;bottom:16px;display:flex;align-items:center;gap:5px;padding:8px 11px;border:1px solid #ffffffb0;border-radius:20px;background:#ffffffb8;color:#17465d;font:inherit;font-size:11px;cursor:pointer}
+.snow{position:absolute;inset:0;pointer-events:none;overflow:hidden}.snow i{position:absolute;top:-12px;width:5px;height:5px;background:#fff;border-radius:50%;opacity:.7;animation:snowfall 8s linear infinite}.snow i:nth-child(3n){width:3px;height:3px;opacity:.5}.snow i:nth-child(4n){width:8px;height:8px;filter:blur(1px)}
+.scene[data-running=false] .traveller,.scene[data-running=false] .fill,.scene[data-running=false] .snow i{animation-play-state:paused}
+.scene[data-reduced=true] .traveller{animation:none;left:calc(50% - 50px)}.scene[data-reduced=true] .fill{animation:none;transform:scaleX(.5)}.scene[data-reduced=true] .snow{display:none}.scene[data-reduced=true] .toggle{display:none}
+@keyframes travel{from{left:0}to{left:calc(100% - 100px)}}@keyframes load{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes snowfall{to{transform:translate(30px,430px)}}
+@media(max-width:600px){.scene{min-height:310px;padding:30px 23px 46px;border-radius:12px}.scene h3{margin-bottom:32px}.bar{height:60px}.traveller{width:80px;height:94px;top:-20px}.caption{min-height:76px;margin-top:26px}.caption strong{font-size:12px}.toggle{bottom:10px;right:10px}@keyframes travel{from{left:0}to{left:calc(100% - 80px)}}}
+@media(prefers-reduced-motion:reduce){.traveller,.fill,.snow i{animation:none!important}.snow{display:none}}
+.scene:not([data-season=Winter]) .snow{display:none}
+.scene[data-season=Summer]{background:linear-gradient(140deg,#e1ad55,#efd3a0 65%,#fff0d7)}
+.scene[data-season=Autumn]{background:linear-gradient(140deg,#ba8262,#d6ad89 65%,#efdec9)}
+.scene[data-season=Monsoon]{background:linear-gradient(140deg,#608c86,#95bcb3 65%,#dbe9e2)}
+.scene[data-season=Spring]{background:linear-gradient(140deg,#9fb893,#c8d9b9 65%,#eef0de)}
+
+/* A sunlit beach setting for the summer product edit. */
+.scene[data-season=Summer]{min-height:430px;padding:42px 70px 30px;color:#285760;background-image:linear-gradient(90deg,#fff8e8a8,#fff8e8cc 35%,#fff8e8c4 65%,#fff8e84d),url('/images/seasonal/summer-beach.webp');background-size:cover;background-position:center 55%;box-shadow:inset 0 0 50px #fff4d95c}
+.scene[data-season=Summer] h3{font-family:Georgia,serif;font-size:clamp(34px,4.2vw,54px);font-weight:400;letter-spacing:-1.5px;color:#24535b;text-shadow:0 1px 12px #fff9e9;margin-bottom:10px}
+.scene[data-season=Summer] .kicker{color:#8a5d23;text-shadow:0 1px 5px #fff;letter-spacing:2.5px}
+.summerIntro{position:relative;z-index:1;margin:0 0 32px;color:#446566;font-size:14px;line-height:1.6}
+.scene[data-season=Summer] .bar{border:2px solid #fffdf4;border-radius:35px;background:#fffef363;box-shadow:0 5px 22px #a17b3514;max-width:660px}
+.scene[data-season=Summer] .fill{border-radius:32px;background:linear-gradient(90deg,#f5cc7780,#fff4c580)}
+.scene[data-season=Summer] .caption{color:#234e53;margin-top:24px;min-height:66px}.scene[data-season=Summer] .caption strong{font-size:15px}.scene[data-season=Summer] .toggle{color:#365e61;border-color:#fffaf0;background:#fffaf0dc}
+.summerDetails{position:relative;z-index:1;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:8px;color:#5f6a50;font-size:11px}.summerDetails span{display:flex;gap:6px;align-items:center}.summerDetails svg{color:#b28535}
+.sunlight{position:absolute;top:-70px;left:4%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#fff9ddc9 0%,#ffe9a94d 40%,transparent 70%);pointer-events:none;animation:sunshine 8s ease-in-out infinite alternate}
+.scene[data-running=false] .sunlight{animation-play-state:paused}
+@keyframes sunshine{from{opacity:.55;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+@media(max-width:600px){.scene[data-season=Summer]{min-height:410px;padding:33px 20px 52px;background-position:53% center}.scene[data-season=Summer] h3{font-size:34px;letter-spacing:-1px}.scene[data-season=Summer] .kicker{font-size:9px;letter-spacing:1.7px}.summerIntro{font-size:12px;max-width:260px;margin-bottom:30px}.scene[data-season=Summer] .caption strong{font-size:13px}.summerDetails{gap:9px 14px;font-size:10px;max-width:270px}.sunlight{width:180px;height:180px;left:-30px}}
+@media(prefers-reduced-motion:reduce){.sunlight{animation:none}}
+
+.autumnVideo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.48;filter:saturate(.65)}
+.autumnVeil{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#fff9eeed 0%,#fff6e6cf 46%,#f5e2c08c 100%);pointer-events:none}
+.scene[data-season=Autumn]{min-height:390px;padding-top:40px;padding-bottom:34px;background:#efe1c9;color:#583d27}
+.scene[data-season=Autumn] h3{color:#563a26;font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,3.6vw,44px);letter-spacing:-1px;text-shadow:0 1px 8px #fff8e8}
+.scene[data-season=Autumn] .kicker{color:#80613d;text-shadow:none}
+.scene[data-season=Autumn] .bar{height:86px;background:#fffdf3ce;border-color:#fffdf5;box-shadow:0 8px 25px #805d2412}
+.scene[data-season=Autumn] .fill{background:#ecd8b752}
+.scene[data-season=Autumn] .traveller{height:126px;width:100px;top:-22px;filter:drop-shadow(0 5px 6px #61462440)}
+.scene[data-season=Autumn] .caption{color:#513b28;margin-top:30px;max-width:680px}.scene[data-season=Autumn] .caption strong{font-size:16px}.scene[data-season=Autumn] .toggle{color:#65492d;background:#fffdf2e8}
+@media(max-width:600px){.scene[data-season=Autumn]{min-height:370px;padding:34px 23px 52px}.scene[data-season=Autumn] h3{max-width:290px;font-size:29px}.scene[data-season=Autumn] .traveller{width:80px;height:116px;top:-18px}.scene[data-season=Autumn] .caption strong{font-size:14px}.scene[data-season=Autumn] .bar{height:80px}}
+/* Keep the autumn footage visible, with contrast concentrated around the products. */
+.autumnVideo{opacity:.86;filter:saturate(.9)}
+.autumnVeil{background:radial-gradient(ellipse at center,#fff9eebd 0%,#fff6e699 34%,#f5e2c033 75%,#f5e2c01a 100%)}
+.scene[data-season=Autumn] .kicker{padding:5px 12px;border-radius:16px;background:#fff9e9bd}
+.scene[data-season=Autumn] h3{text-shadow:0 1px 8px #fff8e8,0 0 22px #fff8e8}
+.scene[data-season=Autumn] .caption{padding:10px 20px;background:#fffaf0e8;border-radius:12px;box-shadow:0 3px 16px #63441c0d}
+
+/* Quiet shoreline washes and drifting air, behind the product content. */
+.shoreWaves{position:absolute;z-index:0;left:-8%;right:-8%;top:37%;height:42px;pointer-events:none;opacity:.65;filter:blur(.6px)}
+.shoreWaves i{position:absolute;inset:0;border-radius:45% 55% 48% 52%;border-top:3px solid #ffffffb3;background:linear-gradient(180deg,#dcf6f84d,transparent 65%);animation:shoreWash 8s ease-in-out infinite;transform-origin:center}
+.shoreWaves i:nth-child(2){animation-delay:-2.7s;opacity:.6;height:28px}.shoreWaves i:nth-child(3){animation-delay:-5.3s;opacity:.4;height:20px}
+.breeze{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none}
+.breeze i{position:absolute;left:-30%;top:16%;width:180px;height:36px;border-top:1px solid #fffefa80;border-radius:50%;opacity:0;animation:seaBreeze 15s ease-in-out infinite;filter:blur(.4px)}
+.breeze i:nth-child(2){top:65%;width:130px;animation-delay:-5s;animation-duration:19s}.breeze i:nth-child(3){top:83%;width:220px;animation-delay:-11s;animation-duration:22s}
+.scene[data-running=false] .shoreWaves i,.scene[data-running=false] .breeze i{animation-play-state:paused}
+@keyframes shoreWash{0%,100%{transform:translate(-1%,0) scaleX(1);opacity:.15}45%{transform:translate(1%,12px) scaleX(1.04);opacity:.7}75%{transform:translate(0,18px) scaleX(1.02);opacity:0}}
+@keyframes seaBreeze{0%{transform:translateX(0) rotate(-4deg);opacity:0}20%{opacity:.45}75%{opacity:.25}100%{transform:translateX(1500px) translateY(-28px) rotate(3deg);opacity:0}}
+@media(max-width:600px){.shoreWaves{top:37%;height:28px;opacity:.5}.breeze i{width:100px}.breeze i:nth-child(3){width:140px}}
+@media(prefers-reduced-motion:reduce){.shoreWaves,.breeze{display:none}}
+.scene[data-reduced=true] .shoreWaves,.scene[data-reduced=true] .breeze{display:none}
+
+.summerVideo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.95}
+.summerVeil{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#fff9e6b3 0%,#fff9e680 42%,#fff9e62b 100%);pointer-events:none}
+.scene[data-season=Summer] .caption{padding:9px 18px;background:#fffaf0db;border-radius:12px}
+.scene[data-season=Summer] .summerIntro{text-shadow:0 1px 6px #fff,0 0 12px #fff9e8}
+.scene[data-season=Summer] .summerDetails{padding:7px 12px;background:#fffaf0c9;border-radius:20px}
+.scene[data-season=Summer] .shoreWaves{display:none}
+
+.monsoonVideo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.9}
+.monsoonVeil{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#f0faf3bd 0%,#e4f3ec91 42%,#d5e9e333 100%);pointer-events:none}
+.scene[data-season=Monsoon] h3{color:#214f4c;text-shadow:0 1px 8px #f5fff5,0 0 22px #eef9ef}
+.scene[data-season=Monsoon] .kicker{color:#315b51;text-shadow:none;padding:5px 12px;border-radius:16px;background:#f4fcf1c9}
+.scene[data-season=Monsoon] .bar{background:#f7fff4b8;border-color:#f9fff6}
+.scene[data-season=Monsoon] .caption{color:#224b40;padding:10px 20px;background:#f5fff2e6;border-radius:12px}
+
+.springVideo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.9}
+.springVeil{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#fffaf2b3 0%,#f6fae991 42%,#e5efdb26 100%);pointer-events:none}
+.scene[data-season=Spring] h3{color:#365c45;text-shadow:0 1px 8px #fbfff5,0 0 22px #f5faee}
+.scene[data-season=Spring] .kicker{color:#42624c;text-shadow:none;padding:5px 12px;border-radius:16px;background:#fcfff2cc}
+.scene[data-season=Spring] .bar{background:#fffef4bd;border-color:#fffef5}
+.scene[data-season=Spring] .caption{color:#36513c;padding:10px 20px;background:#fffef2e6;border-radius:12px}
+/* The rainfall stays visible at the edges while the product track stays clear. */
+.monsoonVeil{background:radial-gradient(ellipse at center,#f0faf39e 0%,#e4f3ec61 42%,#d5e9e30d 100%)}

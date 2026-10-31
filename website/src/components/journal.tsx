@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
+import ProductImage from "./product-image";
 import Link from "next/link";
 import ReadMore from "./read-more";
 
@@ -45,7 +45,7 @@ export default function Journal({ standalone = false }: { standalone?: boolean }
         const isFeatured = standalone && index === 0;
         const previewLength = isFeatured ? Math.ceil(post.body.length / 2) : 0;
         return <article className={`journal-card${isFeatured ? " journal-featured" : ""}`} key={post.id} ref={isFeatured ? featured : undefined} tabIndex={isFeatured ? -1 : undefined} aria-labelledby={`journal-heading-${post.id}`}>
-          <div className={`journal-art spotlight-${post.theme}`}><span>{post.tag}</span><div className="journal-packshot"><Image src={post.image} alt={`${post.brand} featured product`} fill sizes={isFeatured ? "(max-width: 700px) 80vw, 35vw" : "(max-width: 600px) 80vw, (max-width: 1000px) 40vw, 22vw"}/></div><small>{post.brand}</small></div>
+          <div className={`journal-art spotlight-${post.theme}`}><span>{post.tag}</span><div className="journal-packshot"><ProductImage src={post.image} alt={`${post.brand} featured product`} fill sizes={isFeatured ? "(max-width: 700px) 80vw, 35vw" : "(max-width: 600px) 80vw, (max-width: 1000px) 40vw, 22vw"}/></div><small>{post.brand}</small></div>
           <h3 lang="bn" id={`journal-heading-${post.id}`}>{standalone && !isFeatured ? <button className="journal-title-button" onClick={() => selectArticle(post.id)}>{post.title}</button> : post.title}</h3>
           <p className="journal-excerpt" lang="bn">{post.excerpt}</p>
           {isFeatured && <div className="journal-preview" lang="bn">{post.body.slice(0, previewLength).map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>}

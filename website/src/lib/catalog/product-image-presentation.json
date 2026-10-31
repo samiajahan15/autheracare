@@ -1,0 +1,419 @@
+{
+  "/products/aveeno-skin-relief-shea-butter-lotion-222ml.png": {
+    "source": "/products/aveeno-skin-relief-lotion-222ml.webp"
+  },
+  "/products/azelaic.png": {
+    "source": "/products/azelaic-acid.png"
+  },
+  "/products/barrier.png": {
+    "source": "/products/barrier-serum.png"
+  },
+  "/products/bbw-disney-princess-rapunzel-lip-gloss.png": {
+    "source": "/products/disney-princess-rapunzel-cutout.png"
+  },
+  "/products/cerave-baby-lotion.png": {
+    "source": "/products/cerave-baby-lotion-cutout.png"
+  },
+  "/products/cerave-baby-wash.png": {
+    "source": "/products/cerave-baby-wash-cutout.png"
+  },
+  "/products/cerave-conditioner.png": {
+    "source": "/products/cerave-conditioner-cutout.png"
+  },
+  "/products/cerave-daily-lotion.png": {
+    "source": "/products/cerave-daily-lotion-cutout.png"
+  },
+  "/products/cerave-daily-lotion-237ml.png": {
+    "source": "/products/cerave-daily-lotion-cutout.png"
+  },
+  "/products/cerave-daily-lotion-473ml.png": {
+    "source": "/products/cerave-daily-lotion-cutout.png"
+  },
+  "/products/cerave-shampoo.png": {
+    "source": "/products/cerave-shampoo-cutout.png"
+  },
+  "/products/garnier-conditioner.png": {
+    "source": "/products/garnier-conditioner-cutout.png"
+  },
+  "/products/garnier-serum.png": {
+    "source": "/products/garnier-serum-cutout.png"
+  },
+  "/products/ordinary-niacinamide-30.png": {
+    "source": "/products/ordinary-niacinamide-30-product-only.webp"
+  },
+  "/products/ordinary-pha.png": {
+    "source": "/products/ordinary-pha-lip.png"
+  },
+  "/products/ordinary-rice-120.png": {
+    "source": "/products/ordinary-rice-120-product-only.webp"
+  },
+  "/products/ordinary-rice-60.png": {
+    "source": "/products/ordinary-rice-60-product-only.webp"
+  },
+  "/products/pdf-03-010-1-aveeno-skin-relief-moisturizing-lotion-dry-extra-dry-skin-222-ml.png": {
+    "source": "/products/aveeno-skin-relief-lotion-222ml.webp"
+  },
+  "/products/pdf-04-006-2-the-ordinary-niacinamide-10-1-zinc-60-ml.png": {
+    "source": "/products/ordinary-niacinamide-60.png"
+  },
+  "/products/pdf-05-001-1-cetaphil-gentle-skin-cleanser-all-skin-types-1-l.png": {
+    "source": "/products/pdf-05-001-1-cetaphil-gentle-skin-cleanser-all-skin-types-1-l.webp"
+  },
+  "/products/pdf-05-002-1-cetaphil-gentle-skin-cleanser-sensitive-skin-250-ml.png": {
+    "source": "/products/cetaphil-gentle-cleanser-250ml.webp"
+  },
+  "/products/pdf-05-003-1-cetaphil-hydrating-cream-to-foam-cleanser-all-skin-types-473-ml.png": {
+    "source": "/products/cetaphil-hydrating-foaming-cream-cleanser-473ml.webp"
+  },
+  "/products/pdf-05-004-1-cetaphil-soothing-moisturizer-hydratant-apaisant-eczema-295-ml.png": {
+    "source": "/products/cetaphil-restoraderm-soothing-295ml.webp"
+  },
+  "/products/pdf-05-006-1-cetaphil-ultra-hydrating-lotion-daily-advance-225-ml.png": {
+    "source": "/products/cetaphil-dailyadvance-225ml.webp"
+  },
+  "/products/pdf-05-012-1-cetaphil-baby-skin-care-gift-pack-1000-ml.png": {
+    "source": "/products/cetaphil-baby-gift-pack.webp"
+  },
+  "/products/pdf-05-015-1-cetaphil-flare-up-cream-eczema-227-g.png": {
+    "source": "/products/cetaphil-restoraderm-flare-up-227g.webp"
+  },
+  "/products/salicylic.png": {
+    "source": "/products/salicylic-acid.png"
+  },
+  "/products/bbw-at-the-beach-body-cream-226g.png": {
+    "source": "/products/bbw-at-the-beach-body-cream-226g-packshot.png"
+  },
+  "/products/around-me-watercolor-hand-cream-60g.png": {
+    "source": "/products/around-me-watercolor-hand-cream-60g-packshot.png"
+  },
+  "/products/bbw-autumn-evening-3-wick-candle-411g.png": {
+    "source": "/products/bbw-autumn-evening-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-backyard-honeysuckle-3-wick-candle-411g.png": {
+    "source": "/products/bbw-backyard-honeysuckle-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-book-loft-body-cream-226g.png": {
+    "source": "/products/bbw-book-loft-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-campfire-cocoa-3-wick-candle-411g.png": {
+    "source": "/products/bbw-campfire-cocoa-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-bourbon-body-cream-226g.png": {
+    "source": "/products/bbw-bourbon-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-champagne-apple-and-honey-body-cream-226g.png": {
+    "source": "/products/bbw-champagne-apple-and-honey-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-champagne-toast-lip-gloss.png": {
+    "source": "/products/bbw-champagne-toast-lip-gloss-packshot.png"
+  },
+  "/products/bbw-cinnamon-spiced-vanilla-3-wick-candle-411g.png": {
+    "source": "/products/bbw-cinnamon-spiced-vanilla-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-coffee-and-whiskey-3-wick-candle-411g.png": {
+    "source": "/products/bbw-coffee-and-whiskey-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-cranberry-and-gala-apple-3-wick-candle-411g.png": {
+    "source": "/products/bbw-cranberry-and-gala-apple-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-cranberry-woods-3-wick-candle-411g.png": {
+    "source": "/products/bbw-cranberry-woods-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-disney-princess-aurora-lip-gloss.png": {
+    "source": "/products/bbw-disney-princess-aurora-lip-gloss-packshot.png"
+  },
+  "/products/bbw-disney-princess-mulan-lip-gloss.png": {
+    "source": "/products/bbw-disney-princess-mulan-lip-gloss-packshot.png"
+  },
+  "/products/bbw-eucalyptus-and-spearmint-body-cream-226g.png": {
+    "source": "/products/bbw-eucalyptus-and-spearmint-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-flannel-3-wick-candle-411g.png": {
+    "source": "/products/bbw-flannel-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-frozen-lake-3-wick-candle-411g.png": {
+    "source": "/products/bbw-frozen-lake-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-gingham-fresh-body-cream-226g.png": {
+    "source": "/products/bbw-gingham-fresh-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-gingham-gorgeous-body-cream-226g.png": {
+    "source": "/products/bbw-gingham-gorgeous-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-glazed-pumpkin-body-cream-226g.png": {
+    "source": "/products/bbw-glazed-pumpkin-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-graphite-body-cream-226g.png": {
+    "source": "/products/bbw-graphite-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-honorable-body-cream-226g.png": {
+    "source": "/products/bbw-honorable-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-i-scream-float-body-cream-226g.png": {
+    "source": "/products/bbw-i-scream-float-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-into-the-night-body-cream-226g.png": {
+    "source": "/products/bbw-into-the-night-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-japanese-cherry-blossom-body-cream-226g.png": {
+    "source": "/products/bbw-japanese-cherry-blossom-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-japanese-cherry-blossom-body-wash-295ml.png": {
+    "source": "/products/bbw-japanese-cherry-blossom-body-wash-295ml-packshot.png"
+  },
+  "/products/bbw-japanese-cherry-blossom-lip-gloss.png": {
+    "source": "/products/bbw-japanese-cherry-blossom-lip-gloss-packshot.png"
+  },
+  "/products/bbw-lakeside-morning-3-wick-candle-411g.png": {
+    "source": "/products/bbw-lakeside-morning-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-lavender-and-sea-salt-body-cream-226g.png": {
+    "source": "/products/bbw-lavender-and-sea-salt-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-mahogany-teakwood-body-cream-226g.png": {
+    "source": "/products/bbw-mahogany-teakwood-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-marshmallow-fireside-3-wick-candle-411g.png": {
+    "source": "/products/bbw-marshmallow-fireside-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-moonlit-goddess-3-wick-candle-411g.png": {
+    "source": "/products/bbw-moonlit-goddess-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-mountainside-mist-3-wick-candle-411g.png": {
+    "source": "/products/bbw-mountainside-mist-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-noir-body-cream-226g.png": {
+    "source": "/products/bbw-noir-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-ocean-body-cream-226g.png": {
+    "source": "/products/bbw-ocean-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-off-the-vine-body-cream-226g.png": {
+    "source": "/products/bbw-off-the-vine-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-peach-blossom-and-nectar-lip-gloss.png": {
+    "source": "/products/bbw-peach-blossom-and-nectar-lip-gloss-packshot.png"
+  },
+  "/products/bbw-pink-pineapple-sunrise-lip-gloss.png": {
+    "source": "/products/bbw-pink-pineapple-sunrise-lip-gloss-packshot.png"
+  },
+  "/products/bbw-platinum-body-cream-226g.png": {
+    "source": "/products/bbw-platinum-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-pumpkin-cinnamon-bun-3-wick-candle-411g.png": {
+    "source": "/products/bbw-pumpkin-cinnamon-bun-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-pumpkin-pecan-waffles-3-wick-candle-411g.png": {
+    "source": "/products/bbw-pumpkin-pecan-waffles-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-pumpkin-smores-3-wick-candle-411g.png": {
+    "source": "/products/bbw-pumpkin-smores-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-pumpkin-spice-latte-3-wick-candle-411g.png": {
+    "source": "/products/bbw-pumpkin-spice-latte-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-raspberry-mimosa-3-wick-candle-411g.png": {
+    "source": "/products/bbw-raspberry-mimosa-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-salted-butterscotch-3-wick-candle-411g.png": {
+    "source": "/products/bbw-salted-butterscotch-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-strawberry-pound-cake-body-cream-226g.png": {
+    "source": "/products/bbw-strawberry-pound-cake-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-sweater-weather-3-wick-candle-411g.png": {
+    "source": "/products/bbw-sweater-weather-3-wick-candle-411g-packshot.png"
+  },
+  "/products/bbw-sweater-weather-body-cream-226g.png": {
+    "source": "/products/bbw-sweater-weather-body-cream-226g-packshot.png"
+  },
+  "/products/bbw-sweetest-song-body-wash-295ml.png": {
+    "source": "/products/bbw-sweetest-song-body-wash-295ml-packshot.png"
+  },
+  "/products/bbw-sweetheart-cherry-lip-gloss.png": {
+    "source": "/products/bbw-sweetheart-cherry-lip-gloss-packshot.png"
+  },
+  "/products/bbw-tis-the-season-3-wick-candle-411g.png": {
+    "source": "/products/bbw-tis-the-season-3-wick-candle-411g-packshot.png"
+  },
+  "/products/lotion.png": {
+    "source": "/products/body-lotion.png"
+  },
+  "/products/ordinary-nmf.png": {
+    "source": "/products/ordinary-nmf-product-only.webp"
+  },
+  "/products/ordinary-hyaluronic.png": {
+    "source": "/products/ordinary-hyaluronic-product-only.webp"
+  },
+  "/products/ordinary-eye-peptide.png": {
+    "source": "/products/ordinary-eye-peptide-product-only.webp"
+  },
+  "/products/ordinary-nmf-alternate-1.png": {
+    "source": "/products/ordinary-nmf-product-only.webp"
+  },
+  "/products/ordinary-nmf-oct27-additional.png": {
+    "source": "/products/ordinary-nmf-product-only.webp"
+  },
+  "/products/ordinary-niacinamide-30-alternate-1.png": {
+    "source": "/products/ordinary-niacinamide-30-product-only.webp"
+  },
+  "/products/ordinary-rice-60-alternate-1.png": {
+    "source": "/products/ordinary-rice-60-product-only.webp"
+  },
+  "/products/ordinary-rice-120-alternate-1.png": {
+    "source": "/products/ordinary-rice-120-product-only.webp"
+  },
+  "/products/ordinary-mini-set.png": {
+    "source": "/products/ordinary-mini-set-product-only.webp"
+  },
+  "/products/ordinary-niacinamide.png": {
+    "source": "/products/ordinary-niacinamide-30-product-only.webp"
+  },
+  "/products/pdf-01-004-1-cerave-baby-moisturizing-cream-227g.png": {
+    "source": "/products/cerave-baby-cream-227g-product-only.webp"
+  },
+  "/products/pdf-03-005-1-aveeno-daily-moisturizing-lotion-71-ml.png": {
+    "source": "/products/aveeno-daily-lotion-71ml-product-only.webp"
+  },
+  "/products/pdf-03-006-1-aveeno-daily-moisturizing-lotion-nourishing-dry-skin-227-ml.png": {
+    "source": "/products/aveeno-daily-lotion-227ml-product-only.webp"
+  },
+  "/products/pdf-03-011-1-aveeno-intense-relief-over-night-cream-with-shea-butter-very-dry-skin-208-ml.png": {
+    "source": "/products/aveeno-intense-relief-208ml-product-only.webp"
+  },
+  "/products/pdf-03-013-1-aveeno-kids-enfants-gel-cream-face-body-227-ml.png": {
+    "source": "/products/aveeno-kids-gel-cream-227ml-product-only.webp"
+  },
+  "/products/pdf-04-002-1-the-ordinary-acne-set-box-set.png": {
+    "source": "/products/ordinary-acne-set-product-only.webp"
+  },
+  "/products/pdf-04-003-1-the-ordinary-bright-set-box-set.png": {
+    "source": "/products/ordinary-bright-set-product-only.webp"
+  },
+  "/products/pdf-04-005-1-the-ordinary-glycolic-acid-7-exfoliating-toner-100-ml.png": {
+    "source": "/products/ordinary-glycolic-100ml-product-only.webp"
+  },
+  "/products/pdf-04-005-2-the-ordinary-glycolic-acid-7-exfoliating-toner-240-ml.png": {
+    "source": "/products/ordinary-glycolic-240ml-product-only.webp"
+  },
+  "/products/pdf-04-008-2-the-ordinary-natural-moisturizing-factors-ha-100-ml.png": {
+    "source": "/products/ordinary-nmf-100ml-product-only.webp"
+  },
+  "/products/pdf-04-010-1-the-ordinary-hyaluronic-acid-2-b5-ceramide-30-ml.png": {
+    "source": "/products/ordinary-hyaluronic-ceramides-30ml-product-only.webp"
+  },
+  "/products/pdf-04-013-1-the-ordinary-natural-moisturizing-factors-beta-glucan-30-ml.png": {
+    "source": "/products/ordinary-beta-glucan-30ml-product-only.webp"
+  },
+  "/products/pdf-04-014-1-the-ordinary-natural-moisturizing-factors-phytocramides-30-ml.png": {
+    "source": "/products/ordinary-phytoceramides-30ml-product-only.webp"
+  },
+  "/products/pdf-04-015-1-the-ordinary-caffeine-solution-5-egcg-30-ml.png": {
+    "source": "/products/ordinary-caffeine-30ml-product-only.webp"
+  },
+  "/products/pdf-04-017-1-the-ordinary-alpha-arbutin-2-ha-30-ml.png": {
+    "source": "/products/ordinary-alpha-arbutin-30ml-product-only.webp"
+  },
+  "/products/pdf-05-005-1-cetaphil-baby-eczema-calming-moisturizer-dry-itchy-skin-295-ml.png": {
+    "source": "/products/cetaphil-baby-restoraderm-295ml-product-only.webp"
+  },
+  "/products/pdf-05-007-1-cetaphil-extra-gentle-daily-scrub-all-skin-types-178-ml.png": {
+    "source": "/products/cetaphil-extra-gentle-scrub-178ml-product-only.webp"
+  },
+  "/products/pdf-05-008-1-cetaphil-healthy-radiance-gentle-renewing-cleanser-100-g.png": {
+    "source": "/products/cetaphil-radiance-cleanser-product-only.webp"
+  },
+  "/products/pdf-05-009-1-cetaphil-brightening-c-serum-30-ml.png": {
+    "source": "/products/cetaphil-brightening-c-30ml-product-only.webp"
+  },
+  "/products/pdf-05-013-1-cetaphil-moisturizing-body-cream-very-dry-sensitive-skin-453-g.png": {
+    "source": "/products/cetaphil-body-cream-453g-product-only.webp"
+  },
+  "/products/pdf-06-010-1-loreal-paris-absolute-repair-protein-gold-guinoa-hair-250-ml.png": {
+    "source": "/products/loreal-absolut-repair-mask-250ml-product-only.webp"
+  },
+  "/products/pdf-06-012-1-loreal-paris-men-expert-vitalift-daily-moisturizer-cream-48-ml.png": {
+    "source": "/products/loreal-men-vitalift-48ml-product-only.webp"
+  },
+  "/products/pdf-07-001-1-la-roche-posay-cleansing-micellar-foam-soothing-purifying-make-up-remover-150-ml.png": {
+    "source": "/products/lrp-micellar-foam-150ml-product-only.webp"
+  },
+  "/products/pdf-07-002-1-la-roche-posay-anthelios-50-spf-body-lotion-sensitive-skin-200-ml.png": {
+    "source": "/products/lrp-anthelios-body-200ml-product-only.webp"
+  },
+  "/products/pdf-07-003-1-la-roche-posay-anthelios-50-spf-face-lotion-ultra-fluid-50-ml.png": {
+    "source": "/products/lrp-anthelios-fluid-50ml-product-only.webp"
+  },
+  "/products/pdf-07-004-1-la-roche-posay-anthelios-mineral-spf-50-teintee-lotion-ultra-fluid-50-ml.png": {
+    "source": "/products/lrp-anthelios-tinted-50ml-product-only.webp"
+  },
+  "/products/pdf-07-005-1-la-roche-posay-hyalu-serum-b5-anti-aging-30-ml.png": {
+    "source": "/products/lrp-hyalu-b5-30ml-product-only.webp"
+  },
+  "/products/pdf-07-007-1-la-roche-posay-cicaplast-baume-b5-dame-thicon-cream-100-ml.png": {
+    "source": "/products/lrp-cicaplast-b5-100ml-product-only.webp"
+  },
+  "/products/pdf-07-001-1-la-roche-posay-cleansing-micellar-foam-soothing-purifying-make-up-remover-150-ml-oct27-extra.png": {
+    "source": "/products/lrp-micellar-foam-150ml-product-only.webp"
+  },
+  "/products/pdf-09-001-1-maybelline-super-stay-24h-skin-tint-foundation-vitamin-c-312-30-ml.png": {
+    "source": "/products/maybelline-skin-tint-312-product-only.webp"
+  },
+  "/products/pdf-09-012-1-maybelline-super-stay-teddy-tint-liquid-lip-tint-25-baby-tee-0-5-ml.png": {
+    "source": "/products/maybelline-teddy-baby-tee-product-only.webp"
+  },
+  "/products/pdf-11-004-1-nyx-blurrin-tint-foundation-golden-07-30-ml.png": {
+    "source": "/products/nyx-blur-golden-07-product-only.webp"
+  },
+  "/products/pdf-11-007-1-nyx-cant-stop-foundation-pale-30-ml.png": {
+    "source": "/products/nyx-cant-stop-pale-product-only.webp"
+  },
+  "/products/pdf-13-017-2-tirtir-milk-skin-toner-200-ml.png": {
+    "source": "/products/tirtir-milk-toner-200ml-product-only.webp"
+  },
+  "/products/pdf-14-024-2-nizoral-anti-dandruff-shampoo-2-ketoconazole-400-ml.png": {
+    "source": "/products/nizoral-shampoo-400ml-product-only.webp"
+  },
+  "/products/pdf-14-025-1-lubriderm-unscented-lotion-710-ml.png": {
+    "source": "/products/lubriderm-lotion-710ml-product-only.webp"
+  },
+  "/products/pdf-15-045-1-aquaphor-healing-ointment-396-g.png": {
+    "source": "/products/aquaphor-ointment-396g-product-only.webp"
+  },
+  "/products/pdf-16-063-1-vichy-aqualia-thermal-rehydration-cream-15-ml.png": {
+    "source": "/products/vichy-aqualia-15ml-product-only.webp"
+  },
+  "/products/pdf-17-070-1-kiehls-cannabis-satva-seed-oil-harbal-30-ml.png": {
+    "source": "/products/kiehls-cannabis-oil-30ml-product-only.webp"
+  },
+  "/products/pdf-18-073-1-nutrius-brazilian-body-butter-cream-177-ml.png": {
+    "source": "/products/nutrius-body-butter-177ml-product-only.webp"
+  },
+  "/products/pdf-16-063-1-vichy-aqualia-thermal-rehydration-cream-15-ml-alternate-1.png": {
+    "source": "/products/vichy-aqualia-15ml-product-only.webp"
+  },
+  "/products/ordinary-sulphate-4-cleanser-body-hair-240ml.png": {
+    "source": "/products/ordinary-sulphate-240ml-product-only.webp"
+  },
+  "/products/monday-gentle-shampoo-354ml.png": {
+    "source": "/products/monday-gentle-shampoo-354ml-product-only.webp"
+  },
+  "/products/monday-gentle-conditioner-354ml.png": {
+    "source": "/products/monday-gentle-conditioner-354ml-product-only.webp"
+  },
+  "/products/irish-spring-original-clean-bar-soap-104-8g.png": {
+    "source": "/products/irish-spring-soap-product-only.webp"
+  },
+  "/products/glysomed-hand-cream-250ml.png": {
+    "source": "/products/glysomed-250ml-product-only.webp"
+  },
+  "/products/glysomed-hand-cream-50ml.png": {
+    "source": "/products/glysomed-50ml-product-only.webp"
+  },
+  "/products/bbw-vanilla-cafe-body-cream-226g.png": {
+    "source": "/products/bbw-vanilla-cafe-226g-product-only.webp"
+  },
+  "/products/bbw-whiskey-toast-body-cream-226g.png": {
+    "source": "/products/bbw-whiskey-toast-226g-product-only.webp"
+  }
+}

@@ -5,9 +5,6 @@ const { Client } = require('pg');
 const variants = [
   ['vanilla-bean', 'Vanilla Bean', 'Cream', '62ed84a3-77eb-4852-ab84-3ce842df0305'],
   ['raspberry-rose', 'Raspberry Rosé', 'Pink', '85abb680-47bb-44f3-8a81-cdd1784cb533'],
-  ['strawberry-limoncello', 'Strawberry Limoncello', 'Yellow', 'f3877d12-4a20-45a9-a175-004ef616ad7d'],
-  ['pistachio-gelato', 'Pistachio Gelato', 'Green', '5a223bc6-5442-4fcf-9699-74229686ddd5'],
-  ['tangerine-spritz', 'Tangerine Spritz', 'Coral', '123d4cfa-012b-4905-96de-f6afa182e554'],
 ];
 
 async function main() {
@@ -54,7 +51,7 @@ async function main() {
       throw error;
     }
     fs.writeFileSync(seedPath, JSON.stringify(seed, null, 2) + '\n');
-    console.log('Updated live catalog and preview: five singles at 320, combo at 2730.');
+    console.log('Updated live catalog and preview: two singles at 320, combo at 2730.');
   } finally { await client.end(); }
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; });

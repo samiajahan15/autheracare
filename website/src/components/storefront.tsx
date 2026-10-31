@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import ProductImage from "./product-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { shuffleProducts, prioritizePopular } from "@/lib/catalog/discovery";
-import { isWinterCareProduct } from "@/lib/catalog/winter-care";
+import { isSeasonalCareProduct, seasons, seasonDescriptions, type Season } from "@/lib/catalog/seasonal-care";
 import { sectionHref } from "@/lib/catalog/sections";
 import { normalizeSearch, searchProducts } from "@/lib/catalog/search";
 import seed from "@/lib/catalog/seed.json";
@@ -12,6 +13,7 @@ import brandLogos from "@/lib/catalog/brand-logos.json";
 import CategoryMenu from "./category-menu";
 import PriceFilter from "./price-filter";
 import WinterCareDropdown from "./winter-care-dropdown";
+import WinterCareMotion from "./winter-care-motion";
 import ProductPrice from "./product-price";
 import FlavorGallery, { hasFlavorGallery } from "./flavor-gallery";
 import SkinTypeFilter from "./skin-type-filter";
@@ -21,7 +23,7 @@ import Journal from "./journal";
 import type { Product } from "@/lib/catalog/types";
 
 import { useEffect, useRef, useState } from "react";
-import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ChevronRight, ShieldCheck } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ChevronRight, ShieldCheck, Snowflake, Sun, Leaf, CloudRain, Flower2 } from "lucide-react";
 
 function CampaignVideo({ src, title, onShop }: { src: string; title: string; onShop: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -182,9 +184,10 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
   function chooseBrand(value: string) {  setMenuOpen(false); router.push(`/shop/collection${value ? `?brand=${encodeURIComponent(value)}` : ""}`); }
   function adjust(id: string, delta: number) { setCart(prev => ({...prev,[id]:Math.max(0,(prev[id] || 0) + delta)})); }
   const [winterCategory, setWinterCategory] = useState("");
+  const [season, setSeason] = useState<Season>("Winter");
   const winterRowRef = useRef<HTMLDivElement>(null);
   const [winterEdges, setWinterEdges] = useState({ start: true, end: false });
-  const winterProducts = discoveryProducts.filter(isWinterCareProduct);
+  const winterProducts = discoveryProducts.filter(product => isSeasonalCareProduct(product, season));
   const winterCategories = Array.from(new Set(winterProducts.map(product => product.category)));
   const visibleWinterProducts = winterProducts.filter(product => !winterCategory || product.category === winterCategory);
   useEffect(() => {
@@ -197,14 +200,14 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
     observer.observe(row);
     row.addEventListener("scroll", update, { passive: true });
     return () => { observer.disconnect(); row.removeEventListener("scroll", update); };
-  }, [winterCategory, discoveryProducts, categoryPage, blogPage, selectedProduct, searchPage]);
+  }, [winterCategory, season, discoveryProducts, categoryPage, blogPage, selectedProduct, searchPage]);
   function scrollWinter(direction: number) {
     const row = winterRowRef.current;
     if (row) row.scrollBy({ left: direction * row.clientWidth, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
   const popularIds = new Set(prioritizePopular(products, popularity).filter(product => popularity[product.id] > 0).slice(0, 4).map(product => product.id));
   const renderProduct = (p: Product) => <article className="product-card" key={p.id}>
-            <div className="product-photo">{isHomepage && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <Image src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
+            <div className="product-photo">{isHomepage && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <ProductImage src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
             <div className="product-card-content"><div className="product-card-meta"><span className="product-card-brand">{p.brand}</span><span className="product-card-category">{p.category}</span></div><h3 className="product-card-title"><Link className="product-name" href={`/products/${encodeURIComponent(p.id)}`}>{p.name}</Link></h3><p className="product-size">{p.size || "See product details"}</p><ProductPrice product={p}/><button className="preview-button" aria-label={`Add ${p.name} to cart`} onClick={() => adjust(p.id,1)}>{cart[p.id] ? `In cart (${cart[p.id]}) · Add another` : "Add to cart"}<Plus size={16}/></button></div>
           </article>;
   return <>
@@ -232,7 +235,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       {blogPage ? <Journal standalone/> : selectedProduct ? <section className="product-page" aria-labelledby="product-title">
         <nav className="product-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link><span>/</span><span aria-current="page">{selectedProduct.name}</span></nav>
         <div className="product-page-grid">
-          <div className="product-page-photo">{hasFlavorGallery(selectedProduct) ? <FlavorGallery product={selectedProduct} products={products} priority/> : selectedProduct.image ? <Image src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
+          <div className="product-page-photo">{hasFlavorGallery(selectedProduct) ? <FlavorGallery product={selectedProduct} products={products} priority/> : selectedProduct.image ? <ProductImage src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
           <div className="product-page-info"><Link className="product-page-brand" href={`/shop/collection?brand=${encodeURIComponent(selectedProduct.brand)}`}>{selectedProduct.brand}</Link><h1 id="product-title">{selectedProduct.name}</h1><Link className="category-label" href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link>
             <ProductPrice product={selectedProduct}/>
             <p className="product-page-size">Size: <strong>{selectedProduct.size || "Details coming soon"}</strong></p>
@@ -261,12 +264,26 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <p className="catalog-note">Save your favorites to the cart. Contact us to confirm availability and delivery.</p>
       </section>}
       {!categoryPage && !blogPage && !selectedProduct && !searchPage && winterProducts.length > 0 && <section className="winter-care-section" id="winter-care" aria-labelledby="winter-care-title">
-        <div className="winter-care-heading"><span className="section-kicker">THE COLD-WEATHER EDIT</span><h2 id="winter-care-title">Winter Care</h2><p>Comfort for colder days. Explore moisturizers, hydrating serums, lip balm, and nourishing care for skin and hair.</p></div>
-        <div className="winter-care-toolbar">
-          <WinterCareDropdown value={winterCategory} categories={winterCategories} onChange={setWinterCategory}/>
-          <div className="winter-care-navigation"><span role="status">{visibleWinterProducts.length} items</span><button aria-label="Previous winter care products" aria-controls="winter-care-products" disabled={winterEdges.start} onClick={() => scrollWinter(-1)}><ChevronRight size={22} style={{ transform: "rotate(180deg)" }}/></button><button aria-label="Next winter care products" aria-controls="winter-care-products" disabled={winterEdges.end} onClick={() => scrollWinter(1)}><ChevronRight size={22}/></button></div>
+        <div className="seasonal-care-selector" data-season={season}>
+          <span className="seasonal-care-eyebrow">CARE THROUGH THE SEASONS</span>
+          <h2 id="winter-care-title">{season} Care</h2>
+          <div className="seasonal-care-tabs" role="tablist" aria-label="Shop by season">{seasons.map((item, index) => <button key={item} id={`season-tab-${item}`} type="button" role="tab" aria-selected={season === item} aria-controls="seasonal-care-panel" tabIndex={season === item ? 0 : -1} onClick={() => { setSeason(item); setWinterCategory(""); }} onKeyDown={event => {
+            const offset = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+            if (!offset && event.key !== "Home" && event.key !== "End") return;
+            event.preventDefault();
+            const next = seasons[event.key === "Home" ? 0 : event.key === "End" ? seasons.length - 1 : (index + offset + seasons.length) % seasons.length];
+            setSeason(next); setWinterCategory(""); document.getElementById(`season-tab-${next}`)?.focus();
+          }}>{item === "Winter" ? <Snowflake aria-hidden="true"/> : item === "Summer" ? <Sun aria-hidden="true"/> : item === "Autumn" ? <Leaf aria-hidden="true"/> : item === "Monsoon" ? <CloudRain aria-hidden="true"/> : <Flower2 aria-hidden="true"/>}<span>{item}</span></button>)}</div>
         </div>
-        <div className="winter-care-row" id="winter-care-products" ref={winterRowRef} tabIndex={0} aria-label="Winter care products">{visibleWinterProducts.map(renderProduct)}</div>
+        <div id="seasonal-care-panel" role="tabpanel" aria-labelledby={`season-tab-${season}`}>
+        <p className="seasonal-care-description">{seasonDescriptions[season]}</p>
+        <div className="winter-care-toolbar">
+          <WinterCareDropdown value={winterCategory} categories={winterCategories} onChange={setWinterCategory} season={season}/>
+          <div className="winter-care-navigation"><span role="status">{visibleWinterProducts.length} items</span><button aria-label={`Previous ${season.toLowerCase()} care products`} aria-controls="winter-care-products" disabled={winterEdges.start} onClick={() => scrollWinter(-1)}><ChevronRight size={22} style={{ transform: "rotate(180deg)" }}/></button><button aria-label={`Next ${season.toLowerCase()} care products`} aria-controls="winter-care-products" disabled={winterEdges.end} onClick={() => scrollWinter(1)}><ChevronRight size={22}/></button></div>
+        </div>
+        <WinterCareMotion key={season} products={visibleWinterProducts} season={season}/>
+        <div className="winter-care-row" id="winter-care-products" ref={winterRowRef} tabIndex={0} aria-label={`${season} care products`}>{visibleWinterProducts.map(renderProduct)}</div>
+        </div>
       </section>}
       {!categoryPage && !blogPage && <><section className="spotlight-section" aria-labelledby="spotlight-title">
         <h2 id="spotlight-title">SKIN CARE SPOTLIGHT</h2>
@@ -365,9 +382,10 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       <p className="footer-copyright">Copyright © {new Date().getFullYear()} AutheraCare. All rights reserved.</p>
       <a className="back-to-top" href="#" aria-label="Back to top"><ChevronUp size={26}/></a>
     </footer>
-    <dialog ref={dialogRef} className={`shop-dialog${modal === "bag" ? " cart-drawer" : ""}`} aria-labelledby="shop-dialog-title" onCancel={() => setModal(null)} onClick={e => {if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-heading"><h2 id="shop-dialog-title">{modal === "bag" ? "Shopping cart" : modal ? modal.brand : ""}</h2><button className="icon-button" aria-label="Close dialog" onClick={() => setModal(null)}><X/></button></div>{modal === "bag" ? <CartContents products={products} cart={cart} onAdjust={adjust} onClose={()=>setModal(null)}/> : modal && <div className="product-detail">{modal.image && <div className="detail-photo"><Image src={modal.image} alt={modal.name} fill sizes="400px"/></div>}<span className="category-label">{modal.category}</span><h3>{modal.name}</h3>{modal.description && <p className="product-description">{modal.description}</p>}{modal.size && <p className="product-size">{modal.size}</p>}<ProductPrice product={modal}/>{!modal.size && <p>Available sizes will be added soon.</p>}{modal.editedImage && <p className="campaign-note">Product image prepared from supplied artwork.</p>}<button className="detail-add" onClick={()=>adjust(modal.id,1)}>{cart[modal.id] ? `In cart (${cart[modal.id]})` : "Add to cart"}</button><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer">Enquire on Facebook</a></div>}</dialog>
+    <dialog ref={dialogRef} className={`shop-dialog${modal === "bag" ? " cart-drawer" : ""}`} aria-labelledby="shop-dialog-title" onCancel={() => setModal(null)} onClick={e => {if(e.target===e.currentTarget)setModal(null);}}><div className="dialog-heading"><h2 id="shop-dialog-title">{modal === "bag" ? "Shopping cart" : modal ? modal.brand : ""}</h2><button className="icon-button" aria-label="Close dialog" onClick={() => setModal(null)}><X/></button></div>{modal === "bag" ? <CartContents products={products} cart={cart} onAdjust={adjust} onClose={()=>setModal(null)}/> : modal && <div className="product-detail">{modal.image && <div className="detail-photo"><ProductImage src={modal.image} alt={modal.name} fill sizes="400px"/></div>}<span className="category-label">{modal.category}</span><h3>{modal.name}</h3>{modal.description && <p className="product-description">{modal.description}</p>}{modal.size && <p className="product-size">{modal.size}</p>}<ProductPrice product={modal}/>{!modal.size && <p>Available sizes will be added soon.</p>}{modal.editedImage && <p className="campaign-note">Product image prepared from supplied artwork.</p>}<button className="detail-add" onClick={()=>adjust(modal.id,1)}>{cart[modal.id] ? `In cart (${cart[modal.id]})` : "Add to cart"}</button><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer">Enquire on Facebook</a></div>}</dialog>
   </>;
 }
+
 
 
 

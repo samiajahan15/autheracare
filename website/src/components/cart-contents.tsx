@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ProductImage from "./product-image";
 import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import type { Product } from "@/lib/catalog/types";
@@ -12,7 +12,7 @@ export default function CartContents({ products, cart, onAdjust, onClose }: { pr
   return <>
     <div className="cart-drawer-items">
       {!items.length ? <div className="cart-drawer-empty"><p>Your cart is empty.</p><Link href="/shop/collection" onClick={onClose}>Continue shopping</Link></div> : items.map(product => <article className="cart-drawer-item" key={product.id}>
-        <Link className="cart-drawer-photo" href={`/products/${encodeURIComponent(product.id)}`} onClick={onClose}>{product.image ? <Image src={product.image} alt={product.name} fill sizes="72px"/> : <span>{product.brand}</span>}</Link>
+        <Link className="cart-drawer-photo" href={`/products/${encodeURIComponent(product.id)}`} onClick={onClose}>{product.image ? <ProductImage src={product.image} alt={product.name} fill sizes="72px"/> : <span>{product.brand}</span>}</Link>
         <div className="cart-drawer-product"><small>{product.brand}</small><Link href={`/products/${encodeURIComponent(product.id)}`} onClick={onClose}>{product.name}</Link>{product.size && <small>{product.size}</small>}
           <div className="quantity"><button aria-label={`Remove one ${product.name}`} onClick={() => onAdjust(product.id, -1)}><Minus size={14}/></button><span aria-label="Quantity">{cart[product.id]}</span><button aria-label={`Add one ${product.name}`} disabled={cart[product.id] >= 99} onClick={() => onAdjust(product.id, 1)}><Plus size={14}/></button></div>
           <p>{cart[product.id]} × {product.price != null && product.price > 0 ? money(Math.round(product.price * 100)) : "Price unavailable"}</p>

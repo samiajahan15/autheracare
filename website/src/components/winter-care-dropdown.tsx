@@ -3,13 +3,13 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 
-export default function WinterCareDropdown({ value, categories, onChange }: { value: string; categories: string[]; onChange: (value: string) => void }) {
+export default function WinterCareDropdown({ value, categories, onChange, season = "Winter" }: { value: string; categories: string[]; onChange: (value: string) => void; season?: string }) {
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
-  const options = [{ value: "", label: "All winter care" }, ...categories.map(category => ({ value: category, label: category }))];
+  const options = [{ value: "", label: `All ${season.toLowerCase()} care` }, ...categories.map(category => ({ value: category, label: category }))];
   const selected = Math.max(0, options.findIndex(option => option.value === value));
   useEffect(() => {
     if (!open) return;
