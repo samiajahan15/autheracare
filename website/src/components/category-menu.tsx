@@ -24,6 +24,7 @@ export default function CategoryMenu({ onNavigate }: { onNavigate: () => void })
           {category.types.map((type, index) => <Link key={type} href={`/shop/${category.section}?q=${encodeURIComponent(category.queries[index])}`} onClick={close}>{type}</Link>)}
         </div>}
       </div>)}
+      <Link href="/shop/sets" onPointerEnter={() => setActive(null)} onClick={close}>Sets &amp; Bundles</Link>
       <Link href="/shop/collection" onPointerEnter={() => setActive(null)} onClick={close}>View All Products</Link>
     </div>}
   </div>;

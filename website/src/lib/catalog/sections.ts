@@ -12,6 +12,10 @@ export const sections = {
   collection: "Our collection",
 } as const;
 
+export function categoryLabel(category: string) {
+  return category === "Sets" ? "Sets & Bundles" : category;
+}
+
 export function sectionHref(category: string) {
   const section = Object.entries(sections).find(([, title]) => title === category)?.[0] ?? "collection";
   return `/shop/${section}`;

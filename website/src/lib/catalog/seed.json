@@ -71,7 +71,10 @@
     "Urban Decay",
     "Nescafé",
     "Lubriderm",
-    "Pantene"
+    "Pantene",
+    "Kirkland Signature",
+    "Fino",
+    "Marc Anthony"
   ],
   "products": [
     {
@@ -321,7 +324,10 @@
       "id": "aveeno",
       "brand": "Aveeno",
       "name": "Daily Moisturizing Body Wash & Soothing Shower Essentials",
-      "category": "Body care"
+      "category": "Body care",
+      "size": null,
+      "description": "Representative Canadian Daily Moisturizing Body Wash photo; listing size has not been recorded. Confirm available size before ordering.",
+      "editedImage": false
     },
     {
       "id": "native",
@@ -572,7 +578,7 @@
       "id": "eos-spritz-lip-balm",
       "brand": "EOS",
       "name": "Spritz Shea Natural Smooth Lip Balm 9-Pack Combo",
-      "category": "Lip care",
+      "category": "Sets",
       "image": "/products/eos-spritz-lip-balm.png",
       "editedImage": true,
       "size": "9 × 4 g",
@@ -630,7 +636,7 @@
       "id": "native-vanilla-variety",
       "brand": "Native",
       "name": "Vanilla Variety Deodorant 3-Pack",
-      "category": "Body care",
+      "category": "Sets",
       "image": "/products/native-vanilla-variety.png",
       "editedImage": true,
       "size": "3 × 75 g",
@@ -650,7 +656,7 @@
       "id": "neutrogena-retinol-cream",
       "brand": "Neutrogena",
       "name": "Rapid Wrinkle Repair Retinol Regenerating Cream – Fragrance Free",
-      "category": "Face care",
+      "category": "Sets",
       "image": "/products/neutrogena-retinol-cream.png",
       "editedImage": true,
       "size": "2 × 48 mL",
@@ -1284,7 +1290,7 @@
       "brand": "Blistex",
       "name": "Lip Medex & Mint Lip Balm Value Pack",
       "size": "9 × 4.25 g (6 Lip Medex + 3 Mint SPF 15)",
-      "category": "Lip care",
+      "category": "Sets",
       "image": "/products/blistex-lip-medex-mint-lip-balm-9-pack.webp",
       "editedImage": true
     },
@@ -1293,7 +1299,7 @@
       "brand": "Burt’s Bees",
       "name": "Fruit Lip Balm Variety Pack",
       "size": "8 × 4.25 g",
-      "category": "Lip care",
+      "category": "Sets",
       "image": "/products/burts-bees-fruit-lip-balm-8-pack.webp",
       "editedImage": true
     },
@@ -1302,7 +1308,7 @@
       "brand": "Cira",
       "name": "Hydration Electrolytes Variety Pack",
       "size": "45 sticks · 225 g",
-      "category": "Wellness",
+      "category": "Sets",
       "image": "/products/cira-hydration-electrolytes-variety-45-pack.webp",
       "editedImage": true
     },
@@ -1401,7 +1407,7 @@
       "brand": "Aveeno",
       "name": "Stress Relief Moisturizing Lotion – Lavender 3-Pack",
       "size": "3 × 532 mL",
-      "category": "Body care",
+      "category": "Sets",
       "image": "/products/aveeno-stress-relief-lotion-3x532ml.webp",
       "editedImage": true
     },
@@ -1420,7 +1426,7 @@
       "brand": "Pura d’or",
       "name": "Thin2Thick Apple Cider Vinegar Shampoo & Conditioner Set",
       "size": "2 × 709 mL",
-      "category": "Hair care",
+      "category": "Sets",
       "image": "/products/pura-dor-thin2thick-apple-cider-vinegar-duo.webp",
       "editedImage": true
     },
@@ -1465,7 +1471,7 @@
       "brand": "Herbal Essences",
       "name": "Rose Hips Smooth & Shine Shampoo & Conditioner Set",
       "size": "2 × 961 mL",
-      "category": "Hair care",
+      "category": "Sets",
       "image": "/products/herbal-essences-rose-hips-duo-961ml.webp",
       "editedImage": true
     },
@@ -1492,7 +1498,7 @@
       "brand": "MONDAY Haircare",
       "name": "Moisture Shampoo & Conditioner Set – Hyaluronic Acid",
       "size": "2 × 1 L",
-      "category": "Hair care",
+      "category": "Sets",
       "image": "/products/monday-moisture-shampoo-conditioner-duo-1l.webp",
       "editedImage": true
     },
@@ -1761,15 +1767,6 @@
       "editedImage": true
     },
     {
-      "id": "bbw-winter-3-wick-candle-411g",
-      "brand": "Bath & Body Works",
-      "name": "Winter 3-Wick Candle",
-      "size": "411 g",
-      "category": "Accessories",
-      "image": "/products/bbw-winter-3-wick-candle-411g.png",
-      "editedImage": true
-    },
-    {
       "id": "bbw-lakeside-morning-3-wick-candle-411g",
       "brand": "Bath & Body Works",
       "name": "Lakeside Morning 3-Wick Candle",
@@ -1884,15 +1881,6 @@
       "size": "411 g",
       "category": "Accessories",
       "image": "/products/bbw-moonlit-goddess-3-wick-candle-411g.png",
-      "editedImage": true
-    },
-    {
-      "id": "bbw-whipped-honey-and-vanilla-3-wick-candle-411g",
-      "brand": "Bath & Body Works",
-      "name": "Whipped Honey & Vanilla 3-Wick Candle",
-      "size": "411 g",
-      "category": "Accessories",
-      "image": "/products/bbw-whipped-honey-and-vanilla-3-wick-candle-411g.png",
       "editedImage": true
     },
     {
@@ -2788,11 +2776,12 @@
     {
       "id": "around-me-watercolor-hand-cream-60g",
       "brand": "Around Me",
-      "name": "Watercolor Hand Cream",
+      "name": "Watercolor Hand Cream – Blue Tube",
       "size": "60 g",
       "category": "Body care",
-      "image": "/products/around-me-watercolor-hand-cream-60g.png",
-      "editedImage": true
+      "image": "/products/around-me-watercolor-blue-60g.png",
+      "editedImage": true,
+      "description": "One individual 60 g hand cream. Blue packaging shown in the uploaded poster; color identifies the tube design, not a confirmed scent. Product image isolated from the supplied poster using AI."
     },
     {
       "id": "garnier-hyaluronic-aloe-jelly-50ml",
@@ -2872,12 +2861,12 @@
     {
       "id": "pdf-09-012-1-maybelline-super-stay-teddy-tint-liquid-lip-tint-25-baby-tee-0-5-ml",
       "brand": "Maybelline",
-      "name": "Super Stay Teddy Tint Liquid Lip Tint (25-Baby Tee)",
+      "name": "Super Stay Teddy Tint – Shade 25 Baby Tee",
       "size": "0.5 mL",
       "category": "Lip care",
-      "image": "/products/pdf-09-012-1-maybelline-super-stay-teddy-tint-liquid-lip-tint-25-baby-tee-0-5-ml.png",
-      "editedImage": true,
-      "price": 1100
+      "editedImage": false,
+      "price": 1100,
+      "description": "Blurred matte lip tint. Shade 25 Baby Tee. Confirm availability before ordering. International shade range; packaging may vary by market."
     },
     {
       "id": "pdf-04-017-1-the-ordinary-alpha-arbutin-2-ha-30-ml",
@@ -3025,6 +3014,1480 @@
       "image": "/products/pdf-13-005-1-pantene-advanced-care-pro-v-5-in-1-shampoo-1-13-l.png",
       "editedImage": true,
       "price": 3700
+    },
+    {
+      "id": "natures-bounty-melatonin-gummies",
+      "brand": "Nature’s Bounty",
+      "name": "Sleep Support Melatonin Gummies",
+      "size": "5 mg per 2 gummies",
+      "category": "Wellness",
+      "image": "/products/natures-bounty-melatonin-gummies-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "kirkland-men-50-multivitamin-365",
+      "brand": "Kirkland Signature",
+      "name": "Men 50+ Multivitamin and Minerals",
+      "size": "365 tablets",
+      "category": "Wellness",
+      "image": "/products/kirkland-men-50-multivitamin-365-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "kirkland-women-50-multivitamin-365",
+      "brand": "Kirkland Signature",
+      "name": "Women 50+ Multivitamin and Minerals",
+      "size": "365 tablets",
+      "category": "Wellness",
+      "image": "/products/kirkland-women-50-multivitamin-365-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "natures-bounty-hair-skin-nails-220",
+      "brand": "Nature’s Bounty",
+      "name": "Hair, Skin & Nails Gummies",
+      "size": "220 gummies",
+      "category": "Wellness",
+      "image": "/products/natures-bounty-hair-skin-nails-220-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "kirkland-procare-infant-formula-1360g",
+      "brand": "Kirkland Signature",
+      "name": "ProCare Infant Formula",
+      "size": "1.36 kg",
+      "category": "Wellness",
+      "image": "/products/kirkland-procare-infant-formula-1360g-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-17-056-1-fino-hair-mask",
+      "brand": "Fino",
+      "name": "Premium Touch Hair Mask",
+      "category": "Hair care",
+      "image": "/products/fino-premium-touch-hair-mask-product-only.webp",
+      "price": 1700,
+      "editedImage": true
+    },
+    {
+      "id": "pdf-17-069-1-other-brands-renewing-argan-oil-of-morocco-penetrating-oil-100-ml",
+      "brand": "OGX",
+      "name": "Renewing + Argan Oil of Morocco Penetrating Oil",
+      "category": "Hair care",
+      "image": "/products/ogx-argan-oil-morocco-100ml-product-only.webp",
+      "size": "100 mL",
+      "price": 1400,
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-001-2-cerave-moisturizing-cream-453g",
+      "brand": "CeraVe",
+      "name": "Moisturizing Cream",
+      "category": "Face care",
+      "size": "453g",
+      "price": 3350,
+      "image": "/products/cerave-moisturizing-cream-453g-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-001-3-cerave-moisturizing-cream-227g",
+      "brand": "CeraVe",
+      "name": "Moisturizing Cream",
+      "category": "Face care",
+      "size": "227g",
+      "price": 2100,
+      "image": "/products/cerave-moisturizing-cream-227g-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-001-4-cerave-moisturizing-cream-57g",
+      "brand": "CeraVe",
+      "name": "Moisturizing Cream",
+      "category": "Face care",
+      "size": "57g",
+      "price": 1300,
+      "image": "/products/cerave-moisturizing-cream-57g-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-007-1-cerave-intensive-moisturizing-lotion-473-ml",
+      "brand": "CeraVe",
+      "name": "Intensive Moisturizing Lotion",
+      "category": "Face care",
+      "size": "473 mL",
+      "price": 3100,
+      "image": "/products/cerave-intensive-473-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-007-2-cerave-intensive-moisturizing-lotion-355-ml",
+      "brand": "CeraVe",
+      "name": "Intensive Moisturizing Lotion",
+      "category": "Face care",
+      "size": "355 mL",
+      "price": 2800,
+      "image": "/products/cerave-intensive-355-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-007-3-cerave-intensive-moisturizing-lotion-237-ml",
+      "brand": "CeraVe",
+      "name": "Intensive Moisturizing Lotion",
+      "category": "Face care",
+      "size": "237 mL",
+      "price": 2700,
+      "image": "/products/cerave-intensive-237-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-008-1-cerave-hydrating-cleanser-237-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser",
+      "category": "Face care",
+      "size": "237 mL",
+      "price": 2300,
+      "image": "/products/cerave-hydrating-237-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-008-2-cerave-hydrating-cleanser-355-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser",
+      "category": "Face care",
+      "size": "355 mL",
+      "price": 3450,
+      "image": "/products/cerave-hydrating-355-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-008-3-cerave-hydrating-cleanser-562-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser",
+      "category": "Face care",
+      "size": "562 mL",
+      "price": 3700,
+      "image": "/products/cerave-hydrating-562-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-009-1-cerave-hydrating-cleanser-cream-to-foam-355-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser (Cream To Foam)",
+      "category": "Face care",
+      "size": "355 mL",
+      "price": 2550,
+      "image": "/products/cerave-cream-foam-355-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-009-2-cerave-hydrating-cleanser-cream-to-foam-562-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser (Cream To Foam)",
+      "category": "Face care",
+      "size": "562 mL",
+      "price": 3700,
+      "image": "/products/cerave-cream-foam-562-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-010-1-cerave-hydrating-cleanser-foaming-oil-237-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser (Foaming Oil)",
+      "category": "Face care",
+      "size": "237 mL",
+      "price": 2500,
+      "image": "/products/cerave-oil-237-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-010-2-cerave-hydrating-cleanser-foaming-oil-355-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser (Foaming Oil)",
+      "category": "Face care",
+      "size": "355 mL",
+      "price": 2600,
+      "image": "/products/cerave-oil-355-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-010-3-cerave-hydrating-cleanser-foaming-oil-562-ml",
+      "brand": "CeraVe",
+      "name": "Hydrating Cleanser (Foaming Oil)",
+      "category": "Face care",
+      "size": "562 mL",
+      "price": 3700,
+      "image": "/products/cerave-oil-562-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-011-1-cerave-acne-control-cleanser-473-ml",
+      "brand": "CeraVe",
+      "name": "Acne Control Cleanser",
+      "category": "Face care",
+      "size": "473 mL",
+      "price": 3300,
+      "image": "/products/cerave-acne-473-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-012-1-cerave-sa-cleanser-473-ml",
+      "brand": "CeraVe",
+      "name": "SA Cleanser",
+      "category": "Face care",
+      "size": "473 mL",
+      "price": 3000,
+      "image": "/products/cerave-sa-473-product-only.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-01-002-2-cerave-healing-ointment-85g",
+      "brand": "CeraVe",
+      "name": "Healing Ointment",
+      "category": "Body care",
+      "size": "85g",
+      "price": 1550,
+      "image": "/products/cerave-healing-ointment-85g-internet.jpg",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-01-003-1-cerave-baby-healing-ointment-85g",
+      "brand": "CeraVe",
+      "name": "Baby Healing Ointment",
+      "category": "Body care",
+      "size": "85g",
+      "price": 1600,
+      "image": "/products/cerave-baby-healing-ointment-85g-internet.jpg",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-01-017-1-cerave-am-facial-moisturizing-lotion-89-ml",
+      "brand": "CeraVe",
+      "name": "Am - Facial Moisturizing Lotion",
+      "category": "Face care",
+      "size": "89 mL",
+      "price": 2300,
+      "image": "/products/cerave-am-lotion-89ml-internet.jpg",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-02-019-1-cerave-ultra-light-moisturizing-lotion-spf-30-55-ml",
+      "brand": "CeraVe",
+      "name": "Ultra Light Moisturizing Lotion (SPF-30)",
+      "category": "Face care",
+      "size": "55 mL",
+      "price": 2000,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-02-021-1-cerave-acne-control-gel-2-salieylc-acid-40-ml",
+      "brand": "CeraVe",
+      "name": "Acne Control Gel 2% Salieylc Acid",
+      "category": "Face care",
+      "size": "40 mL",
+      "price": 2350,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-02-025-1-cerave-skin-renewing-eye-cream-15-ml",
+      "brand": "CeraVe",
+      "name": "Skin Renewing Eye Cream",
+      "category": "Face care",
+      "size": "15 mL",
+      "price": 2500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-02-026-1-cerave-skin-renewing-night-cream-48-ml",
+      "brand": "CeraVe",
+      "name": "Skin Renewing Night Cream",
+      "category": "Face care",
+      "size": "48 mL",
+      "price": 2750,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-02-028-1-cerave-renewing-sa-lotion-237-ml",
+      "brand": "CeraVe",
+      "name": "Renewing SA Lotion",
+      "category": "Body care",
+      "size": "237 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-05-011-1-cetaphil-moisturizing-lotion-1-l",
+      "brand": "Cetaphil",
+      "name": "Moisturizing Lotion",
+      "category": "Face care",
+      "size": "1 L",
+      "price": 5500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-05-014-1-cetaphil-gentle-sa-acne-treatment-serum-30-ml",
+      "brand": "Cetaphil",
+      "name": "Gentle SA Acne Treatment Serum",
+      "category": "Face care",
+      "size": "30 mL",
+      "price": 2400,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-005-1-loreal-paris-bond-repair-shampoo-12-200-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Bond Repair Shampoo 12%",
+      "category": "Hair care",
+      "size": "200 mL",
+      "price": 1500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-009-1-loreal-paris-enforcer-b6-biotin-professional-mask-hair-250-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Enforcer B6+Biotin Professional Mask Hair",
+      "category": "Hair care",
+      "size": "250 mL",
+      "price": 2500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-011-1-loreal-paris-revitalift-night-moisturizer-50-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Revitalift Night Moisturizer",
+      "category": "Face care",
+      "size": "50 mL",
+      "price": 2200,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-013-1-loreal-paris-men-expert-barber-club-hair-beard-body-wash-300-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Men Expert Barber Club (Hair, Beard, Body Wash)",
+      "category": "Hair care",
+      "size": "300 mL",
+      "price": 1500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-014-1-loreal-paris-revitalift-derm-intensives-pure-glycolic-acid-3-5-200-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Revitalift Derm Intensives (Pure Glycolic Acid 3.5%)",
+      "category": "Face care",
+      "size": "200 mL",
+      "price": 2000,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-015-1-loreal-paris-extra-ordinary-oil-intense-nutrition-385-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Extra Ordinary Oil Intense Nutrition",
+      "category": "Face care",
+      "size": "385 mL",
+      "price": 1600,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-016-1-loreal-paris-micro-ink-pen-stylo-teinte-48hr-tint-brow-stylist-1-0-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Micro Ink Pen Stylo Teinte 48Hr Tint (Brow Stylist)",
+      "category": "Lip care",
+      "size": "1.0 mL",
+      "price": 2300,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-017-1-loreal-paris-age-perfect-serum-anti-age-30-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Age Perfect Serum Anti Age",
+      "category": "Face care",
+      "size": "30 mL",
+      "price": 2300,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-018-1-loreal-paris-panorama-mascara-9-9-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Panorama Mascara",
+      "category": "Lip care",
+      "size": "9.9 mL",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-019-1-loreal-paris-eye-bag-insteant-ereser-15-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Eye Bag Insteant Ereser",
+      "category": "Face care",
+      "size": "15 mL",
+      "price": 2300,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-020-1-loreal-paris-renewing-midnight-eye-cream-14-g",
+      "brand": "L’Oréal Paris",
+      "name": "Renewing Midnight Eye Cream",
+      "category": "Face care",
+      "size": "14 g",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-06-021-1-loreal-paris-renewal-midnight-cream-50-ml",
+      "brand": "L’Oréal Paris",
+      "name": "Renewal Midnight Cream",
+      "category": "Face care",
+      "size": "50 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-04-011-1-the-ordinary-multi-active-delivery-essence-100-ml",
+      "brand": "The Ordinary",
+      "name": "Multi Active Delivery Essence",
+      "category": "Face care",
+      "size": "100 mL",
+      "price": 2500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-001-1-monday-haircare-volume-shampoo-354-ml",
+      "brand": "MONDAY Haircare",
+      "name": "Volume Shampoo",
+      "category": "Hair care",
+      "size": "354 mL",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-002-1-monday-haircare-volume-conditioner-354-ml",
+      "brand": "MONDAY Haircare",
+      "name": "Volume Conditioner",
+      "category": "Hair care",
+      "size": "354 mL",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-003-1-monday-haircare-moisture-shampoo-354-ml",
+      "brand": "MONDAY Haircare",
+      "name": "Moisture Shampoo",
+      "category": "Hair care",
+      "size": "354 mL",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-004-1-monday-haircare-moisture-conditioner-354-ml",
+      "brand": "MONDAY Haircare",
+      "name": "Moisture Conditioner",
+      "category": "Hair care",
+      "size": "354 mL",
+      "price": 1700,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-001-1-bath-body-works-body-butter-185-g",
+      "brand": "Bath & Body Works",
+      "name": "Body Butter – Scent varies",
+      "category": "Body care",
+      "size": "185 g",
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-002-1-bath-body-works-moisturizer-body-cream-men-226-g",
+      "brand": "Bath & Body Works",
+      "name": "Moisturizer Body Cream (Men) – Scent varies",
+      "category": "Body care",
+      "size": "226 g",
+      "price": 1550,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-003-1-bath-body-works-moisturizer-body-cream-226-g",
+      "brand": "Bath & Body Works",
+      "name": "Moisturizer Body Cream – Scent varies",
+      "category": "Body care",
+      "size": "226 g",
+      "price": 1550,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-004-1-bath-body-works-daily-moisturizing-body-wash-295-ml",
+      "brand": "Bath & Body Works",
+      "name": "Daily Moisturizing (Body Wash) – Scent varies",
+      "category": "Body care",
+      "size": "295 mL",
+      "price": 1500,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-005-1-bath-body-works-daily-moisturizing-body-lotion-236-ml",
+      "brand": "Bath & Body Works",
+      "name": "Daily Moisturizing (Body Lotion ) – Scent varies",
+      "category": "Body care",
+      "size": "236 mL",
+      "price": 1500,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-006-1-bath-body-works-lip-oil-pin-colada-swipl-4-3-g",
+      "brand": "Bath & Body Works",
+      "name": "Lip Oil (Pin Colada Swipl)",
+      "category": "Lip care",
+      "size": "4.3 g",
+      "price": 280,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-007-1-bath-body-works-hand-sanitizer-29-ml",
+      "brand": "Bath & Body Works",
+      "name": "Coconut Piña Colada PocketBac Moisturizing Hand Sanitizer",
+      "category": "Body care",
+      "size": "29 mL",
+      "price": 280,
+      "image": "/products/bbw-pocketbac-coconut-pina-colada-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-08-008-1-bath-body-works-lip-gloss-14-ml",
+      "brand": "Bath & Body Works",
+      "name": "Lip Gloss – Scent varies",
+      "category": "Lip care",
+      "size": "14 mL",
+      "price": 1000,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-009-1-bath-body-works-lip-mask-15-g",
+      "brand": "Bath & Body Works",
+      "name": "Lip Mask – Scent varies",
+      "category": "Lip care",
+      "size": "15 g",
+      "price": 1000,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-010-1-bath-body-works-cotton-candy-clouds-body-wash-295-ml",
+      "brand": "Bath & Body Works",
+      "name": "Cotton Candy Clouds (Body Wash)",
+      "category": "Body care",
+      "size": "295 mL",
+      "price": 1500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-011-1-bath-body-works-true-blue-spa-hand-cream-100-ml",
+      "brand": "Bath & Body Works",
+      "name": "True Blue Spa Hand Cream",
+      "category": "Body care",
+      "size": "100 mL",
+      "price": 900,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-012-1-bath-body-works-body-mist-75-ml",
+      "brand": "Bath & Body Works",
+      "name": "Body Mist – Scent varies",
+      "category": "Perfume",
+      "size": "75 mL",
+      "price": 850,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-013-1-bath-body-works-1-wick-candles-227-g",
+      "brand": "Bath & Body Works",
+      "name": "1 Wick Candles – Scent varies",
+      "category": "Accessories",
+      "size": "227 g",
+      "price": 2200,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-08-014-1-bath-body-works-3-wick-candles-411-g",
+      "brand": "Bath & Body Works",
+      "name": "3 Wick Candles – Scent varies",
+      "category": "Accessories",
+      "size": "411 g",
+      "price": 3000,
+      "description": "Scent varies. Representative product photo; the pictured scent and packaging may differ from the item supplied. Contact us to confirm available scents.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-001-1-neutrogena-ultra-sheer-dry-touch-sunscreeen-lotion-spf-45-147-ml",
+      "brand": "Neutrogena",
+      "name": "Ultra Sheer Dry Touch Sunscreeen Lotion SPF- 45",
+      "category": "Face care",
+      "size": "147 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-002-1-neutrogena-hydro-boost-water-gel-sunscreen-lotion-spf-50-88-ml",
+      "brand": "Neutrogena",
+      "name": "Hydro Boost Water Gel Sunscreen Lotion SPF- 50",
+      "category": "Face care",
+      "size": "88 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-003-1-neutrogena-hydro-boost-gel-cream-47-ml",
+      "brand": "Neutrogena",
+      "name": "Hydro Boost Gel Cream",
+      "category": "Face care",
+      "size": "47 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-004-1-neutrogena-ultra-sheer-dry-touch-sunscreen-lotion-spf-60-88-ml",
+      "brand": "Neutrogena",
+      "name": "Ultra Sheer Dry Touch Sunscreen Lotion SPF- 60",
+      "category": "Face care",
+      "size": "88 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-005-1-neutrogena-ultra-sheer-face-sunscreen-spf-60-88-ml",
+      "brand": "Neutrogena",
+      "name": "Ultra Sheer Face Sunscreen SPF- 60",
+      "category": "Face care",
+      "size": "88 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-006-1-neutrogena-ultra-sheer-face-stick-spf-60-13-g",
+      "brand": "Neutrogena",
+      "name": "Ultra Sheer Face Stick SPF- 60",
+      "category": "Face care",
+      "size": "13 g",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-12-008-1-neutrogena-retinol-regenerating-cream-48-ml",
+      "brand": "Neutrogena",
+      "name": "Retinol Regenerating Cream",
+      "category": "Face care",
+      "size": "48 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-006-1-la-roche-posay-anthelios-mineral-spf-50-125-ml",
+      "brand": "La Roche-Posay",
+      "name": "Anthelios Mineral SPF-50",
+      "category": "Face care",
+      "size": "125 mL",
+      "price": 3200,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-008-1-la-roche-posay-effaclar-duo-lotion-40-ml",
+      "brand": "La Roche-Posay",
+      "name": "Effaclar Duo (+) Lotion",
+      "category": "Face care",
+      "size": "40 mL",
+      "price": 2100,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-07-009-1-la-roche-posay-effaclar-duo-m-lotion-40-ml",
+      "brand": "La Roche-Posay",
+      "name": "Effaclar Duo (+ M) Lotion",
+      "category": "Face care",
+      "size": "40 mL",
+      "price": 2100,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-11-001-1-olay-ultra-moisturizer-body-wash-887-ml",
+      "brand": "Olay",
+      "name": "Ultra Moisture Shea Butter Body Wash",
+      "category": "Body care",
+      "size": "887 mL",
+      "image": "/products/olay-ultra-moisture-shea-887ml-isolated.png",
+      "editedImage": true,
+      "description": "Sold individually: one 887 mL bottle or jar. Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-11-002-1-olay-regenerist-advanced-hydratin-niacinamide-moisturizer-cream-50-ml",
+      "brand": "Olay",
+      "name": "Regenerist Advanced + Niacinamide Hydrating Moisturizer",
+      "category": "Face care",
+      "size": "50 mL",
+      "image": "/products/olay-regenerist-niacinamide-50ml-isolated.png",
+      "description": "Sold individually: one 50 mL bottle or jar. Product image isolated from the supplied poster using AI.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-11-003-1-olay-vitamin-c-max-lightweght-moisture-cream-50-ml",
+      "brand": "Olay",
+      "name": "Vitamin C MAX Lightweight Moisturizer",
+      "category": "Face care",
+      "size": "50 mL",
+      "image": "/products/olay-vitamin-c-max-50ml-isolated.png",
+      "editedImage": true,
+      "description": "Sold individually: one 50 mL bottle or jar. Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-11-004-1-olay-retinol-24-max-night-moisturizer-cream-50-ml",
+      "brand": "Olay",
+      "name": "Retinol24 MAX Night Moisturizer",
+      "category": "Face care",
+      "size": "50 mL",
+      "image": "/products/olay-retinol24-max-50ml-isolated.png",
+      "editedImage": true,
+      "description": "Sold individually: one 50 mL bottle or jar. Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-11-006-1-olay-essential-botanicals-bar-soap-passion-flowers-lychee-106-g",
+      "brand": "Olay",
+      "name": "Essential Botanicals Bar Soap - Passion Flowers & Lychee (Single bar; multipack photo)",
+      "category": "Body care",
+      "size": "106 g",
+      "description": "Sold individually: one 106 g bar in the named scent. Photo shows the Canadian multipack packaging for reference; the full multipack is not included.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-11-006-2-olay-essential-botanicals-bar-soap-vanilla-cream-honey-106-g",
+      "brand": "Olay",
+      "name": "Essential Botanicals Bar Soap - Vanilla Cream & Honey (Single bar; multipack photo)",
+      "category": "Body care",
+      "size": "106 g",
+      "description": "Sold individually: one 106 g bar in the named scent. Photo shows the Canadian multipack packaging for reference; the full multipack is not included.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-15-042-1-garnier-hair-filler-vitamin-e-shmpoo-3-300-ml",
+      "brand": "Garnier",
+      "name": "Hair Filler+Vitamin E Shmpoo 3%",
+      "category": "Hair care",
+      "size": "300 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-15-043-1-garnier-fructis-hair-filler-bonding-15-300-ml",
+      "brand": "Garnier",
+      "name": "Fructis Hair Filler Bonding 15%",
+      "category": "Hair care",
+      "size": "300 mL",
+      "price": 1500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-15-044-1-garnier-hair-filer-vitamin-eserum-13-111-ml",
+      "brand": "Garnier",
+      "name": "Hair Filer+Vitamin-Eserum 13%",
+      "category": "Hair care",
+      "size": "111 mL",
+      "price": 1500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-015-1-aveeno-kids-continuous-protection-lotion-88-ml",
+      "brand": "Aveeno",
+      "name": "Kids Continuous Protection Lotion",
+      "category": "Face care",
+      "size": "88 mL",
+      "price": 2000,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-016-1-aveeno-protect-hydrate-moisturizing-sunscreen-spf-50-88-ml",
+      "brand": "Aveeno",
+      "name": "Protect+Hydrate Moisturizing Sunscreen SPF-50",
+      "category": "Face care",
+      "size": "88 mL",
+      "price": 2100,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-017-1-aveeno-calm-restore-nourishing-oat-cleanser-232-ml",
+      "brand": "Aveeno",
+      "name": "Calm+Restore Nourishing Oat Cleanser",
+      "category": "Face care",
+      "size": "232 mL",
+      "price": 2100,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-018-1-aveeno-calm-restore-foaming-cleanser-gel-to-foam-232-ml",
+      "brand": "Aveeno",
+      "name": "Calm+Restore Foaming Cleanser (Gel To Foam)",
+      "category": "Face care",
+      "size": "232 mL",
+      "price": 2100,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-019-1-aveeno-baby-daily-lotion-227-ml",
+      "brand": "Aveeno",
+      "name": "Baby Daily Lotion",
+      "category": "Face care",
+      "size": "227 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-001-2-aveeno-skin-relief-body-wash-apaisant-itchy-dry-skin-532-ml",
+      "brand": "Aveeno",
+      "name": "Skin Relief Body Wash Apaisant (Itchy, Dry Skin)",
+      "category": "Body care",
+      "size": "532 mL",
+      "price": 2200,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-003-2-aveeno-stress-relief-body-wash-apaise-stress-975-ml",
+      "brand": "Aveeno",
+      "name": "Stress Relief Body Wash (Apaise Stress)",
+      "category": "Body care",
+      "size": "975 mL",
+      "price": 4500,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-004-1-aveeno-baby-daily-wash-shampoo-532-ml",
+      "brand": "Aveeno",
+      "name": "Baby Daily Wash & Shampoo",
+      "category": "Body care",
+      "size": "532 mL",
+      "price": 3600,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-008-1-aveeno-skin-relief-moisturizing-lotion-cooling-menthol-itchy-dry-skin-227-ml",
+      "brand": "Aveeno",
+      "name": "Skin Relief Moisturizing Lotion Cooling Menthol (Itchy Dry Skin)",
+      "category": "Body care",
+      "size": "227 mL",
+      "price": 1650,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-009-1-aveeno-skin-relief-moisturizing-lotion-with-shea-butter-itchy-dry-skin-227-ml",
+      "brand": "Aveeno",
+      "name": "Skin Relief Moisturizing Lotion With Shea Butter (Itchy,Dry Skin)",
+      "category": "Body care",
+      "size": "227 mL",
+      "price": 1850,
+      "description": "Closest Canadian packaging photo shows 222 mL. The listed size remains 227 mL; confirm packaging and quantity before ordering.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-012-1-aveeno-healing-ointment-dry-cracked-skin-56-g",
+      "brand": "Aveeno",
+      "name": "Healing Ointment (Dry Cracked Skin )",
+      "category": "Body care",
+      "size": "56 g",
+      "price": 1600,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-03-014-1-aveeno-kids-continuous-protection-mineral-sunscreen-stick-spf-50-42-g",
+      "brand": "Aveeno",
+      "name": "Kids Continuous Protection Mineral Sunscreen Stick SPF-50",
+      "category": "Face care",
+      "size": "42 g",
+      "price": 1800,
+      "editedImage": false
+    },
+    {
+      "id": "pdf-13-007-1-native-restorative-clean-shampoo-1-l",
+      "brand": "Native",
+      "name": "Restorative Clean Shampoo",
+      "category": "Hair care",
+      "size": "1 L",
+      "description": "Representative 1 L Restorative Clean photo shows Cashmere & Vanilla in US packaging. Canadian packaging and available scent may vary.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-13-008-1-native-restorative-clean-conditioner-1-l",
+      "brand": "Native",
+      "name": "Restorative Clean Conditioner",
+      "category": "Hair care",
+      "size": "1 L",
+      "description": "Representative 1 L Restorative Clean photo shows Cashmere & Vanilla in US packaging. Canadian packaging and available scent may vary.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-13-009-1-native-moisturizing-body-wash-1-l",
+      "brand": "Native",
+      "name": "Moisturizing Body Wash – Scent varies (representative photo)",
+      "category": "Body care",
+      "size": "1 L",
+      "description": "Representative photo shows Shea Butter & Almond in a 532 mL bottle. This listing remains 1 L; pictured size, scent and packaging may differ. Confirm the available version before ordering.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-15-050-1-panoxyl-acne-gel-wash-192-ml",
+      "brand": "PanOxyl",
+      "name": "Acne Gel Wash",
+      "category": "Face care",
+      "size": "192 mL",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-15-052-1-panoxyl-acne-wash-for-face-body-85-g",
+      "brand": "PanOxyl",
+      "name": "Acne Wash (For Face & Body)",
+      "category": "Body care",
+      "size": "85 g",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-18-075-1-strivectin-tighten-lift-peptight-360-tightening-eye-serum-19-ml",
+      "brand": "StriVectin",
+      "name": "Tighten & Lift Peptight 360° Tightening Eye Serum",
+      "category": "Face care",
+      "size": "19 mL",
+      "description": "Closest Canadian product photo shows the 30 mL packaging. This listing retains its recorded 19 mL size; confirm the supplied size before ordering.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-18-087-1-g-u-m-sunstar-g-u-m-soft-picks-advanced-90-34",
+      "brand": "G.U.M",
+      "name": "Soft-Picks Advanced",
+      "category": "Oral care",
+      "size": "270 picks (3 × 90)",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-19-090-1-kalaya-muscles-joint-pain-relief-cream-6-extra-strength-with-arnica-2120-150-120-g-50-g",
+      "brand": "Kalaya",
+      "name": "Muscles & Joint Pain Relief Cream 6× Extra Strength With Arnica",
+      "category": "Wellness",
+      "size": "2×120 / 1×50 / 120 g / 50 g",
+      "description": "Product photo shows the 120 g tube. Recorded size options: 2 × 120 g / 1 × 50 g / 120 g / 50 g. Confirm the desired size before ordering.",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-19-091-1-other-brands-osteo-joint-ease-herbal-with-inflam-easy-to-help-relieve-joint-pain-180-ca",
+      "brand": "Webber Naturals",
+      "name": "Osteo Joint Ease with InflamEase",
+      "category": "Wellness",
+      "size": "180 caplets",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-19-093-1-tums-haleon-tums-extra-strength-fort-antacide-fast-acting-relief-estomac-assorted-fruit",
+      "brand": "TUMS",
+      "name": "Extra Strength 750 mg Antacid – Assorted Fruit & Assorted Berries",
+      "category": "Sets",
+      "size": "2 × 200 chewable tablets",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-20-102-1-jamieson-biotin-ultra-strength-10-000-mg-promotes-thicker-hair-stronger-nails-healthier",
+      "brand": "Jamieson",
+      "name": "Biotin Ultra Strength 10,000 mcg",
+      "category": "Wellness",
+      "size": "150 softgels",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-20-103-1-jamieson-organic-cranberry-500-mg-helps-prevent-urinary-tract-infection-240-vtb",
+      "brand": "Jamieson",
+      "name": "Organic Cranberry 500 mg",
+      "category": "Wellness",
+      "size": "240 vegan capsules",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-20-104-1-jamieson-magnesium-supports-bone-health-muscle-function-150-gum",
+      "brand": "Jamieson",
+      "name": "Magnesium Bisglycinate Gummies – Cranberry Grape",
+      "category": "Wellness",
+      "size": "150 gummies",
+      "editedImage": false
+    },
+    {
+      "id": "qtips-cotton-swabs-500",
+      "brand": "Q-tips",
+      "name": "Paper Stick Cotton Swabs",
+      "category": "Accessories",
+      "size": "500 swabs",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-13-003-1-marc-anthony-coconut-shea-nourishing-shampoo-1-l",
+      "brand": "Marc Anthony",
+      "name": "Coconut & Shea Nourishing Shampoo",
+      "category": "Hair care",
+      "edited_image": false,
+      "size": "1 L",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-13-004-1-marc-anthony-coconut-shea-nourishing-conditioner-1-l",
+      "brand": "Marc Anthony",
+      "name": "Coconut & Shea Nourishing Conditioner",
+      "category": "Hair care",
+      "edited_image": false,
+      "size": "1 L",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-19-092-1-robax-platinum-fast-effective-relief-from-joint-muscles-pain-102-cap",
+      "brand": "Robax",
+      "name": "Platinum Fast Effective Relief From Joint & Muscles Pain",
+      "category": "Wellness",
+      "edited_image": false,
+      "size": "102 cap",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-20-111-1-webber-naturals-minerals-magnesium-citrate-150-mg-high-absorption-healthy-bones-muscle",
+      "brand": "Webber Naturals",
+      "name": "Minerals Magnesium Citrate 150 Mg, High Absorption Healthy Bones & Muscle Function",
+      "category": "Wellness",
+      "edited_image": false,
+      "size": "300 Tab",
+      "editedImage": false
+    },
+    {
+      "id": "pdf-20-112-1-webber-naturals-move-easy-triple-action-joint-care-helps-increase-mobility-in-people-su",
+      "brand": "Webber Naturals",
+      "name": "Move Easy Triple Action Joint Care Helps Increase Mobility In People Suffering From Osteoarthritis",
+      "category": "Wellness",
+      "edited_image": false,
+      "size": "75 Cap",
+      "editedImage": false
+    },
+    {
+      "id": "around-me-watercolor-hand-cream-peach-60g",
+      "brand": "Around Me",
+      "name": "Watercolor Hand Cream – Peach Tube",
+      "category": "Body care",
+      "size": "60 g",
+      "image": "/products/around-me-watercolor-peach-60g.png",
+      "description": "One individual 60 g hand cream. Peach packaging shown in the uploaded poster; color identifies the tube design, not a confirmed scent. Product image isolated from the supplied poster using AI.",
+      "editedImage": true
+    },
+    {
+      "id": "around-me-watercolor-hand-cream-pink-60g",
+      "brand": "Around Me",
+      "name": "Watercolor Hand Cream – Pink Tube",
+      "category": "Body care",
+      "size": "60 g",
+      "image": "/products/around-me-watercolor-pink-60g.png",
+      "description": "One individual 60 g hand cream. Pink packaging shown in the uploaded poster; color identifies the tube design, not a confirmed scent. Product image isolated from the supplied poster using AI.",
+      "editedImage": true
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-130",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 130 Tomato Girl",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 130 Tomato Girl. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-10",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 10 Current Mood",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 10 Current Mood. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-15",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 15 Skinny Dip",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 15 Skinny Dip. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-20",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 20 Mascara Tear",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 20 Mascara Tear. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-30",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 30 Coquettish",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 30 Coquettish. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-35",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 35 July Forever",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 35 July Forever. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-40",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 40 Petalcore",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 40 Petalcore. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-45",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 45 Pinky Promise",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 45 Pinky Promise. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-50",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 50 Wild at Heart",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 50 Wild at Heart. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-55",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 55 Knee High",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 55 Knee High. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-60",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 60 Cool Grunge",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 60 Cool Grunge. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-65",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 65 Pinkie Bestie",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 65 Pinkie Bestie. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-70",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 70 The A+",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 70 The A+. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-75",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 75 Latte To Go",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 75 Latte To Go. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-80",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 80 Keep It Cozy",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 80 Keep It Cozy. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-85",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 85 Soft Era",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 85 Soft Era. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-90",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 90 Ribbon Tied",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 90 Ribbon Tied. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-95",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 95 Buffed Out",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 95 Buffed Out. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-100",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 100 Kitten Heel",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 100 Kitten Heel. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-105",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 105 Velvet Choker",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 105 Velvet Choker. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-110",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 110 Faux Freckle",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 110 Faux Freckle. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-115",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 115 Coffee Date",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 115 Coffee Date. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-120",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 120 Endgame",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 120 Endgame. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "maybelline-superstay-teddy-tint-125",
+      "brand": "Maybelline",
+      "name": "Super Stay Teddy Tint – Shade 125 Heart Locket",
+      "category": "Lip care",
+      "size": "5 mL",
+      "description": "Blurred matte lip tint. Shade 125 Heart Locket. Confirm availability before ordering. International shade range; packaging may vary by market.",
+      "editedImage": false
+    },
+    {
+      "id": "jamieson-b100-complex",
+      "brand": "Jamieson",
+      "name": "B100 Complex Timed Release",
+      "category": "Wellness",
+      "description": "Individual bottle. Confirm available pack count and price before ordering. Representative Canadian product photo shows the 90 + 30 caplet pack; pack count in the supplied poster is unclear.",
+      "editedImage": false
+    },
+    {
+      "id": "bbw-pocketbac-beautiful-day-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Beautiful Day PocketBac Moisturizing Hand Sanitizer",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-beautiful-day-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "bbw-pocketbac-cactus-blossom-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Cactus Blossom PocketBac Antibacterial Hand Gel",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-cactus-blossom-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "bbw-pocketbac-pomegranate-blackberry-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Pomegranate & Blackberry PocketBac Moisturizing Hand Sanitizer",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-pomegranate-blackberry-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "bbw-pocketbac-raspberries-whipped-vanilla-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Raspberries & Whipped Vanilla PocketBac Antibacterial Hand Gel",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-raspberries-whipped-vanilla-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "bbw-pocketbac-strawberry-kiwi-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Strawberry Kiwi PocketBac Antibacterial Hand Gel",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-strawberry-kiwi-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "bbw-pocketbac-sunshine-lemons-29ml",
+      "brand": "Bath & Body Works",
+      "name": "Sunshine & Lemons PocketBac Moisturizing Hand Sanitizer",
+      "category": "Body care",
+      "size": "29 mL",
+      "image": "/products/bbw-pocketbac-sunshine-lemons-29ml.png",
+      "description": "One individual 29 mL bottle. Product image isolated from the supplied poster using AI. Confirm current availability.",
+      "editedImage": true
+    },
+    {
+      "id": "kirkland-vitamin-b12-1200mcg-360",
+      "brand": "Kirkland Signature",
+      "name": "Vitamin B12 1,200 mcg Sublingual Tablets",
+      "category": "Wellness",
+      "size": "360 tablets",
+      "description": "Individual bottle. Strength confirmed by the seller; Canadian packaging shown. Confirm price and availability.",
+      "editedImage": false
+    },
+    {
+      "id": "kirkland-vitamin-c-1000mg-500",
+      "brand": "Kirkland Signature",
+      "name": "Timed Release Vitamin C 1,000 mg with Rose Hips",
+      "category": "Wellness",
+      "size": "500 tablets",
+      "description": "Individual bottle. Strength confirmed by the seller; Canadian packaging shown. Confirm price and availability.",
+      "editedImage": false
+    },
+    {
+      "id": "loreal-age-perfect-serum-le-duo-twin-pack",
+      "brand": "L’Oréal Paris",
+      "name": "Age Perfect Serum Le Duo Twin Pack",
+      "category": "Sets",
+      "size": "2 bottles",
+      "image": "/products/loreal-le-duo-twin-pack-isolated.png",
+      "description": "Two serum bottles. Individual bottle volume is not visible in the supplied poster; confirm before ordering. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "neutrogena-hydro-boost-spf50-3x88ml",
+      "brand": "Neutrogena",
+      "name": "Hydro Boost Water Gel Sunscreen Lotion SPF 50 – 3-Pack",
+      "category": "Sets",
+      "size": "3 × 88 mL",
+      "image": "/products/neutrogena-hydro-spf50-three-pack-isolated.png",
+      "description": "Three 88 mL sunscreen tubes. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-15-039-1-eucerin-complete-hydration-lotion-spf-50-150-ml",
+      "brand": "Eucerin",
+      "name": "Complete Hydration Sunscreen Lotion SPF 50",
+      "category": "Face care",
+      "size": "150 mL",
+      "image": "/products/eucerin-hydration-spf50-150ml-isolated.png",
+      "description": "One individual tube, matching the supplied poster. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-16-060-1-sun-bum-sunscreen-cream-177-ml",
+      "brand": "Sun Bum",
+      "name": "Premium Sunscreen Lotion SPF 50",
+      "category": "Face care",
+      "size": "177 mL",
+      "image": "/products/sun-bum-spf50-177ml-isolated.png",
+      "description": "One individual tube, matching the supplied poster. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-16-061-1-blue-lizard-sunscreen-spf-50-89-ml",
+      "brand": "Blue Lizard",
+      "name": "Sensitive Mineral Sunscreen SPF 50",
+      "category": "Face care",
+      "size": "89 mL",
+      "image": "/products/blue-lizard-sensitive-89ml-isolated.png",
+      "description": "One individual tube, matching the supplied poster. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-16-071-1-banana-boat-enfants-sunscreen-spray-spf-50-240-ml",
+      "brand": "Banana Boat",
+      "name": "Kids Sunscreen Lotion SPF 50+",
+      "category": "Face care",
+      "size": "240 mL",
+      "image": "/products/banana-boat-kids-spf50-240ml-isolated.png",
+      "description": "One individual tube, matching the supplied poster. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "thinkbaby-mineral-sunscreen-spf50-trio",
+      "brand": "Thinkbaby",
+      "name": "Mineral Sunscreen SPF 50 Trio",
+      "category": "Sets",
+      "size": "2 × 177 mL + 1 × 18.4 g",
+      "image": "/products/thinkbaby-sunscreen-trio-isolated.png",
+      "description": "Two 177 mL SPF 50 sunscreen tubes and one 18.4 g SPF 50 sunscreen stick. Product image isolated from the supplied poster using AI. Confirm price and availability.",
+      "editedImage": true
+    },
+    {
+      "id": "eucerin-q10-revitalize-night-cream-48g",
+      "brand": "Eucerin",
+      "name": "Face Q10 Revitalize Night Cream + Pro-Retinol",
+      "category": "Face care",
+      "size": "48 g",
+      "image": "/products/eucerin-q10-night-48g-isolated.png",
+      "editedImage": true,
+      "description": "Single 48 g jar. Product image isolated from the supplied poster using AI. Confirm price and availability."
+    },
+    {
+      "id": "pdf-15-041-1-eucerin-anti-shine-mattifying-finish-face-lotion-spf-50-75-ml",
+      "brand": "Eucerin",
+      "name": "Anti Shine+Mattifying Finish Face Lotion SPF- 50",
+      "category": "Face care",
+      "size": "75 mL",
+      "image": "/products/eucerin-anti-shine-75ml-isolated.png",
+      "editedImage": true,
+      "description": "Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-15-049-1-numbuzin-pantothenic-b5-active-soothing-cream-80-ml",
+      "brand": "numbuzin",
+      "name": "Pantothenic B5 Active Soothing Cream",
+      "category": "Face care",
+      "size": "80 mL",
+      "image": "/products/numbuzin-b5-80ml-isolated.png",
+      "editedImage": true,
+      "description": "Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-16-055-1-dr-althea-345-relief-cream-50-ml",
+      "brand": "Dr. Althea",
+      "name": "345 Relief Cream",
+      "category": "Face care",
+      "size": "50 mL",
+      "image": "/products/dr-althea-345-50ml-isolated.png",
+      "editedImage": true,
+      "description": "Product image isolated from the supplied poster using AI."
     }
   ]
 }

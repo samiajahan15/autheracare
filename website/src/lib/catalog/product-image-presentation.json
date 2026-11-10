@@ -1,4 +1,10 @@
 {
+  "/products/pdf-09-002-10-maybelline-super-stay-lumi-matte-foundation-shade-332-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-05-010-1-cetaphil-daily-facial-moisturizer-lotion-spf50-50-ml.png": {
+    "source": "/products/cetaphil-daily-facial-spf50-50ml-product-only.webp"
+  },
   "/products/aveeno-skin-relief-shea-butter-lotion-222ml.png": {
     "source": "/products/aveeno-skin-relief-lotion-222ml.webp"
   },
@@ -117,7 +123,7 @@
     "source": "/products/bbw-cranberry-and-gala-apple-3-wick-candle-411g-packshot.png"
   },
   "/products/bbw-cranberry-woods-3-wick-candle-411g.png": {
-    "source": "/products/bbw-cranberry-woods-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-cranberry-woods-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-disney-princess-aurora-lip-gloss.png": {
     "source": "/products/bbw-disney-princess-aurora-lip-gloss-packshot.png"
@@ -129,7 +135,7 @@
     "source": "/products/bbw-eucalyptus-and-spearmint-body-cream-226g-packshot.png"
   },
   "/products/bbw-flannel-3-wick-candle-411g.png": {
-    "source": "/products/bbw-flannel-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-flannel-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-frozen-lake-3-wick-candle-411g.png": {
     "source": "/products/bbw-frozen-lake-3-wick-candle-411g-packshot.png"
@@ -174,7 +180,7 @@
     "source": "/products/bbw-mahogany-teakwood-body-cream-226g-packshot.png"
   },
   "/products/bbw-marshmallow-fireside-3-wick-candle-411g.png": {
-    "source": "/products/bbw-marshmallow-fireside-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-marshmallow-fireside-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-moonlit-goddess-3-wick-candle-411g.png": {
     "source": "/products/bbw-moonlit-goddess-3-wick-candle-411g-packshot.png"
@@ -207,7 +213,7 @@
     "source": "/products/bbw-pumpkin-pecan-waffles-3-wick-candle-411g-packshot.png"
   },
   "/products/bbw-pumpkin-smores-3-wick-candle-411g.png": {
-    "source": "/products/bbw-pumpkin-smores-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-pumpkin-smores-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-pumpkin-spice-latte-3-wick-candle-411g.png": {
     "source": "/products/bbw-pumpkin-spice-latte-3-wick-candle-411g-packshot.png"
@@ -216,13 +222,13 @@
     "source": "/products/bbw-raspberry-mimosa-3-wick-candle-411g-packshot.png"
   },
   "/products/bbw-salted-butterscotch-3-wick-candle-411g.png": {
-    "source": "/products/bbw-salted-butterscotch-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-salted-butterscotch-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-strawberry-pound-cake-body-cream-226g.png": {
     "source": "/products/bbw-strawberry-pound-cake-body-cream-226g-packshot.png"
   },
   "/products/bbw-sweater-weather-3-wick-candle-411g.png": {
-    "source": "/products/bbw-sweater-weather-3-wick-candle-411g-packshot.png"
+    "source": "/products/bbw-sweater-weather-3-wick-candle-411g-product-only.webp"
   },
   "/products/bbw-sweater-weather-body-cream-226g.png": {
     "source": "/products/bbw-sweater-weather-body-cream-226g-packshot.png"
@@ -415,5 +421,143 @@
   },
   "/products/bbw-whiskey-toast-body-cream-226g.png": {
     "source": "/products/bbw-whiskey-toast-226g-product-only.webp"
+  },
+  "/products/pdf-13-005-1-pantene-advanced-care-pro-v-5-in-1-shampoo-1-13-l.png": {
+    "source": "/products/pantene-5in1-shampoo-1130ml-product-only.webp"
+  },
+  "/products/pdf-13-017-1-tirtir-milk-skin-toner-50-ml.png": {
+    "source": "/products/tirtir-milk-toner-50ml-product-only.webp"
+  },
+  "/products/maybelline-super-stay-24h-skin-tint-shade-88.png": {
+    "source": "/products/maybelline-skin-tint-88-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-shade-01.png": {
+    "source": "/products/nyx-blur-01-product-only.webp"
+  },
+  "/products/bbw-vanilla-romance-body-wash-295ml.png": {
+    "source": "/products/bbw-vanilla-romance-body-wash-295ml-product-only.webp"
+  },
+  "/products/bbw-vanilla-noir-body-cream-226g.png": {
+    "source": "/products/bbw-vanilla-noir-body-cream-226g-product-only.webp"
+  },
+  "/products/bbw-to-the-moon-body-cream-226g.png": {
+    "source": "/products/bbw-to-the-moon-body-cream-226g-product-only.webp"
+  },
+  "/products/cetaphil-healthy-radiance-brightening-cream-50g.png": {
+    "source": "/products/cetaphil-healthy-radiance-brightening-cream-50g-product-only.webp"
+  },
+  "/products/maybelline-super-stay-lumi-matte-shade-80.png": {
+    "source": "/products/maybelline-super-stay-lumi-matte-shade-80-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-05-vanilla.png": {
+    "source": "/products/nyx-bare-with-me-blur-05-vanilla-product-only.webp"
+  },
+  "/products/elf-soft-glam-satin-foundation.png": {
+    "source": "/products/elf-soft-glam-satin-foundation-product-only.webp"
+  },
+  "/products/bbw-warm-vanilla-sugar-body-cream-226g.png": {
+    "source": "/products/bbw-warm-vanilla-sugar-body-cream-226g-product-only.webp"
+  },
+  "/products/bbw-violets-are-blue-lip-gloss.png": {
+    "source": "/products/bbw-violets-are-blue-lip-gloss-product-only.webp"
+  },
+  "/products/loreal-professionnel-inforcer-mask-250ml.png": {
+    "source": "/products/loreal-professionnel-inforcer-mask-250ml-product-only.webp"
+  },
+  "/products/garnier-hyaluronic-aloe-jelly-50ml.png": {
+    "source": "/products/garnier-hyaluronic-aloe-jelly-50ml-product-only.webp"
+  },
+  "/products/garnier-ombrelle-mineral-spf50-75ml.png": {
+    "source": "/products/garnier-ombrelle-mineral-spf50-75ml-product-only.webp"
+  },
+  "/products/nyx-duck-plump-lip-gloss.png": {
+    "source": "/products/nyx-duck-plump-lip-gloss-product-only.webp"
+  },
+  "/products/urban-decay-all-nighter-setting-spray-15ml.png": {
+    "source": "/products/urban-decay-all-nighter-setting-spray-15ml-product-only.webp"
+  },
+  "/products/urban-decay-all-nighter-watermelon-setting-spray-15ml.png": {
+    "source": "/products/urban-decay-all-nighter-watermelon-setting-spray-15ml-product-only.webp"
+  },
+  "/products/nescafe-rich-instant-coffee-475g.png": {
+    "source": "/products/nescafe-rich-instant-coffee-475g-product-only.webp"
+  },
+  "/products/bbw-vanilla-ease-body-wash-295ml.png": {
+    "source": "/products/bbw-vanilla-ease-body-wash-295ml-product-only.webp"
+  },
+  "/products/bbw-warm-vanilla-sugar-body-wash-295ml.png": {
+    "source": "/products/bbw-warm-vanilla-sugar-body-wash-295ml-product-only.webp"
+  },
+  "/products/bbw-tree-farm-3-wick-candle-411g.png": {
+    "source": "/products/bbw-tree-farm-3-wick-candle-411g-product-only.webp"
+  },
+  "/products/bbw-the-perfect-christmas-3-wick-candle-411g.png": {
+    "source": "/products/bbw-the-perfect-christmas-3-wick-candle-411g-product-only.webp"
+  },
+  "/products/bbw-winter-candy-apple-3-wick-candle-411g.png": {
+    "source": "/products/bbw-winter-candy-apple-3-wick-candle-411g-product-only.webp"
+  },
+  "/products/bbw-under-the-christmas-tree-3-wick-candle-411g.png": {
+    "source": "/products/bbw-under-the-christmas-tree-3-wick-candle-411g-product-only.webp"
+  },
+  "/products/maybelline-super-stay-lumi-matte-shade-367.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-1-maybelline-super-stay-lumi-matte-foundation-shade-120-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-2-maybelline-super-stay-lumi-matte-foundation-shade-125-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-3-maybelline-super-stay-lumi-matte-foundation-shade-128-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-4-maybelline-super-stay-lumi-matte-foundation-shade-129-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-5-maybelline-super-stay-lumi-matte-foundation-shade-220-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-6-maybelline-super-stay-lumi-matte-foundation-shade-250-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-7-maybelline-super-stay-lumi-matte-foundation-shade-300-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-8-maybelline-super-stay-lumi-matte-foundation-shade-312-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/pdf-09-002-9-maybelline-super-stay-lumi-matte-foundation-shade-322-30-ml.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/maybelline-super-stay-lumi-matte-shade-360.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/maybelline-super-stay-lumi-matte-shade-387.png": {
+    "source": "/products/maybelline-lumi-matte-332-product-only.webp"
+  },
+  "/products/maybelline-super-stay-24h-skin-tint-shade-20.png": {
+    "source": "/products/maybelline-super-stay-24h-skin-tint-shade-20-product-only.webp"
+  },
+  "/products/maybelline-super-stay-24h-skin-tint-shade-36.png": {
+    "source": "/products/maybelline-super-stay-24h-skin-tint-shade-36-product-only.webp"
+  },
+  "/products/maybelline-super-stay-24h-skin-tint-shade-40.png": {
+    "source": "/products/maybelline-super-stay-24h-skin-tint-shade-40-product-only.webp"
+  },
+  "/products/maybelline-super-stay-24h-skin-tint-shade-48.png": {
+    "source": "/products/maybelline-super-stay-24h-skin-tint-shade-48-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-shade-10.png": {
+    "source": "/products/nyx-bare-with-me-blur-shade-10-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-shade-16.png": {
+    "source": "/products/nyx-bare-with-me-blur-shade-16-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-shade-23.png": {
+    "source": "/products/nyx-bare-with-me-blur-shade-23-product-only.webp"
+  },
+  "/products/nyx-bare-with-me-blur-24-deep-mocha.png": {
+    "source": "/products/nyx-bare-with-me-blur-24-deep-mocha-product-only.webp"
   }
 }

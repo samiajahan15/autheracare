@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import RoutineShowcase from "./routine-showcase";
 import ProductImage from "./product-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { shuffleProducts, prioritizePopular } from "@/lib/catalog/discovery";
 import { isSeasonalCareProduct, seasons, seasonDescriptions, type Season } from "@/lib/catalog/seasonal-care";
-import { sectionHref } from "@/lib/catalog/sections";
+import { matchesShoppingGroup, shoppingGroups, type ShoppingGroup } from "@/lib/catalog/shopping-groups";
+import { sectionHref, categoryLabel } from "@/lib/catalog/sections";
 import { normalizeSearch, searchProducts } from "@/lib/catalog/search";
 import seed from "@/lib/catalog/seed.json";
 import brandLogos from "@/lib/catalog/brand-logos.json";
@@ -15,6 +17,9 @@ import PriceFilter from "./price-filter";
 import WinterCareDropdown from "./winter-care-dropdown";
 import WinterCareMotion from "./winter-care-motion";
 import ProductPrice from "./product-price";
+import TeddyTintCard, { TeddyCarousel } from './teddy-tint-card';
+import LumiMatteCard from "./lumi-matte-card";
+import { isLumiMatte, isTeddyTint, groupShadeCards, shadeNumber } from "@/lib/catalog/shades";
 import FlavorGallery, { hasFlavorGallery } from "./flavor-gallery";
 import SkinTypeFilter from "./skin-type-filter";
 import { matchesSkinTypes, type SkinType } from "@/lib/catalog/skin-types";
@@ -23,7 +28,7 @@ import Journal from "./journal";
 import type { Product } from "@/lib/catalog/types";
 
 import { useEffect, useRef, useState } from "react";
-import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ChevronRight, ShieldCheck, Snowflake, Sun, Leaf, CloudRain, Flower2 } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ChevronRight, ShieldCheck, Snowflake, Sun, Leaf, CloudRain, Flower2, Sparkles, Droplets, Activity, HandHeart, Coffee } from "lucide-react";
 
 function CampaignVideo({ src, title, onShop }: { src: string; title: string; onShop: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -64,10 +69,22 @@ function FacebookIcon() {
 function InstagramIcon() {
   return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
 }
+const categoryIcons = { beauty: Sparkles, "hair-body": Droplets, "health-wellness": Activity, "personal-care": HandHeart, lifestyle: Coffee };
+
+const dailyRoutine = [
+  { step: "Face Cleanser", id: "pdf-01-008-1-cerave-hydrating-cleanser-237-ml" },
+  { step: "Lightweight Moisturizer", id: "pdf-04-013-1-the-ordinary-natural-moisturizing-factors-beta-glucan-30-ml" },
+  { step: "Sunscreen SPF 50+", id: "pdf-07-003-1-la-roche-posay-anthelios-50-spf-face-lotion-ultra-fluid-50-ml" },
+  { step: "Skin Tint", id: "pdf-09-001-1-maybelline-super-stay-24h-skin-tint-foundation-vitamin-c-312-30-ml" },
+  { step: "Lip Color · Gloss", id: "nyx-duck-plump-lip-gloss" },
+] as const;
+
 const tabs = ["Featured products", "Face care", "Body care", "Hair care", "Lip care", "Perfume", "Wellness", "Oral care", "Accessories", "Sets"] as const;
 type Tab = typeof tabs[number];
 
-export default function Home({ products, catalogUnavailable = false, categoryPage = false, title, initialTab = "Featured products", initialBrand = "", selectedProduct, searchPage = false, blogPage = false, initialQuery = "" }: { products: Product[]; catalogUnavailable?: boolean; categoryPage?: boolean; title?: string; initialTab?: Tab; initialBrand?: string; selectedProduct?: Product; searchPage?: boolean; blogPage?: boolean; initialQuery?: string }) {
+export default function Home({ products, catalogUnavailable = false, categoryPage = false, title, initialTab = "Featured products", initialBrand = "", selectedProduct: initialSelectedProduct, searchPage = false, blogPage = false, initialQuery = "", collectionSeason, shoppingGroup }: { products: Product[]; catalogUnavailable?: boolean; categoryPage?: boolean; title?: string; initialTab?: Tab; initialBrand?: string; selectedProduct?: Product; searchPage?: boolean; blogPage?: boolean; initialQuery?: string; collectionSeason?: Season; shoppingGroup?: ShoppingGroup }) {
+  const [teddySelection, setTeddySelection] = useState<{sourceId: string; product: Product} | null>(null);
+  const selectedProduct = teddySelection?.sourceId === initialSelectedProduct?.id ? teddySelection?.product : initialSelectedProduct;
   const router = useRouter();
   const brands = Array.from(new Set([...seed.brands, ...products.map(product => product.brand)]));
   const [tab, setTab] = useState<Tab>(initialTab);
@@ -175,40 +192,32 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
     return () => controller.abort();
   }, [products, isHomepage]);
   const searching = query.trim().toLowerCase();
-  const filtered = searchProducts(isHomepage ? discoveryProducts : products, query).filter(p => (!brand || p.brand === brand) && (tab === "Featured products" || p.category === tab) && (!priceRange || (p.price != null && p.price >= priceRange[0] && p.price <= priceRange[1])) && matchesSkinTypes(p, selectedSkinTypes));
+  const filtered = searchProducts(isHomepage ? discoveryProducts : products, query).filter(p => (!shoppingGroup || matchesShoppingGroup(p, shoppingGroup)) && (!collectionSeason || isSeasonalCareProduct(p, collectionSeason)) && (!brand || p.brand === brand) && (tab === "Featured products" || p.category === tab) && (!priceRange || (p.price != null && p.price >= priceRange[0] && p.price <= priceRange[1])) && matchesSkinTypes(p, selectedSkinTypes));
+  // Brand browsing puts uploaded product photos before entries awaiting photography.
+  if (brand && searchSort === "relevance") filtered.sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)));
   if (searchSort === "price-low" || searchSort === "price-high") filtered.sort((first, second) => first.price == null ? (second.price == null ? 0 : 1) : second.price == null ? -1 : searchSort === "price-low" ? first.price - second.price : second.price - first.price);
   if (searchSort === "name") filtered.sort((first, second) => first.name.localeCompare(second.name));
-  const shown = !categoryPage && tab === "Featured products" && !brand && !searching && !priceRange ? filtered.slice(0,4) : filtered;
+  const grouped = groupShadeCards(filtered);
+  const showRoutine = isHomepage && tab === "Featured products" && !brand && !searching && !priceRange && !selectedSkinTypes.length;
+  const routine = dailyRoutine.flatMap(({ step, id }, index) => {
+    const product = products.find(item => item.id === id);
+    return product ? [{ step, product, number: index + 1 }] : [];
+  });
+  const shown = showRoutine ? routine.map(({ product }) => product) : grouped;
   const count = Object.values(cart).reduce((total, n) => total + n, 0);
   function chooseTab(value: Tab) { setMenuOpen(false); router.push(sectionHref(value)); }
   function chooseBrand(value: string) {  setMenuOpen(false); router.push(`/shop/collection${value ? `?brand=${encodeURIComponent(value)}` : ""}`); }
   function adjust(id: string, delta: number) { setCart(prev => ({...prev,[id]:Math.max(0,(prev[id] || 0) + delta)})); }
   const [winterCategory, setWinterCategory] = useState("");
   const [season, setSeason] = useState<Season>("Winter");
-  const winterRowRef = useRef<HTMLDivElement>(null);
-  const [winterEdges, setWinterEdges] = useState({ start: true, end: false });
-  const winterProducts = discoveryProducts.filter(product => isSeasonalCareProduct(product, season));
+  const featuredIds = new Set(isHomepage ? shown.map(product => product.id) : []);
+  const winterProducts = groupShadeCards(discoveryProducts.filter(product => !featuredIds.has(product.id) && !(shown.some(isLumiMatte) && isLumiMatte(product)) && !(shown.some(isTeddyTint) && isTeddyTint(product)) && isSeasonalCareProduct(product, season)));
   const winterCategories = Array.from(new Set(winterProducts.map(product => product.category)));
   const visibleWinterProducts = winterProducts.filter(product => !winterCategory || product.category === winterCategory);
-  useEffect(() => {
-    const row = winterRowRef.current;
-    if (!row) return;
-    const update = () => setWinterEdges({ start: row.scrollLeft <= 2, end: row.scrollLeft + row.clientWidth >= row.scrollWidth - 2 });
-    row.scrollTo({ left: 0, behavior: "instant" });
-    update();
-    const observer = new ResizeObserver(update);
-    observer.observe(row);
-    row.addEventListener("scroll", update, { passive: true });
-    return () => { observer.disconnect(); row.removeEventListener("scroll", update); };
-  }, [winterCategory, season, discoveryProducts, categoryPage, blogPage, selectedProduct, searchPage]);
-  function scrollWinter(direction: number) {
-    const row = winterRowRef.current;
-    if (row) row.scrollBy({ left: direction * row.clientWidth, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
-  }
   const popularIds = new Set(prioritizePopular(products, popularity).filter(product => popularity[product.id] > 0).slice(0, 4).map(product => product.id));
-  const renderProduct = (p: Product) => <article className="product-card" key={p.id}>
-            <div className="product-photo">{isHomepage && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <ProductImage src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
-            <div className="product-card-content"><div className="product-card-meta"><span className="product-card-brand">{p.brand}</span><span className="product-card-category">{p.category}</span></div><h3 className="product-card-title"><Link className="product-name" href={`/products/${encodeURIComponent(p.id)}`}>{p.name}</Link></h3><p className="product-size">{p.size || "See product details"}</p><ProductPrice product={p}/><button className="preview-button" aria-label={`Add ${p.name} to cart`} onClick={() => adjust(p.id,1)}>{cart[p.id] ? `In cart (${cart[p.id]}) · Add another` : "Add to cart"}<Plus size={16}/></button></div>
+  const renderProduct = (p: Product) => isTeddyTint(p) ? <TeddyTintCard key="teddy-tint" initial={p} variants={products.filter(isTeddyTint)} cart={cart} saved={saved} onAdd={id => adjust(id, 1)} onSave={id => setSaved(prev => prev.includes(id) ? prev.filter(value => value !== id) : [...prev, id])}/> : isLumiMatte(p) ? <LumiMatteCard key="lumi-matte" initial={p} variants={products.filter(isLumiMatte)} cart={cart} saved={saved} onAdd={id => adjust(id, 1)} onSave={id => setSaved(prev => prev.includes(id) ? prev.filter(value => value !== id) : [...prev, id])}/> : <article className="product-card" key={p.id}>
+            <div className="product-photo">{isHomepage && !showRoutine && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <ProductImage src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
+            <div className="product-card-content"><div className="product-card-meta"><span className="product-card-brand">{p.brand}</span><span className="product-card-category">{categoryLabel(p.category)}</span></div><h3 className="product-card-title"><Link className="product-name" href={`/products/${encodeURIComponent(p.id)}`}>{p.name}</Link></h3><p className="product-size">{p.size || "See product details"}</p><ProductPrice product={p}/><button className="preview-button" aria-label={`Add ${p.name} to cart`} onClick={() => adjust(p.id,1)}>{cart[p.id] ? `In cart (${cart[p.id]}) · Add another` : "Add to cart"}<Plus size={16}/></button></div>
           </article>;
   return <>
     {catalogUnavailable && <p role="status" style={{ padding: 12, textAlign: "center" }}>Live catalog temporarily unavailable. Showing a catalog preview; prices and availability must be confirmed.</p>}
@@ -235,9 +244,11 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       {blogPage ? <Journal standalone/> : selectedProduct ? <section className="product-page" aria-labelledby="product-title">
         <nav className="product-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link><span>/</span><span aria-current="page">{selectedProduct.name}</span></nav>
         <div className="product-page-grid">
-          <div className="product-page-photo">{hasFlavorGallery(selectedProduct) ? <FlavorGallery product={selectedProduct} products={products} priority/> : selectedProduct.image ? <ProductImage src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
+          <div className="product-page-photo">{isTeddyTint(selectedProduct) ? <TeddyCarousel variants={products.filter(isTeddyTint)} initial={selectedProduct} onSelect={p=>setTeddySelection({sourceId: initialSelectedProduct!.id, product:p})}/> : hasFlavorGallery(selectedProduct) ? <FlavorGallery product={selectedProduct} products={products} priority/> : selectedProduct.image ? <ProductImage src={selectedProduct.image} alt={`${selectedProduct.brand} ${selectedProduct.name}`} fill sizes="(max-width: 700px) 90vw, 48vw" priority /> : <span>Product photo coming soon</span>}</div>
           <div className="product-page-info"><Link className="product-page-brand" href={`/shop/collection?brand=${encodeURIComponent(selectedProduct.brand)}`}>{selectedProduct.brand}</Link><h1 id="product-title">{selectedProduct.name}</h1><Link className="category-label" href={sectionHref(selectedProduct.category)}>{selectedProduct.category}</Link>
-            <ProductPrice product={selectedProduct}/>
+            {isLumiMatte(selectedProduct) && <label className="shade-picker">Choose shade<select aria-label="Lumi Matte shade" value={selectedProduct.id} onChange={event => router.push(`/products/${event.target.value}`)}>{products.filter(isLumiMatte).sort((a,b) => Number(shadeNumber(a))-Number(shadeNumber(b))).map(product => <option key={product.id} value={product.id}>Shade {shadeNumber(product)}</option>)}</select></label>}
+            <ProductPrice product={selectedProduct}/>{isTeddyTint(selectedProduct) && <p>Confirm availability for your selected shade.</p>}
+            {isLumiMatte(selectedProduct) && <small className="shade-photo-note">Product photo is representative; check your selected shade before adding to cart.</small>}
             <p className="product-page-size">Size: <strong>{selectedProduct.size || "Details coming soon"}</strong></p>
             <div className="product-offer"><ShoppingBag size={21}/><div><strong>Your everyday care, from {selectedProduct.brand}</strong><p>Ask us about current availability and delivery options.</p></div></div>
             <div className="product-purchase"><div className="product-quantity" role="group" aria-label="Product quantity"><button aria-label="Decrease quantity" disabled={productQuantity === 1} onClick={() => setProductQuantity(quantity => Math.max(1, quantity - 1))}><Minus size={16}/></button><output aria-live="polite" aria-label="Quantity">{productQuantity}</output><button aria-label="Increase quantity" disabled={productQuantity === 99} onClick={() => setProductQuantity(quantity => Math.min(99, quantity + 1))}><Plus size={16}/></button></div><button className="product-page-add" onClick={() => adjust(selectedProduct.id, productQuantity)}>ADD TO CART <ShoppingBag size={18}/></button></div><p className="product-page-note" role="status">{cart[selectedProduct.id] ? `${cart[selectedProduct.id]} added to your cart. Checkout is coming soon.` : "Checkout is coming soon. Contact us to confirm availability."}</p>
@@ -249,15 +260,30 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <div className="product-service-strip"><div><ShieldCheck size={25}/><span><strong>Product information</strong><small>Brand, size and details in one place</small></span></div><div><ShoppingBag size={25}/><span><strong>Your cart</strong><small>Save your selection before checkout launches</small></span></div><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer"><Heart size={25}/><span><strong>Need a little help?</strong><small>Contact the Authéra team</small></span></a></div>
       </section> : <section className="shop-section" id="collection" aria-labelledby="shop-title">
         <div className="shop-intro"><span className="section-kicker">{categoryPage || searchPage ? "THE AUTHÉRA COLLECTION" : "YOUR EVERYDAY CARE, CONSIDERED"}</span><h1 id="shop-title">{categoryPage ? brand || title : searchPage ? "Find your next essential" : <>Find your everyday <em>glow.</em></>}</h1><p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p></div>
-        {!categoryPage && !searchPage && <><nav className="collection-category-links" aria-label="Explore care categories">{(["Face care", "Body care", "Hair care", "Lip care", "Perfume"] as const).map(category => <Link key={category} href={sectionHref(category)}>{category}<ChevronRight size={14}/></Link>)}</nav><div className="collection-section-heading"><div><span className="section-kicker">THE EVERYDAY EDIT</span><h2>Discover your daily essentials</h2></div><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
-        {searchPage ? <><form action="/search" role="search" className="search-page-form"><label className="screen-reader-only" htmlFor="search-page-query">Search products</label><input id="search-page-query" name="q" defaultValue={query} maxLength={160} placeholder="Search products, brands or categories…"/><button type="submit"><Search size={18}/> Search</button></form><div className="search-filters"><label>Category<select value={tab} onChange={event => setTab(event.target.value as Tab)}>{tabs.map(category => <option key={category} value={category}>{category === "Featured products" ? "All categories" : category}</option>)}</select></label><label>Brand<select value={brand} onChange={event => setBrand(event.target.value)}><option value="">All brands</option>{Array.from(new Set(products.map(product => product.brand))).sort().map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={searchSort} onChange={event => setSearchSort(event.target.value)}><option value="relevance">Best match</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option></select></label><p role="status">{shown.length} {shown.length === 1 ? "product" : "products"}</p></div></> : null}
+        {!categoryPage && !searchPage && <><nav className="collection-category-links" aria-label="Explore shopping categories">
+          {(Object.keys(shoppingGroups) as ShoppingGroup[]).map(slug => {
+            const group = shoppingGroups[slug];
+            const Icon = categoryIcons[slug];
+            return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
+              <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
+              <span><strong>{group.title}</strong><small>{group.description}</small></span>
+              <ChevronRight className="collection-category-arrow" size={16} aria-hidden="true"/>
+            </Link>;
+          })}
+        </nav><div className="collection-section-heading"><div><span className="section-kicker">THE EVERYDAY EDIT</span><h2>Discover your daily essentials</h2></div><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
+        {searchPage ? <><form action="/search" role="search" className="search-page-form"><label className="screen-reader-only" htmlFor="search-page-query">Search products</label><input id="search-page-query" name="q" defaultValue={query} maxLength={160} placeholder="Search products, brands or categories…"/><button type="submit"><Search size={18}/> Search</button></form><div className="search-filters"><label>Category<select value={tab} onChange={event => setTab(event.target.value as Tab)}>{tabs.map(category => <option key={category} value={category}>{category === "Featured products" ? "All categories" : categoryLabel(category)}</option>)}</select></label><label>Brand<select value={brand} onChange={event => setBrand(event.target.value)}><option value="">All brands</option>{Array.from(new Set(products.map(product => product.brand))).sort().map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={searchSort} onChange={event => setSearchSort(event.target.value)}><option value="relevance">Best match</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option></select></label><p role="status">{shown.length} {shown.length === 1 ? "product" : "products"}</p></div></> : null}
         {brand && <div className="active-filter"><span>{brand}{tab !== "Featured products" && <> <span aria-hidden="true">›</span> {tab}</>}</span><button onClick={() => setBrand("")} aria-label="Clear brand filter"><X size={14}/></button></div>}
         <div className={categoryPage || searchPage ? "product-listing-layout" : undefined}>
         {(categoryPage || searchPage) && <div className="product-filter-sidebar"><PriceFilter key={maximumPrice} maximum={maximumPrice} active={priceRange !== null} onApply={setPriceRange} onReset={() => setPriceRange(null)}/><SkinTypeFilter selected={selectedSkinTypes} onChange={setSelectedSkinTypes}/></div>}
-        <div id="product-panel" aria-label={`${brand || tab} products`}>
+        <div id="product-panel" aria-label={ `${brand || tab} products`}>
           {selectedSkinTypes.length > 0 && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} for {selectedSkinTypes.join(", ")} skin</p>}
           {priceRange && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} from ৳{priceRange[0].toLocaleString()} to ৳{priceRange[1].toLocaleString()}</p>}
-          <div className="product-grid">{shown.map(renderProduct)}</div>
+          {showRoutine && routine.length > 0 ? <><RoutineShowcase routine={routine}/><h3 className="routine-lineup-title" id="daily-routine-products">Five steps, one routine</h3><ol className="daily-routine" aria-label="Daily essentials routine">
+            {routine.map(({ step, product, number }) => <li key={product.id}>
+              <p className="daily-routine-step"><span aria-hidden="true">{String(number).padStart(2, "0")}</span>{step}</p>
+              {renderProduct(product)}
+            </li>)}
+          </ol></> : <div className="product-grid">{shown.map(renderProduct)}</div>}
           {!shown.length && <div className="empty-state"><h2>{searchPage ? "No products match your search." : brand ? `${brand} products are coming soon.` : "No matching products."}</h2><p>{searchPage ? "Try another spelling or choose a different category or brand." : brand ? "We’re preparing the product details for this brand." : "Try another brand or product name."}</p>{searchPage ? <button onClick={() => {setBrand("");setTab("Featured products");}}>Clear category and brand filters</button> : <button onClick={() => {setBrand("");chooseTab("Featured products");}}>View featured products</button>}<Link className="search-browse-all" href="/shop/collection">Browse all products</Link></div>}
         </div>
         </div>
@@ -279,10 +305,12 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <p className="seasonal-care-description">{seasonDescriptions[season]}</p>
         <div className="winter-care-toolbar">
           <WinterCareDropdown value={winterCategory} categories={winterCategories} onChange={setWinterCategory} season={season}/>
-          <div className="winter-care-navigation"><span role="status">{visibleWinterProducts.length} items</span><button aria-label={`Previous ${season.toLowerCase()} care products`} aria-controls="winter-care-products" disabled={winterEdges.start} onClick={() => scrollWinter(-1)}><ChevronRight size={22} style={{ transform: "rotate(180deg)" }}/></button><button aria-label={`Next ${season.toLowerCase()} care products`} aria-controls="winter-care-products" disabled={winterEdges.end} onClick={() => scrollWinter(1)}><ChevronRight size={22}/></button></div>
+          <div className="winter-care-navigation">
+            <Link className="winter-care-collection-link" href={`/shop/season/${season.toLowerCase()}`} prefetch={false}>All {season} Products <ChevronRight size={16} aria-hidden="true"/></Link>
+            <span role="status">{visibleWinterProducts.length} items</span>
+          </div>
         </div>
         <WinterCareMotion key={season} products={visibleWinterProducts} season={season}/>
-        <div className="winter-care-row" id="winter-care-products" ref={winterRowRef} tabIndex={0} aria-label={`${season} care products`}>{visibleWinterProducts.map(renderProduct)}</div>
         </div>
       </section>}
       {!categoryPage && !blogPage && <><section className="spotlight-section" aria-labelledby="spotlight-title">
