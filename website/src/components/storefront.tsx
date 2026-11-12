@@ -25,6 +25,7 @@ import SkinTypeFilter from "./skin-type-filter";
 import { matchesSkinTypes, type SkinType } from "@/lib/catalog/skin-types";
 import CartContents from "./cart-contents";
 import Journal from "./journal";
+import CustomerReviews from "./customer-reviews";
 import type { Product } from "@/lib/catalog/types";
 
 import { useEffect, useRef, useState } from "react";
@@ -259,18 +260,31 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         </div>
         <div className="product-service-strip"><div><ShieldCheck size={25}/><span><strong>Product information</strong><small>Brand, size and details in one place</small></span></div><div><ShoppingBag size={25}/><span><strong>Your cart</strong><small>Save your selection before checkout launches</small></span></div><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer"><Heart size={25}/><span><strong>Need a little help?</strong><small>Contact the Authéra team</small></span></a></div>
       </section> : <section className="shop-section" id="collection" aria-labelledby="shop-title">
-        <div className="shop-intro"><span className="section-kicker">{categoryPage || searchPage ? "THE AUTHÉRA COLLECTION" : "YOUR EVERYDAY CARE, CONSIDERED"}</span><h1 id="shop-title">{categoryPage ? brand || title : searchPage ? "Find your next essential" : <>Find your everyday <em>glow.</em></>}</h1><p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p></div>
-        {!categoryPage && !searchPage && <><nav className="collection-category-links" aria-label="Explore shopping categories">
-          {(Object.keys(shoppingGroups) as ShoppingGroup[]).map(slug => {
-            const group = shoppingGroups[slug];
-            const Icon = categoryIcons[slug];
-            return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
-              <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
-              <span><strong>{group.title}</strong><small>{group.description}</small></span>
-              <ChevronRight className="collection-category-arrow" size={16} aria-hidden="true"/>
-            </Link>;
-          })}
-        </nav><div className="collection-section-heading"><div><span className="section-kicker">THE EVERYDAY EDIT</span><h2>Discover your daily essentials</h2></div><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
+        {categoryPage || searchPage ? <div className="shop-intro">
+          <span className="section-kicker">THE AUTHÉRA COLLECTION</span>
+          <h1 id="shop-title">{categoryPage ? brand || title : "Find your next essential"}</h1>
+          <p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p>
+        </div> : <>
+          <section className="essentials-intro" aria-labelledby="essentials-intro-title">
+            <video className="essentials-intro-video" src="/daily-essentials-background.mp4" autoPlay muted loop playsInline aria-hidden="true"/>
+            <div className="shop-intro">
+              <h2 id="essentials-intro-title" className="shop-intro-tagline">Discover your daily essentials</h2>
+              <span className="section-kicker">YOUR EVERYDAY CARE, CONSIDERED</span>
+              <p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p>
+            </div>
+            <nav className="collection-category-links" aria-label="Explore shopping categories">
+              {(Object.keys(shoppingGroups) as ShoppingGroup[]).map(slug => {
+                const group = shoppingGroups[slug];
+                const Icon = categoryIcons[slug];
+                return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
+                  <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
+                  <span><strong>{group.title}</strong><small>{group.description}</small></span>
+                  <ChevronRight className="collection-category-arrow" size={16} aria-hidden="true"/>
+                </Link>;
+              })}
+            </nav>
+          </section>
+          <div className="collection-section-heading"><span className="section-kicker">THE EVERYDAY EDIT</span><h1 id="shop-title" className="collection-glow-line">Find your everyday <em>glow.</em></h1><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
         {searchPage ? <><form action="/search" role="search" className="search-page-form"><label className="screen-reader-only" htmlFor="search-page-query">Search products</label><input id="search-page-query" name="q" defaultValue={query} maxLength={160} placeholder="Search products, brands or categories…"/><button type="submit"><Search size={18}/> Search</button></form><div className="search-filters"><label>Category<select value={tab} onChange={event => setTab(event.target.value as Tab)}>{tabs.map(category => <option key={category} value={category}>{category === "Featured products" ? "All categories" : categoryLabel(category)}</option>)}</select></label><label>Brand<select value={brand} onChange={event => setBrand(event.target.value)}><option value="">All brands</option>{Array.from(new Set(products.map(product => product.brand))).sort().map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={searchSort} onChange={event => setSearchSort(event.target.value)}><option value="relevance">Best match</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option></select></label><p role="status">{shown.length} {shown.length === 1 ? "product" : "products"}</p></div></> : null}
         {brand && <div className="active-filter"><span>{brand}{tab !== "Featured products" && <> <span aria-hidden="true">›</span> {tab}</>}</span><button onClick={() => setBrand("")} aria-label="Clear brand filter"><X size={14}/></button></div>}
         <div className={categoryPage || searchPage ? "product-listing-layout" : undefined}>
@@ -278,12 +292,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <div id="product-panel" aria-label={ `${brand || tab} products`}>
           {selectedSkinTypes.length > 0 && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} for {selectedSkinTypes.join(", ")} skin</p>}
           {priceRange && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} from ৳{priceRange[0].toLocaleString()} to ৳{priceRange[1].toLocaleString()}</p>}
-          {showRoutine && routine.length > 0 ? <><RoutineShowcase routine={routine}/><h3 className="routine-lineup-title" id="daily-routine-products">Five steps, one routine</h3><ol className="daily-routine" aria-label="Daily essentials routine">
-            {routine.map(({ step, product, number }) => <li key={product.id}>
-              <p className="daily-routine-step"><span aria-hidden="true">{String(number).padStart(2, "0")}</span>{step}</p>
-              {renderProduct(product)}
-            </li>)}
-          </ol></> : <div className="product-grid">{shown.map(renderProduct)}</div>}
+          {showRoutine && routine.length > 0 ? <RoutineShowcase routine={routine}/> : <div className="product-grid">{shown.map(renderProduct)}</div>}
           {!shown.length && <div className="empty-state"><h2>{searchPage ? "No products match your search." : brand ? `${brand} products are coming soon.` : "No matching products."}</h2><p>{searchPage ? "Try another spelling or choose a different category or brand." : brand ? "We’re preparing the product details for this brand." : "Try another brand or product name."}</p>{searchPage ? <button onClick={() => {setBrand("");setTab("Featured products");}}>Clear category and brand filters</button> : <button onClick={() => {setBrand("");chooseTab("Featured products");}}>View featured products</button>}<Link className="search-browse-all" href="/shop/collection">Browse all products</Link></div>}
         </div>
         </div>
@@ -317,7 +326,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <h2 id="spotlight-title">SKIN CARE SPOTLIGHT</h2>
         <div className="spotlight-grid">
           {[
-            { brand: "The Ordinary", theme: "rose", eyebrow: "THE SERUM EDIT", title: "A LITTLE CARE. A LOVELY GLOW.", text: "Make room for your daily ritual with The Ordinary’s serums and moisturizers.", images: ["/products/barrier-serum.png", "/products/ordinary-hyaluronic.png"], names: ["Soothing & Barrier Support Serum", "Hyaluronic Acid 2% + B5"] },
+            { brand: "The Ordinary", theme: "rose", eyebrow: "THE SERUM EDIT", title: "A LITTLE CARE. A LOVELY GLOW.", text: "Make room for your daily ritual with The Ordinary’s serums and moisturizers.", images: ["/products/barrier-serum.png", "/products/ordinary-hyaluronic-product-only.webp"], names: ["Soothing & Barrier Support Serum", "Hyaluronic Acid 2% + B5"] },
             { brand: "CeraVe", theme: "blue", eyebrow: "EVERYDAY MOISTURE", title: "YOUR HYDRATION HEROES.", text: "Discover CeraVe creams and lotions for your everyday moisturizing routine.", images: ["/products/cerave-daily-lotion-cutout.png", "/products/cerave-cream-cutout.png"], names: ["Daily Moisturizing Lotion", "Moisturizing Cream"] },
             { brand: "Garnier", theme: "sun", eyebrow: "THE SUN CARE EDIT", title: "SUN CARE, IN YOUR ROUTINE.", text: "Explore Garnier Ombrelle Dry Touch sunscreens in SPF 45 and SPF 60.", images: ["/products/garnier-spf45-cutout.png", "/products/garnier-spf60-cutout.png"], names: ["Ombrelle Complete Dry Touch SPF 45", "Ombrelle Complete Dry Touch SPF 60"] },
           ].map(edit => <article className="spotlight-card" key={edit.brand}>
@@ -357,7 +366,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         </div>
         <div className="video-carousel-controls"><button aria-label="Previous videos" onClick={() => setVideoPage(p => (p+5)%6)}>‹</button><span aria-live="polite">Reel {videoPage+1} of 6</span><button aria-label="Next videos" onClick={() => setVideoPage(p => (p+1)%6)}>›</button></div>
       </section>
-      <Journal/>
+      <CustomerReviews products={products} />
       <section className="brand-section" id="brands" aria-labelledby="brands-title">
         <h2 id="brands-title">Our Brands</h2>
         <div className="brand-ticker" aria-label="Shop by brand">

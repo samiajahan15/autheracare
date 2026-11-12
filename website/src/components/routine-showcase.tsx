@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/lib/catalog/types";
 import ProductImage from "./product-image";
-import ProductPrice from "./product-price";
 
 type Step = { step: string; product: Product; number: number };
 
@@ -11,32 +10,28 @@ export default function RoutineShowcase({ routine }: { routine: Step[] }) {
   const track = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: number; x: number; left: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
+  const video = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(0);
-  const [closeUp, setCloseUp] = useState(-1);
-  const [paused, setPaused] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [replay, setReplay] = useState(0);
-  const featured = routine[closeUp]?.product;
+  const [playingSequence, setPlayingSequence] = useState(false);
 
   useEffect(() => {
-    const node = track.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.35 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+    if (active !== 0) video.current?.pause();
+  }, [active]);
 
-  const finished = closeUp === routine.length - 1;
   useEffect(() => {
-    if (!visible || active !== 0 || paused || finished || !routine.length) return;
-    const timer = window.setTimeout(() => setCloseUp(closeUp + 1), closeUp < 0 ? 1250 : 3700);
+    if (!playingSequence || active === 0 || active >= routine.length) return;
+    const timer = window.setTimeout(() => goTo(active + 1), 4500);
     return () => window.clearTimeout(timer);
-  }, [active, closeUp, finished, paused, replay, routine.length, visible]);
+  }, [active, playingSequence, routine.length]);
 
+  function selectScene(index: number) {
+    setPlayingSequence(false);
+    goTo(index);
+  }
   function goTo(index: number) {
     const node = track.current;
     if (!node) return;
-    const target = Math.max(0, Math.min(routine.length, index));
+    const target = Math.max(0, Math.min(node.children.length - 1, index));
     node.scrollTo({
       left: target * node.clientWidth,
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
@@ -75,7 +70,7 @@ export default function RoutineShowcase({ routine }: { routine: Step[] }) {
       : Math.round(node.scrollLeft / node.clientWidth);
     suppressClick.current = true;
     delete node.dataset.dragging;
-    goTo(target);
+    selectScene(target);
   }
 
   return <section className="routine-showcase" aria-label="Explore the daily routine">
@@ -87,9 +82,13 @@ export default function RoutineShowcase({ routine }: { routine: Step[] }) {
       onKeyDown={event => {
         if (event.target !== event.currentTarget || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
         event.preventDefault();
-        goTo(active + (event.key === "ArrowRight" ? 1 : -1));
+        selectScene(active + (event.key === "ArrowRight" ? 1 : -1));
       }}
-      onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}
+      onWheel={() => setPlayingSequence(false)}
+      onPointerDown={event => {
+        setPlayingSequence(false);
+        startDrag(event);
+      }} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}
       onPointerLeave={event => { if (!drag.current?.moved) endDrag(event); }}
       onClickCapture={event => {
         if (event.detail && suppressClick.current) {
@@ -99,34 +98,15 @@ export default function RoutineShowcase({ routine }: { routine: Step[] }) {
         }
       }}>
       <article className="routine-scene routine-scene-intro">
-        <div className="routine-scene-copy">
-          <span className="section-kicker">THE EVERYDAY EDIT</span>
-          <h3>A complete routine, in bloom</h3>
-          <p>Five essentials for your everyday routine.</p>
-          <button type="button" onClick={() => goTo(1)}>Explore the routine <ChevronRight size={16}/></button>
-          {featured && <div className="routine-reveal-details" key={featured.id}>
-            <span className="section-kicker">STEP {closeUp + 1} · {routine[closeUp].step}</span>
-            <h4><Link href={`/products/${encodeURIComponent(featured.id)}`}>{featured.name}</Link></h4>
-            <p>{featured.brand}{featured.size ? ` · ${featured.size}` : ""}</p>
-            <ProductPrice product={featured}/>
-          </div>}
-        </div>
-        <div className="routine-closeup">
-          <div className="routine-scene-art routine-flower-reveal">
-            <div className="routine-flower" data-blooming={visible && active === 0} key={replay} aria-hidden="true">
-              {Array.from({ length: 12 }, (_, index) => <i key={index} style={{ rotate: `${index * 30}deg` }}/>)}
-            </div>
-            {featured?.image && <ProductImage key={featured.id} src={featured.image} alt={`${featured.brand} ${featured.name}`} width={460} height={460} draggable={false}/>}
-          </div>
-          <div className="routine-steps" aria-label="Close-up controls">
-            <button type="button" disabled={closeUp <= 0} onClick={() => { setPaused(true); setCloseUp(index => index - 1); }} aria-label="Previous product close-up"><ChevronLeft size={16}/></button>
-            <button type="button" onClick={() => {
-              if (finished) { setCloseUp(-1); setPaused(false); setReplay(value => value + 1); }
-              else setPaused(value => !value);
-            }}>{finished ? "Replay" : paused ? "Resume" : "Pause"}</button>
-            <button type="button" disabled={finished} onClick={() => { setPaused(true); setCloseUp(index => index + 1); }} aria-label="Next product close-up"><ChevronRight size={16}/></button>
-          </div>
-        </div>
+        <p className="routine-video-title">Five steps One routine</p>
+        <video ref={video} className="routine-video" width={1280} height={720} controls autoPlay muted playsInline preload="metadata"
+          onEnded={() => {
+            setPlayingSequence(true);
+            goTo(1);
+          }}
+          aria-label="Daily essentials video" onPointerDown={event => event.stopPropagation()}>
+          <source src="/daily-essentials.mp4" type="video/mp4"/>
+        </video>
       </article>
       {routine.map(({ step, product, number }) => <article className="routine-scene" data-step={number} key={product.id}>
         <div className="routine-scene-copy">
@@ -141,12 +121,11 @@ export default function RoutineShowcase({ routine }: { routine: Step[] }) {
       </article>)}
     </div>
     <div className="routine-controls">
-      <button type="button" aria-label="Previous scene" disabled={active === 0} onClick={() => goTo(active - 1)}><ChevronLeft size={19}/></button>
+      <button type="button" aria-label="Previous scene" disabled={active === 0} onClick={() => selectScene(active - 1)}><ChevronLeft size={19}/></button>
       <div className="routine-steps" aria-label="Choose a routine scene">
-        {["Overview", ...routine.map(({ step }) => step)].map((label, index) => <button type="button" key={label} aria-label={label} aria-current={index === active ? "step" : undefined} onClick={() => goTo(index)}>{index || "Start"}</button>)}
+        {["Overview", ...routine.map(({ step }) => step)].map((label, index) => <button type="button" key={label} aria-label={label} aria-current={index === active ? "step" : undefined} onClick={() => selectScene(index)}>{index || "Start"}</button>)}
       </div>
-      <button type="button" aria-label="Next scene" disabled={active === routine.length} onClick={() => goTo(active + 1)}><ChevronRight size={19}/></button>
-      <a href="#daily-routine-products">Shop the lineup</a>
+      <button type="button" aria-label="Next scene" disabled={active === routine.length} onClick={() => selectScene(active + 1)}><ChevronRight size={19}/></button>
     </div>
   </section>;
 }

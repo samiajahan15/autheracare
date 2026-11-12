@@ -1,0 +1,71 @@
+.section {
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 5vw, 5rem);
+  background: #fdebef;
+  color: #242334;
+}
+
+.inner { max-width: 1510px; margin: 0 auto; }
+
+.heading, .reviewer { display: flex; align-items: center; }
+
+.heading { justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+.heading h2 { margin: 0; font-size: clamp(1.45rem, 3vw, 2.25rem); letter-spacing: -.035em; }
+.controls { display: flex; gap: .65rem; }
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #292737;
+  border-radius: .55rem;
+  background: #fff;
+  color: #292737;
+  cursor: pointer;
+}
+.controls button:last-child { background: #292737; color: #fff; }
+.controls button:focus-visible { outline: 2px solid #ad3158; outline-offset: 3px; }
+
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2.25rem); }
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 12rem;
+  gap: 1.5rem;
+  padding: clamp(1rem, 2vw, 2rem);
+  border-radius: 1.25rem;
+  background: #fff;
+}
+.reviewer { flex-wrap: wrap; gap: .65rem; }
+.reviewer h3 { margin: 0; font-size: 1rem; }
+.avatar { display: grid; flex: none; place-items: center; width: 2.75rem; height: 2.75rem; }
+.avatar { border-radius: 50%; background: #f0f0f2; color: #686775; }
+.card blockquote { margin: 0; line-height: 1.65; }
+.quote { margin-inline-end: .25em; color: #c34770; font-size: 2.25em; font-weight: 700; line-height: 0; vertical-align: -.25em; }
+
+@media (max-width: 900px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card:nth-child(n + 3) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card:nth-child(n + 2) { display: none; }
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: auto;
+  padding: .85rem;
+  border: 1px solid #edf0f4;
+  border-radius: .85rem;
+  background: #f5f7f9;
+  color: inherit;
+  text-decoration: none;
+  font-size: .875rem;
+}
+
+.product:hover strong { text-decoration: underline; }
+.product img { flex: none; object-fit: contain; border-radius: .5rem; background: #fff; }
+.product p { margin: .35rem 0 0; }
