@@ -269,8 +269,8 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
             <video className="essentials-intro-video" src="/daily-essentials-background.mp4" autoPlay muted loop playsInline aria-hidden="true"/>
             <div className="shop-intro">
               <h2 id="essentials-intro-title" className="shop-intro-tagline">Discover your daily essentials</h2>
-              <span className="section-kicker">YOUR EVERYDAY CARE, CONSIDERED</span>
-              <p>Discover skincare from the brands you love.<br/>A little care, a simple ritual—made for you.</p>
+              <span className="section-kicker">THE ART OF EVERYDAY CARE.</span>
+              <p>Thoughtfully selected. Made for everyday living.</p>
             </div>
             <nav className="collection-category-links" aria-label="Explore shopping categories">
               {(Object.keys(shoppingGroups) as ShoppingGroup[]).map(slug => {
