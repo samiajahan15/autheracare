@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Authéra | The art of everyday care",
     description: "Thoughtfully selected. Made for everyday living.",
-    images: ["/opengraph-image.png"],
+    images: ["https://www.autheracare.com/opengraph-image.jpg"],
   },
 };
 
