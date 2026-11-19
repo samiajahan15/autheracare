@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import RoutineShowcase from "./routine-showcase";
+import LipCareWall from "./lip-care-wall";
 import ProductImage from "./product-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -292,7 +293,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <div id="product-panel" aria-label={ `${brand || tab} products`}>
           {selectedSkinTypes.length > 0 && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} for {selectedSkinTypes.join(", ")} skin</p>}
           {priceRange && <p className="price-filter-results" role="status">{shown.length} {shown.length === 1 ? "product" : "products"} from ৳{priceRange[0].toLocaleString()} to ৳{priceRange[1].toLocaleString()}</p>}
-          {showRoutine && routine.length > 0 ? <RoutineShowcase routine={routine}/> : <div className="product-grid">{shown.map(renderProduct)}</div>}
+          {showRoutine && routine.length > 0 ? <RoutineShowcase routine={routine}/> : tab === "Lip care" && shown.length > 0 ? <LipCareWall cards={shown.map(renderProduct)} /> : <div className="product-grid">{shown.map(renderProduct)}</div>}
           {!shown.length && <div className="empty-state"><h2>{searchPage ? "No products match your search." : brand ? `${brand} products are coming soon.` : "No matching products."}</h2><p>{searchPage ? "Try another spelling or choose a different category or brand." : brand ? "We’re preparing the product details for this brand." : "Try another brand or product name."}</p>{searchPage ? <button onClick={() => {setBrand("");setTab("Featured products");}}>Clear category and brand filters</button> : <button onClick={() => {setBrand("");chooseTab("Featured products");}}>View featured products</button>}<Link className="search-browse-all" href="/shop/collection">Browse all products</Link></div>}
         </div>
         </div>

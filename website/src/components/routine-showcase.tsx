@@ -1,131 +1,157 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+"use client";
+
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/lib/catalog/types";
 import ProductImage from "./product-image";
+import ProductPrice from "./product-price";
+import styles from "./routine-showcase.module.css";
 
 type Step = { step: string; product: Product; number: number };
+const clamp = (value: number) => Math.max(0, Math.min(1, value));
+const ease = (value: number) => { const t = clamp(value); return t * t * (3 - 2 * t); };
 
 export default function RoutineShowcase({ routine }: { routine: Step[] }) {
-  const track = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ id: number; x: number; left: number; moved: boolean } | null>(null);
-  const suppressClick = useRef(false);
-  const video = useRef<HTMLVideoElement>(null);
-  const [active, setActive] = useState(0);
-  const [playingSequence, setPlayingSequence] = useState(false);
+  const section = useRef<HTMLElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const [mobile, setMobile] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (active !== 0) video.current?.pause();
-  }, [active]);
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const node = section.current;
+      if (!node) return;
+      setMobile(window.innerWidth <= 700);
+      const rect = node.getBoundingClientRect();
+      setProgress(clamp(-rect.top / Math.max(1, node.offsetHeight - window.innerHeight)));
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const preference = () => { setReducedMotion(query.matches); schedule(); };
+    preference();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    query.addEventListener("change", preference);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      query.removeEventListener("change", preference);
+    };
+  }, []);
 
-  useEffect(() => {
-    if (!playingSequence || active === 0 || active >= routine.length) return;
-    const timer = window.setTimeout(() => goTo(active + 1), 4500);
-    return () => window.clearTimeout(timer);
-  }, [active, playingSequence, routine.length]);
+  const p = reducedMotion ? 1 : progress;
+  const opening = ease((p - .025) / .19);
+  const lineup = ease((p - .84) / .13);
+  const reveal = ease((p - .13) / .1);
+  const focusPosition = (p - .28) / .54 * routine.length;
+  const focused = Math.max(0, Math.min(routine.length - 1, Math.floor(focusPosition)));
+  const closeups = p >= .27 && p < .85;
+  const current = routine[focused];
+  const tones = ["#edf4ee", "#eee9f0", "#f4dfca", "#edcbb8", "#f3d4d9"];
+  const flowerScale = 1 + opening * .32 - ease((p - .24) / .12) * .72 + lineup * .3;
+  const flowerY = opening * 70 + ease((p - .24) / .12) * 210;
+  const flowerOpacity = 1 - ease((p - .3) / .08) + lineup;
 
-  function selectScene(index: number) {
-    setPlayingSequence(false);
-    goTo(index);
-  }
-  function goTo(index: number) {
-    const node = track.current;
-    if (!node) return;
-    const target = Math.max(0, Math.min(node.children.length - 1, index));
-    node.scrollTo({
-      left: target * node.clientWidth,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
-    });
-  }
-
-  function startDrag(event: PointerEvent<HTMLDivElement>) {
-    suppressClick.current = false;
-    if (event.pointerType !== "mouse" || event.button !== 0) return;
-    drag.current = { id: event.pointerId, x: event.clientX, left: event.currentTarget.scrollLeft, moved: false };
-  }
-
-  function moveDrag(event: PointerEvent<HTMLDivElement>) {
-    const gesture = drag.current;
-    if (!gesture || gesture.id !== event.pointerId) return;
-    const distance = event.clientX - gesture.x;
-    if (!gesture.moved && Math.abs(distance) < 8) return;
-    const node = event.currentTarget;
-    if (!gesture.moved) {
-      gesture.moved = true;
-      node.setPointerCapture(event.pointerId);
-      node.dataset.dragging = "true";
-    }
-    node.scrollLeft = gesture.left - distance;
-  }
-
-  function endDrag(event: PointerEvent<HTMLDivElement>) {
-    const gesture = drag.current;
-    drag.current = null;
-    if (!gesture?.moved) return;
-    const node = event.currentTarget;
-    const distance = event.clientX - gesture.x;
-    const start = Math.round(gesture.left / node.clientWidth);
-    const target = Math.abs(distance) > 40 && Math.abs(distance) < node.clientWidth / 2
-      ? start - Math.sign(distance)
-      : Math.round(node.scrollLeft / node.clientWidth);
-    suppressClick.current = true;
-    delete node.dataset.dragging;
-    selectScene(target);
-  }
-
-  return <section className="routine-showcase" aria-label="Explore the daily routine">
-    <div className="routine-track" ref={track} tabIndex={0} aria-label="Routine scenes. Use the left and right arrow keys to browse."
-      onScroll={event => {
-        const node = event.currentTarget;
-        if (node.clientWidth) setActive(Math.round(node.scrollLeft / node.clientWidth));
-      }}
-      onKeyDown={event => {
-        if (event.target !== event.currentTarget || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-        event.preventDefault();
-        selectScene(active + (event.key === "ArrowRight" ? 1 : -1));
-      }}
-      onWheel={() => setPlayingSequence(false)}
-      onPointerDown={event => {
-        setPlayingSequence(false);
-        startDrag(event);
-      }} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}
-      onPointerLeave={event => { if (!drag.current?.moved) endDrag(event); }}
-      onClickCapture={event => {
-        if (event.detail && suppressClick.current) {
-          event.preventDefault();
-          event.stopPropagation();
-          suppressClick.current = false;
-        }
-      }}>
-      <article className="routine-scene routine-scene-intro">
-        <p className="routine-video-title">Five steps One routine</p>
-        <video ref={video} className="routine-video" width={1280} height={720} controls autoPlay muted playsInline preload="metadata"
-          onEnded={() => {
-            setPlayingSequence(true);
-            goTo(1);
-          }}
-          aria-label="Daily essentials video" onPointerDown={event => event.stopPropagation()}>
-          <source src="/daily-essentials.mp4" type="video/mp4"/>
-        </video>
-      </article>
-      {routine.map(({ step, product, number }) => <article className="routine-scene" data-step={number} key={product.id}>
-        <div className="routine-scene-copy">
-          <span className="section-kicker">STEP {number} · {step}</span>
-          <h3>{product.name}</h3>
-          <p>{product.brand}{product.size ? ` · ${product.size}` : ""}</p>
-          <Link href={`/products/${encodeURIComponent(product.id)}`}>View product <ChevronRight size={16}/></Link>
+  return (
+    <section ref={section} className={styles.section} data-reduced-motion={reducedMotion || undefined}
+      aria-label="Explore five steps, one routine">
+      <div ref={stage} className={styles.stage}
+        style={{ backgroundColor: closeups ? tones[focused % tones.length] : "#f5e9e9" }}
+        onPointerMove={event => {
+          if (reducedMotion || event.pointerType !== "mouse") return;
+          const rect = event.currentTarget.getBoundingClientRect();
+          event.currentTarget.style.setProperty("--cursor-x", `${((event.clientX - rect.left) / rect.width - .5) * 20}px`);
+          event.currentTarget.style.setProperty("--cursor-y", `${((event.clientY - rect.top) / rect.height - .5) * 28}px`);
+        }}
+        onPointerLeave={event => {
+          event.currentTarget.style.setProperty("--cursor-x", "0px");
+          event.currentTarget.style.setProperty("--cursor-y", "0px");
+        }}>
+        <div className={styles.flower} aria-hidden="true" style={{
+          transform: `translate(-50%, -50%) translateY(${flowerY}px) scale(${flowerScale})`,
+          opacity: clamp(flowerOpacity),
+        }}>
+          <div className={styles.heart} />
+          {Array.from({ length: 24 }, (_, index) => {
+            const ring = Math.floor(index / 8);
+            const angle = index % 8 * 45 + ring * 22;
+            return <span key={index} className={styles.petal} style={{
+              "--angle": `${angle}deg`,
+              "--spread": `${22 + opening * (100 - ring * 22)}px`,
+              "--unfold": `${15 + opening * (65 - ring * 12)}deg`,
+              "--petal-scale": 1 - ring * .15,
+              zIndex: 24 - index,
+            } as CSSProperties} />;
+          })}
         </div>
-        <div className="routine-scene-art">
-          {product.image && <ProductImage src={product.image} alt={`${product.brand} ${product.name}`} width={460} height={460} draggable={false}/>}
+
+        <header className={styles.intro} style={{ opacity: 1 - ease((p - .19) / .08), pointerEvents: "none" }}>
+          <span className={styles.kicker}>THE EVERYDAY RITUAL</span>
+          <h2>Complete care.<br /><em>In full bloom.</em></h2>
+          <p>Five essentials. One beautiful routine.</p>
+        </header>
+
+        <header className={styles.lineupHeading} style={{ opacity: lineup }}>
+          <h2>Five steps, <em>one routine.</em></h2>
+          <p>Your everyday essentials, thoughtfully brought together.</p>
+        </header>
+
+        <div className={styles.products}>
+          {routine.map(({ step, product, number }, index) => {
+            const focus = ease(1 - Math.abs(focusPosition - (index + .5)) / .7);
+            const closeupWeight = focus * (1 - lineup);
+            const spread = opening * (1 - ease((p - .24) / .08));
+            const x = (index - (routine.length - 1) / 2) * (100 / routine.length);
+            const finalX = mobile ? (index % 3 - 1) * 30 : x;
+            const finalY = mobile ? 30 + Math.floor(index / 3) * 35 : 47;
+            const opacity = reducedMotion ? 1 : Math.max(reveal * (1 - ease((p - .23) / .06)), closeupWeight, lineup);
+            return (
+              <article className={styles.product} key={product.id} data-routine-product
+                aria-hidden={opacity < .1} style={{
+                  left: `${50 + x * spread * .65 + finalX * lineup + closeupWeight * 17}%`,
+                  top: `${52 + (finalY - 52) * lineup}%`,
+                  opacity,
+                  transform: `translate(-50%, -50%) translateY(${(1 - reveal) * 110}px) scale(${.48 + closeupWeight * .9 + lineup * .14})`,
+                  zIndex: Math.round(closeupWeight * 10) + 2,
+                  pointerEvents: opacity > .5 ? "auto" : "none",
+                } as CSSProperties}>
+                <Link className={styles.productLink} href={`/products/${encodeURIComponent(product.id)}`}
+                  tabIndex={opacity > .5 ? 0 : -1} aria-label={`View ${product.brand} ${product.name}`}>
+                  <div className={styles.art}>
+                    {product.image && <ProductImage src={product.image} alt={`${product.brand} ${product.name}`}
+                      width={360} height={420} sizes="(max-width: 600px) 65vw, 30vw" draggable={false} />}
+                  </div>
+                  <div className={styles.productLabel} style={{ opacity: lineup }}>
+                    <span>{product.brand}</span>
+                    <h3>{product.name}</h3>
+                    <ProductPrice product={product} />
+                    <span className={styles.button}>View product ↗</span>
+                  </div>
+                </Link>
+              </article>
+            );
+          })}
         </div>
-      </article>)}
-    </div>
-    <div className="routine-controls">
-      <button type="button" aria-label="Previous scene" disabled={active === 0} onClick={() => selectScene(active - 1)}><ChevronLeft size={19}/></button>
-      <div className="routine-steps" aria-label="Choose a routine scene">
-        {["Overview", ...routine.map(({ step }) => step)].map((label, index) => <button type="button" key={label} aria-label={label} aria-current={index === active ? "step" : undefined} onClick={() => selectScene(index)}>{index || "Start"}</button>)}
+
+        {current && <div className={styles.detail} style={{ opacity: closeups ? 1 : 0, pointerEvents: closeups ? "auto" : "none" }}>
+          <div key={current.product.id} className={styles.detailContent}>
+            <span className={styles.kicker}>STEP {current.number} · {current.step}</span>
+            <h2>{current.product.name}</h2>
+            <p>{current.product.brand}{current.product.size ? ` · ${current.product.size}` : ""}</p>
+            <Link className={styles.button} href={`/products/${encodeURIComponent(current.product.id)}`}
+              tabIndex={closeups ? 0 : -1}>Explore product ↗</Link>
+          </div>
+        </div>}
+
+        <div className={styles.navigation} aria-label="Routine progress">
+          <span>{p < .27 ? "Scroll to unfold" : lineup > .5 ? "Your complete routine" : current?.step}</span>
+          <div className={styles.progress}><span style={{ transform: `scaleX(${p})` }} /></div>
+        </div>
       </div>
-      <button type="button" aria-label="Next scene" disabled={active === routine.length} onClick={() => selectScene(active + 1)}><ChevronRight size={19}/></button>
-    </div>
-  </section>;
+    </section>
+  );
 }

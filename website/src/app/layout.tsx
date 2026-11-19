@@ -8,8 +8,22 @@ import ProductClickTracker from "@/components/product-click-tracker";
 import MessageWidget from "@/components/message-widget";
 
 export const metadata: Metadata = {
-  title: "Authera Skincare & Health",
-  description: "The AutheraCare cosmetics and skincare store.",
+  metadataBase: new URL("https://www.autheracare.com"),
+  title: "Authéra | The art of everyday care",
+  description: "Thoughtfully selected skincare, lip care and everyday essentials. Made for everyday living.",
+  openGraph: {
+    type: "website",
+    siteName: "Authéra",
+    title: "Authéra | The art of everyday care",
+    description: "Thoughtfully selected. Made for everyday living.",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Authéra | The art of everyday care",
+    description: "Thoughtfully selected. Made for everyday living.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

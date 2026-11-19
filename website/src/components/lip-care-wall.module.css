@@ -1,0 +1,26 @@
+.wall { background: #80162d; border-radius: 22px; padding: 28px 0; overflow: hidden; }
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 26px 26px; color: #fff3f3; }
+.heading span { font-size: 10px; letter-spacing: .15em; }
+.heading h2 { font: 400 clamp(28px, 4vw, 44px)/1.15 Georgia, serif; margin: 10px 0 0; }
+.heading em { color: #f4b4c4; }
+.heading button { background: transparent; color: #fff; border: 1px solid #eeb9c8; border-radius: 999px; padding: 10px 16px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+.row { overflow-x: auto; scrollbar-width: thin; scrollbar-color: #db99ac #80162d; margin-bottom: 18px; }
+.track { display: flex; width: max-content; animation: drift var(--duration) linear infinite; }
+.row:nth-of-type(even) .track { animation-direction: reverse; }
+.group { display: flex; gap: 18px; padding-right: 18px; }
+.tile { width: clamp(190px, 23vw, 255px); flex: none; }
+.tile > article { height: 100%; background: #fff7f7; border: 0; border-radius: 10px; overflow: hidden; }
+.tile :global(.product-photo) { height: 210px; background: #f6f0f1; }
+.tile :global(.product-image-button) { height: 100%; }
+.tile :global(.product-card-content) { padding: 14px; }
+.tile :global(.product-card-title) { min-height: 52px; }
+.wall:hover .track, .wall:focus-within .track, .wall[data-paused="true"] .track { animation-play-state: paused; }
+.wall[data-paused="true"] .track { animation: none; }
+.wall[data-paused="true"] .group[data-copy] { display: none; }
+.heading button:focus-visible, .row:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+@keyframes drift { to { transform: translateX(-50%); } }
+@media (max-width: 600px) { .heading { padding-inline: 16px; } .tile { width: 210px; } .group { gap: 12px; padding-right: 12px; } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } .group[data-copy] { display: none; } }
+
+.wall:focus-within .track { animation: none; }
+.wall:focus-within .group[data-copy] { display: none; }
