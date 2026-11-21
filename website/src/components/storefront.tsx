@@ -6,7 +6,7 @@ import ProductImage from "./product-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { shuffleProducts, prioritizePopular } from "@/lib/catalog/discovery";
-import { isSeasonalCareProduct, seasons, seasonDescriptions, type Season } from "@/lib/catalog/seasonal-care";
+import { isSeasonalCareProduct, seasons, type Season } from "@/lib/catalog/seasonal-care";
 import { matchesShoppingGroup, shoppingGroups, type ShoppingGroup } from "@/lib/catalog/shopping-groups";
 import { sectionHref, categoryLabel } from "@/lib/catalog/sections";
 import { normalizeSearch, searchProducts } from "@/lib/catalog/search";
@@ -321,7 +321,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <div className="seasonal-care-selector" data-season={season}>
           <span className="seasonal-care-eyebrow">CARE THROUGH THE SEASONS</span>
           <h2 id="winter-care-title">{season} Care</h2>
-          <div className="seasonal-care-tabs" role="tablist" aria-label="Shop by season">{seasons.map((item, index) => <button key={item} id={`season-tab-${item}`} type="button" role="tab" aria-selected={season === item} aria-controls="seasonal-care-panel" tabIndex={season === item ? 0 : -1} onClick={() => { setSeason(item); setWinterCategory(""); }} onKeyDown={event => {
+          <div className="seasonal-care-tabs" role="tablist" aria-label="Shop by season">{seasons.map((item, index) => <button key={item} data-season={item} id={`season-tab-${item}`} type="button" role="tab" aria-selected={season === item} aria-controls="seasonal-care-panel" tabIndex={season === item ? 0 : -1} onClick={() => { setSeason(item); setWinterCategory(""); }} onKeyDown={event => {
             const offset = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
             if (!offset && event.key !== "Home" && event.key !== "End") return;
             event.preventDefault();
@@ -330,7 +330,6 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
           }}>{item === "Winter" ? <Snowflake aria-hidden="true"/> : item === "Summer" ? <Sun aria-hidden="true"/> : item === "Autumn" ? <Leaf aria-hidden="true"/> : item === "Monsoon" ? <CloudRain aria-hidden="true"/> : <Flower2 aria-hidden="true"/>}<span>{item}</span></button>)}</div>
         </div>
         <div id="seasonal-care-panel" role="tabpanel" aria-labelledby={`season-tab-${season}`}>
-        <p className="seasonal-care-description">{seasonDescriptions[season]}</p>
         <div className="winter-care-toolbar">
           <WinterCareDropdown value={winterCategory} categories={winterCategories} onChange={setWinterCategory} season={season}/>
           <div className="winter-care-navigation">
