@@ -353,7 +353,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
               <div className="spotlight-packshots">{edit.images.map((src, i) => <div className={`spotlight-packshot packshot-${i}`} key={src}><Image src={src} alt={`${edit.brand} ${edit.names[i]}`} fill sizes="(max-width: 700px) 40vw, 18vw"/></div>)}</div>
               <span className="spotlight-art-caption">AUTHÉRA SKINCARE · THE EVERYDAY EDIT</span>
             </a>
-            <h3>{edit.title}</h3><p>{edit.text}</p><a className="spotlight-shop" href="#collection" onClick={() => chooseBrand(edit.brand)}>SHOP NOW<span className="screen-reader-only"> — {edit.brand}</span></a>
+            <h3>{edit.title}</h3><p>{edit.text}</p><Link className="spotlight-shop" href={`/shop/collection?brand=${encodeURIComponent(edit.brand)}`}><span>SHOP NOW<span className="screen-reader-only"> — {edit.brand}</span></span><ChevronRight size={17} aria-hidden="true"/></Link>
           </article>)}
         </div>
       </section>

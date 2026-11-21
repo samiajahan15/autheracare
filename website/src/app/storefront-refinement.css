@@ -501,3 +501,45 @@
   .seasonal-care-tabs button { transition: none; }
   .seasonal-care-tabs button:is(:hover, [aria-selected="true"]) { transform: none; }
 }
+
+.spotlight-shop {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  gap: 15px;
+  padding: 13px 23px;
+  min-height: 48px;
+  border: 1px solid #91325e;
+  border-radius: 999px;
+  background: #fff;
+  color: #91325e;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 3px 10px #6b2e4c0a;
+  transition: transform 220ms ease, box-shadow 220ms ease, color 220ms ease;
+}
+.spotlight-shop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: #91325e;
+  transform: translateX(-102%);
+  transition: transform 350ms cubic-bezier(.2,.8,.2,1);
+}
+.spotlight-shop svg { transition: transform 250ms ease; }
+.spotlight-shop:is(:hover, :focus-visible) {
+  color: #fff;
+  background: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #91325e30;
+}
+.spotlight-shop:is(:hover, :focus-visible)::before { transform: translateX(0); }
+.spotlight-shop:is(:hover, :focus-visible) svg { transform: translateX(4px); }
+.spotlight-shop:focus-visible { outline: 2px solid #91325e; outline-offset: 4px; }
+.spotlight-shop:active { transform: translateY(0) scale(.97); }
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-shop, .spotlight-shop::before, .spotlight-shop svg { transition: none; }
+  .spotlight-shop:is(:hover, :focus-visible), .spotlight-shop:is(:hover, :focus-visible) svg { transform: none; }
+}
