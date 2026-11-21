@@ -72,6 +72,13 @@ function InstagramIcon() {
 }
 const categoryIcons = { beauty: Sparkles, "hair-body": Droplets, "health-wellness": Activity, "personal-care": HandHeart, lifestyle: Coffee };
 
+const categoryVisualProducts: Record<ShoppingGroup, string[]> = {
+  beauty: ["cerave", "ordinary-hyaluronic"],
+  "hair-body": ["garnier-shampoo", "cerave-shampoo"],
+  "health-wellness": ["nutiva-mct-oil", "salonpas-patches"],
+  "personal-care": ["fixodent-plus-scope", "gum-professional-clean-flosser-picks"],
+  lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "bbw-raspberry-mimosa-3-wick-candle-411g"],
+};
 const dailyRoutine = [
   { step: "Face Cleanser", id: "pdf-01-008-1-cerave-hydrating-cleanser-237-ml" },
   { step: "Lightweight Moisturizer", id: "pdf-04-013-1-the-ordinary-natural-moisturizing-factors-beta-glucan-30-ml" },
@@ -276,9 +283,16 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
               {(Object.keys(shoppingGroups) as ShoppingGroup[]).map(slug => {
                 const group = shoppingGroups[slug];
                 const Icon = categoryIcons[slug];
+                const preferred = categoryVisualProducts[slug].flatMap(id => {
+                  const product = products.find(item => item.id === id && item.image);
+                  return product ? [product] : [];
+                });
+                const visualProducts = preferred.length ? preferred : products.filter(product => product.image && matchesShoppingGroup(product, slug)).slice(0, 2);
                 return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
                   <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
-                  <Image className="collection-category-photo" src={`/images/categories/${slug}.webp`} alt="" fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 30vw, 18vw"/>
+                  <div className="collection-category-products" aria-hidden="true">
+                    {visualProducts.map(product => <ProductImage key={product.id} src={product.image!} alt="" width={180} height={220} sizes="(max-width: 600px) 24vw, 12vw"/>)}
+                  </div>
                   <Image className="collection-category-brand" src="/brand/authera-logo.png" alt="Authéra" width={100} height={40}/>
                   <strong className="collection-category-title">{group.title}</strong>
                   <ChevronRight className="collection-category-arrow" size={16} aria-hidden="true"/>
