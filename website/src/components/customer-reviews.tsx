@@ -50,7 +50,7 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
               const rank = (index - active + reviews.length) % reviews.length;
               const product = products.find(item => item.id === review.productId);
               return (
-                <article className={styles.card} key={review.name} data-rank={rank}
+                <article className={styles.card} key={review.name} data-rank={rank} data-colour={index}
                   style={{ "--rank": Math.min(rank, 3) } as CSSProperties}
                   aria-hidden={rank !== 0} inert={rank !== 0}
                   aria-label={`Feedback ${index + 1} of ${reviews.length}`}>

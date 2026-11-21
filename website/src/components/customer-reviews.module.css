@@ -1,7 +1,7 @@
 .section {
   padding: 34px 20px 28px;
   color: #304b60;
-  background: radial-gradient(ellipse at 85% 15%, #e1edff, transparent 60%), linear-gradient(120deg, #fafcfe, #f0f7fb);
+  background: #fff;
   overflow: hidden;
 }
 .inner { max-width: 1000px; margin: auto; }
@@ -14,18 +14,22 @@
   position: absolute; inset: 0 0 16px;
   display: flex; flex-direction: column; gap: 16px;
   padding: 22px 26px;
-  border: 1px solid #cadff0; border-radius: 17px;
-  color: #314759; background: linear-gradient(115deg, #f4faff, #dfedfc);
+  border: 1px solid var(--card-border, #cadff0); border-radius: 17px;
+  color: #314759; background: var(--card-fill, #edf6ff);
   box-shadow: 0 10px 28px #426d9320;
   transform: translateY(calc(var(--rank) * 8px)) rotate(calc(var(--rank) * -2deg)) scale(calc(1 - var(--rank) * .035));
   transform-origin: center 80%;
   opacity: 1; z-index: calc(5 - var(--rank));
   transition: transform 650ms cubic-bezier(.22,1,.36,1), opacity 450ms ease;
 }
-.card[data-rank="1"] { background: #c9dff4; }
-.card[data-rank="2"] { background: #b6d3ed; transform: translateY(16px) rotate(3deg) scale(.93); }
+.card[data-rank="2"] { transform: translateY(16px) rotate(3deg) scale(.93); }
 .card[data-rank="3"], .card[data-rank="4"] { opacity: 0; pointer-events: none; }
 .card[data-rank="0"] { z-index: 6; }
+.card[data-colour="0"] { --card-fill: #e9f3ff; --card-border: #c7dcf1; }
+.card[data-colour="1"] { --card-fill: #fcebf0; --card-border: #edcdd8; }
+.card[data-colour="2"] { --card-fill: #eaf4ed; --card-border: #cbded0; }
+.card[data-colour="3"] { --card-fill: #f1ebfc; --card-border: #dcd0ee; }
+.card[data-colour="4"] { --card-fill: #fff1df; --card-border: #eedbc0; }
 .cardTop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .reviewer { display: flex; align-items: center; gap: 10px; }
 .reviewer h3 { margin: 0; font-size: 14px; font-weight: 600; }
