@@ -1,16 +1,13 @@
 .marquee { position: relative; }
-.toggle { display: block; margin: -12px 0 14px auto; border: 1px solid #d9c8d0; border-radius: 999px; background: #fff; color: #754059; padding: 7px 13px; font-size: 12px; cursor: pointer; }
 .viewport { overflow-x: auto; scrollbar-width: thin; scrollbar-color: #d6bdc9 transparent; padding: 8px 0 16px; }
 .track { display: flex; width: max-content; animation: drift var(--duration) linear infinite; }
-.group { display: flex; gap: 20px; padding-right: 20px; }
-.item { flex: none; width: clamp(220px, 24vw, 290px); }
+.group { display: flex; gap: 16px; padding-right: 16px; }
+.item { flex: none; width: 195px; }
 .item > article { height: 100%; }
 .marquee:hover .track, .marquee:focus-within .track, .marquee[data-paused="true"] .track { animation-play-state: paused; }
-.toggle:focus-visible { outline: 2px solid #91325e; outline-offset: 3px; }
 @keyframes drift { to { transform: translateX(-50%); } }
-@media (max-width: 700px) { .item { width: 230px; } .group { gap: 14px; padding-right: 14px; } }
+@media (max-width: 700px) { .item { width: 180px; } .group { gap: 14px; padding-right: 14px; } }
 @media (prefers-reduced-motion: reduce) {
   .track { animation: none; }
   .group[data-copy] { display: none; }
-  .toggle { display: none; }
 }
