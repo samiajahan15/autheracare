@@ -24,7 +24,7 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
       if (!document.hidden) {
         setActive(index => (index + 1) % reviews.length);
       }
-    }, 2600);
+    }, 1600);
     return () => window.clearInterval(timer);
   }, []);
 
