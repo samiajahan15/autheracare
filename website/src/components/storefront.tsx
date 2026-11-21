@@ -85,6 +85,12 @@ const hotSellingProductIds = [
   "pdf-18-078-1-bondi-sands-face-sunscreen-lotion-spf-50-75-ml",
   "pdf-18-077-1-bondi-sands-sunscreen-lotion-spf50-500-ml",
   "garnier-spf60",
+  "cerave-daily-lotion",
+  "cerave-healing-ointment",
+  "native-toasted-vanilla-honey-body-wash-1l",
+  "pdf-03-010-1-aveeno-skin-relief-moisturizing-lotion-dry-extra-dry-skin-222-ml",
+  "lypsyl-original-lip-balm-4-2g",
+  "ordinary-nmf",
   "cerave",
   "ordinary-hyaluronic",
 ];

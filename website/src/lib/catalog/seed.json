@@ -4488,6 +4488,30 @@
       "image": "/products/dr-althea-345-50ml-isolated.png",
       "editedImage": true,
       "description": "Product image isolated from the supplied poster using AI."
+    },
+    {
+      "id": "pdf-18-078-1-bondi-sands-face-sunscreen-lotion-spf-50-75-ml",
+      "brand": "Bondi Sands",
+      "category": "Face care",
+      "name": "Face Sunscreen Lotion SPF 50+",
+      "size": "75 mL",
+      "price": 1700,
+      "image": "/products/bondi-sands-face-spf50-75ml-seller.png",
+      "description": "One 75 mL tube of Bondi Sands Face Sunscreen Lotion SPF 50+. Australian made. Sold individually for ৳1,700. Actual seller-supplied product photo.",
+      "editedImage": false,
+      "edited_image": false
+    },
+    {
+      "id": "pdf-18-077-1-bondi-sands-sunscreen-lotion-spf50-500-ml",
+      "brand": "Bondi Sands",
+      "category": "Face care",
+      "name": "Sunscreen Lotion SPF 50+ – Economy Bottle",
+      "size": "500 mL · 1 bottle",
+      "price": 4000,
+      "image": "/products/bondi-sands-spf50-500ml-pack-reference.png",
+      "description": "One 500 mL economy bottle of Bondi Sands Sunscreen Lotion SPF 50+. Australian made. Sold individually for ৳4,000. The reference photo shows a two-bottle pack; this listing is for one 500 mL bottle.",
+      "editedImage": false,
+      "edited_image": false
     }
   ]
 }
