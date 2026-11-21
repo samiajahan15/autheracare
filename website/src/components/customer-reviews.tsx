@@ -18,15 +18,17 @@ const reviews = [
 
 export default function CustomerReviews({ products }: { products: Product[] }) {
   const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
+    if (hovered) return;
     const timer = window.setInterval(() => {
       if (!document.hidden) {
         setActive(index => (index + 1) % reviews.length);
       }
     }, 1200);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [hovered]);
 
   function advance(direction: number) {
     setActive(index => (index + direction + reviews.length) % reviews.length);
@@ -40,7 +42,8 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
         </header>
         <div className={styles.carousel}>
           <button className={styles.arrow} type="button" aria-label="Previous feedback" onClick={() => advance(-1)}><ArrowLeft size={19}/></button>
-          <div className={styles.stack} aria-roledescription="carousel" aria-label="Customer feedback">
+          <div className={styles.stack} aria-roledescription="carousel" aria-label="Customer feedback"
+            onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             {reviews.map((review, index) => {
               const rank = (index - active + reviews.length) % reviews.length;
               const product = products.find(item => item.id === review.productId);
