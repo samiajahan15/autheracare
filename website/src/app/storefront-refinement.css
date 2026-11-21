@@ -30,9 +30,9 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(#fffdf9e8, #fff9f19c);
+  background: linear-gradient(#fffdf9c7, #fff9f166);
 }
-.essentials-intro .collection-category-links { margin-bottom: 0; }
+.essentials-intro .collection-category-links { margin-top: clamp(64px, 7vw, 100px); margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   .essentials-intro-video { display: none; }
 }
@@ -365,7 +365,7 @@
 /* Interactive category destinations with catalog product photography. */
 .collection-category-links { overflow: visible; }
 .collection-category-links a {
-  min-height: 330px;
+  min-height: 230px;
   isolation: isolate;
   overflow: hidden;
   padding: 18px;
@@ -394,17 +394,17 @@
 .collection-category-brand { position: absolute; top: 17px; left: 50%; transform: translateX(-50%); width: 88px; height: 36px; object-fit: contain; }
 .collection-category-links .collection-category-title {
   position: absolute;
-  top: 70px;
+  top: 59px;
   left: 12px;
   right: 12px;
   text-align: center;
-  font: 400 clamp(20px, 1.8vw, 27px)/1.15 Georgia, serif;
+  font: 400 clamp(18px, 1.55vw, 23px)/1.15 Georgia, serif;
   letter-spacing: -.035em;
   color: #493340;
   transition: transform 350ms ease, color 350ms ease;
 }
 .collection-category-links a:is(:hover, :focus-visible) .collection-category-title { transform: translateY(-3px); color: #9f245a; }
-.collection-category-products { position: absolute; inset: 126px 12px 36px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.collection-category-products { position: absolute; inset: 105px 12px 25px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 .collection-category-products img {
   width: 58%;
   height: 100%;
@@ -420,11 +420,11 @@
 .collection-category-arrow { position: absolute; top: auto; bottom: 12px; right: 12px; padding: 7px; width: 30px; height: 30px; border-radius: 50%; color: #754059; background: #fff; box-shadow: 0 2px 8px #60405015; transition: background 250ms, color 250ms, transform 250ms; }
 .collection-category-links a:is(:hover, :focus-visible) .collection-category-arrow { background: #91325e; color: #fff; transform: rotate(-35deg); }
 @media (max-width: 600px) {
-  .collection-category-links a { min-height: 300px; padding: 12px; }
+  .collection-category-links a { min-height: 230px; padding: 12px; }
   .collection-category-links a:last-child { grid-column: auto; }
   .collection-category-brand { top: 18px; width: 76px; left: auto; right: 12px; transform: none; }
-  .collection-category-links .collection-category-title { top: 72px; font-size: 21px; }
-  .collection-category-products { inset: 128px 8px 35px; }
+  .collection-category-links .collection-category-title { top: 63px; font-size: 19px; }
+  .collection-category-products { inset: 108px 8px 25px; }
 }
 @media (hover: none) {
   .collection-category-links a:active { transform: scale(.98); }
