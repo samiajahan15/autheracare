@@ -369,8 +369,8 @@
   isolation: isolate;
   overflow: hidden;
   padding: 18px;
-  background: radial-gradient(ellipse at 50% 65%, #426368 0%, #233e42 65%, #1b3337 100%);
-  border-color: #8ca6a680; color: #fff6e9;
+  background: radial-gradient(ellipse at 50% 70%, #7d9c92 0%, #547b73 65%, #486d67 100%);
+  border-color: #adc6bd; color: #fffaf0;
   transform: translateY(0) scale(1);
   transition: transform 350ms cubic-bezier(.2,.8,.2,1), box-shadow 350ms ease, border-color 350ms ease;
 }
@@ -388,7 +388,7 @@
   transform: translateY(-10px) scale(1.025);
   z-index: 3;
   border-color: #c2d6cd;
-  box-shadow: 0 20px 38px #18383e40, 0 0 0 1px #c2d6cd50;
+  box-shadow: 0 16px 30px #476e6928, 0 0 0 1px #d9e8df70;
 }
 .collection-category-links a:is(:hover, :focus-visible)::after { transform: translateX(110%); }
 .collection-category-icon { position: absolute; top: 14px; left: 14px; width: 34px; height: 34px; }

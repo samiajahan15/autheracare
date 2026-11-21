@@ -63,5 +63,3 @@
   .product { font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .card, .arrow, .dots button::after { transition: none; } .arrow:hover { transform: none; } }
-
-.sampleLabel { display: block; margin-top: 2px; font-size: 9px; color: #718495; }

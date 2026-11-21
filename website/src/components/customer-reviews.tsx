@@ -52,7 +52,7 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
                   <div className={styles.cardTop}>
                     <div className={styles.reviewer}>
                       <span className={styles.avatar}><UserRound size={22} aria-hidden="true"/></span>
-                      <div><h3>{review.name}</h3><span className={styles.sampleLabel}>Sample review</span></div>
+                      <h3>{review.name}</h3>
                     </div>
                     <span className={styles.stars} role="img" aria-label="Illustrative rating: 5 out of 5 stars">
                       {Array.from({ length: 5 }, (_, star) => <Star key={star} size={15} fill="currentColor" aria-hidden="true"/>)}
