@@ -17,12 +17,20 @@ export const metadata: Metadata = {
     title: "Authéra | The art of everyday care",
     description: "Thoughtfully selected. Made for everyday living.",
     locale: "en_US",
+    images: [{
+      url: "https://www.autheracare.com/social/authera-montreal-approved-v3.jpg",
+      secureUrl: "https://www.autheracare.com/social/authera-montreal-approved-v3.jpg",
+      width: 1200,
+      height: 630,
+      type: "image/jpeg",
+      alt: "Authéra. Authentic product straight from Montreal.",
+    }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Authéra | The art of everyday care",
     description: "Thoughtfully selected. Made for everyday living.",
-    images: ["https://www.autheracare.com/opengraph-image.jpg"],
+    images: ["https://www.autheracare.com/social/authera-montreal-approved-v3.jpg"],
   },
 };
 
