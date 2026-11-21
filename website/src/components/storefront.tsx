@@ -285,7 +285,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
           </div>
         </div>
         <div className="product-service-strip"><div><ShieldCheck size={25}/><span><strong>Product information</strong><small>Brand, size and details in one place</small></span></div><div><ShoppingBag size={25}/><span><strong>Your cart</strong><small>Save your selection before checkout launches</small></span></div><a href="https://www.facebook.com/Authera.Skincare" target="_blank" rel="noopener noreferrer"><Heart size={25}/><span><strong>Need a little help?</strong><small>Contact the Authéra team</small></span></a></div>
-      </section> : <section className="shop-section" id="collection" aria-labelledby="shop-title">
+      </section> : <section className="shop-section" id="collection" aria-labelledby={categoryPage || searchPage ? "shop-title" : "essentials-intro-title"}>
         {categoryPage || searchPage ? <div className="shop-intro">
           <span className="section-kicker">THE AUTHÉRA COLLECTION</span>
           <h1 id="shop-title">{categoryPage ? brand || title : "Find your next essential"}</h1>
@@ -321,8 +321,10 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
                 </Link>;
               })}
             </nav>
-          </section>
-          <div className="collection-section-heading"><span className="section-kicker">THE EVERYDAY EDIT</span><h1 id="shop-title" className="collection-glow-line">Find your everyday <em>glow.</em></h1><Link href="/shop/collection">Explore all products <ChevronRight size={16}/></Link></div></>}
+            <div className="essentials-all-products">
+              <Link href="/shop/collection">All Products <ChevronRight size={17} aria-hidden="true"/></Link>
+            </div>
+          </section></>}
         {searchPage ? <><form action="/search" role="search" className="search-page-form"><label className="screen-reader-only" htmlFor="search-page-query">Search products</label><input id="search-page-query" name="q" defaultValue={query} maxLength={160} placeholder="Search products, brands or categories…"/><button type="submit"><Search size={18}/> Search</button></form><div className="search-filters"><label>Category<select value={tab} onChange={event => setTab(event.target.value as Tab)}>{tabs.map(category => <option key={category} value={category}>{category === "Featured products" ? "All categories" : categoryLabel(category)}</option>)}</select></label><label>Brand<select value={brand} onChange={event => setBrand(event.target.value)}><option value="">All brands</option>{Array.from(new Set(products.map(product => product.brand))).sort().map(value => <option key={value}>{value}</option>)}</select></label><label>Sort by<select value={searchSort} onChange={event => setSearchSort(event.target.value)}><option value="relevance">Best match</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option></select></label><p role="status">{shown.length} {shown.length === 1 ? "product" : "products"}</p></div></> : null}
         {brand && <div className="active-filter"><span>{brand}{tab !== "Featured products" && <> <span aria-hidden="true">›</span> {tab}</>}</span><button onClick={() => setBrand("")} aria-label="Clear brand filter"><X size={14}/></button></div>}
         <div className={categoryPage || searchPage ? "product-listing-layout" : undefined}>
@@ -334,7 +336,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
           {!shown.length && <div className="empty-state"><h2>{searchPage ? "No products match your search." : brand ? `${brand} products are coming soon.` : "No matching products."}</h2><p>{searchPage ? "Try another spelling or choose a different category or brand." : brand ? "We’re preparing the product details for this brand." : "Try another brand or product name."}</p>{searchPage ? <button onClick={() => {setBrand("");setTab("Featured products");}}>Clear category and brand filters</button> : <button onClick={() => {setBrand("");chooseTab("Featured products");}}>View featured products</button>}<Link className="search-browse-all" href="/shop/collection">Browse all products</Link></div>}
         </div>
         </div>
-        <p className="catalog-note">Save your favorites to the cart. Contact us to confirm availability and delivery.</p>
+        {!isHomepage && <p className="catalog-note">Save your favorites to the cart. Contact us to confirm availability and delivery.</p>}
       </section>}
       {!categoryPage && !blogPage && !selectedProduct && !searchPage && winterProducts.length > 0 && <section className="winter-care-section" id="winter-care" aria-labelledby="winter-care-title">
         <div className="seasonal-care-selector" data-season={season}>
