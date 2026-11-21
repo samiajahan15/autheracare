@@ -79,6 +79,14 @@ const categoryVisualProducts: Record<ShoppingGroup, string[]> = {
   "personal-care": ["fixodent-plus-scope", "gum-professional-clean-flosser-picks"],
   lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "nescafe-rich-instant-coffee-475g", "ordinary-bottle", "bbw-raspberry-mimosa-3-wick-candle-411g", "bbw-tis-the-season-3-wick-candle-411g", "bbw-lakeside-morning-3-wick-candle-411g"],
 };
+const hotSellingProductIds = [
+  "pdf-07-003-1-la-roche-posay-anthelios-50-spf-face-lotion-ultra-fluid-50-ml",
+  "pdf-18-078-1-bondi-sands-face-sunscreen-lotion-spf-50-75-ml",
+  "pdf-18-077-1-bondi-sands-sunscreen-lotion-spf50-500-ml",
+  "garnier-spf60",
+  "cerave",
+  "ordinary-hyaluronic",
+];
 const dailyRoutine = [
   { step: "Face Cleanser", id: "pdf-01-008-1-cerave-hydrating-cleanser-237-ml" },
   { step: "Lightweight Moisturizer", id: "pdf-04-013-1-the-ordinary-natural-moisturizing-factors-beta-glucan-30-ml" },
@@ -222,6 +230,10 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
   const winterProducts = groupShadeCards(discoveryProducts.filter(product => !featuredIds.has(product.id) && !(shown.some(isLumiMatte) && isLumiMatte(product)) && !(shown.some(isTeddyTint) && isTeddyTint(product)) && isSeasonalCareProduct(product, season)));
   const winterCategories = Array.from(new Set(winterProducts.map(product => product.category)));
   const visibleWinterProducts = winterProducts.filter(product => !winterCategory || product.category === winterCategory);
+  const hotSellingProducts = hotSellingProductIds.flatMap(id => {
+    const product = products.find(item => item.id === id);
+    return product ? [product] : [];
+  });
   const popularIds = new Set(prioritizePopular(products, popularity).filter(product => popularity[product.id] > 0).slice(0, 4).map(product => product.id));
   const renderProduct = (p: Product) => isTeddyTint(p) ? <TeddyTintCard key="teddy-tint" initial={p} variants={products.filter(isTeddyTint)} cart={cart} saved={saved} onAdd={id => adjust(id, 1)} onSave={id => setSaved(prev => prev.includes(id) ? prev.filter(value => value !== id) : [...prev, id])}/> : isLumiMatte(p) ? <LumiMatteCard key="lumi-matte" initial={p} variants={products.filter(isLumiMatte)} cart={cart} saved={saved} onAdd={id => adjust(id, 1)} onSave={id => setSaved(prev => prev.includes(id) ? prev.filter(value => value !== id) : [...prev, id])}/> : <article className="product-card" key={p.id}>
             <div className="product-photo">{isHomepage && !showRoutine && popularIds.has(p.id) && <span className="popular-product-badge">Most clicked</span>}{hasFlavorGallery(p) ? <FlavorGallery product={p} products={products}/> : <Link className="product-image-button" href={`/products/${encodeURIComponent(p.id)}`} aria-label={`View ${p.brand} ${p.name}${p.size ? `, ${p.size}` : ""}`}>{p.image ? <ProductImage src={p.image} alt={`${p.brand} ${p.name}`} fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 40vw, 24vw"/> : <span className="photo-pending"><span>{p.brand}</span>Product photo coming soon</span>}</Link>}<button className={`save-button ${saved.includes(p.id) ? "saved" : ""}`} aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`} aria-pressed={saved.includes(p.id)} onClick={() => setSaved(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev,p.id])}><Heart size={18}/></button></div>
@@ -340,22 +352,12 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <WinterCareMotion key={season} products={visibleWinterProducts} season={season}/>
         </div>
       </section>}
-      {!categoryPage && !blogPage && <><section className="spotlight-section" aria-labelledby="spotlight-title">
-        <h2 id="spotlight-title">SKIN CARE SPOTLIGHT</h2>
-        <div className="spotlight-grid">
-          {[
-            { brand: "The Ordinary", theme: "rose", eyebrow: "THE SERUM EDIT", title: "A LITTLE CARE. A LOVELY GLOW.", images: ["/products/barrier-serum.png", "/products/ordinary-hyaluronic-product-only.webp"], names: ["Soothing & Barrier Support Serum", "Hyaluronic Acid 2% + B5"] },
-            { brand: "CeraVe", theme: "blue", eyebrow: "EVERYDAY MOISTURE", title: "YOUR HYDRATION HEROES.", images: ["/products/cerave-daily-lotion-cutout.png", "/products/cerave-cream-cutout.png"], names: ["Daily Moisturizing Lotion", "Moisturizing Cream"] },
-            { brand: "Garnier", theme: "sun", eyebrow: "THE SUN CARE EDIT", title: "SUN CARE, IN YOUR ROUTINE.", images: ["/products/garnier-spf45-cutout.png", "/products/garnier-spf60-cutout.png"], names: ["Ombrelle Complete Dry Touch SPF 45", "Ombrelle Complete Dry Touch SPF 60"] },
-          ].map(edit => <article className="spotlight-card" key={edit.brand}>
-            <a className={`spotlight-art spotlight-${edit.theme}`} href="#collection" onClick={() => chooseBrand(edit.brand)} aria-label={`Explore ${edit.brand} products`}>
-              <span className="spotlight-eyebrow">{edit.eyebrow}</span><span className="spotlight-brand">{edit.brand}</span>
-              <div className="spotlight-packshots">{edit.images.map((src, i) => <div className={`spotlight-packshot packshot-${i}`} key={src}><Image src={src} alt={`${edit.brand} ${edit.names[i]}`} fill sizes="(max-width: 700px) 40vw, 18vw"/></div>)}</div>
-              <span className="spotlight-art-caption">AUTHÉRA SKINCARE · THE EVERYDAY EDIT</span>
-            </a>
-            <h3>{edit.title}</h3><Link className="spotlight-shop" href={`/shop/collection?brand=${encodeURIComponent(edit.brand)}`}><span>SHOP NOW<span className="screen-reader-only"> — {edit.brand}</span></span><ChevronRight size={17} aria-hidden="true"/></Link>
-          </article>)}
+      {!categoryPage && !blogPage && <><section className="spotlight-section hot-selling-section" aria-labelledby="hot-selling-title">
+        <div className="hot-selling-heading">
+          <h2 id="hot-selling-title">Hot Selling Products</h2>
+          <Link className="hot-selling-browse" href="/shop/collection">Explore all products <ChevronRight size={17} aria-hidden="true"/></Link>
         </div>
+        <div className="hot-selling-products">{hotSellingProducts.map(renderProduct)}</div>
       </section>
       <section className="video-section" id="videos" aria-labelledby="videos-title">
         <h2 id="videos-title">FEATURED IN VIDEOS</h2>
