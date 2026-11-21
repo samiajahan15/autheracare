@@ -1,0 +1,54 @@
+{
+  "Bondi Sands": {
+    "image": "/brand/wordmarks/bondi-sands.png",
+    "source": "https://bondisands.com/cdn/shop/files/Bondi_Sands_Horizontal_logo_BLUE_1_1_168x.png?v=1778718039"
+  },
+  "StriVectin": {
+    "image": "/brand/wordmarks/strivectin.png",
+    "source": "https://strivectin.com/cdn/shop/files/logo-header.png?v=1748378354&width=600"
+  },
+  "RUB·A535": {
+    "image": "/brand/wordmarks/rub-a535.svg",
+    "source": "https://www.ruba535.ca/wp-content/themes/ruba535/images/ruba535_logo.svg"
+  },
+  "The Ordinary": {
+    "image": "/brand/wordmarks/the-ordinary.svg",
+    "source": "https://theordinary.com/on/demandware.static/Sites-deciem-global-Site/-/default/dw57a52809/images/brands-logo/theordinary_black.svg"
+  },
+  "PanOxyl": {
+    "image": "/brand/wordmarks/panoxyl.svg",
+    "source": "https://panoxyl.com/wp-content/themes/panoxyl/fonts/icomoon/fonts/icomoon.svg?zbtee0"
+  },
+  "Salonpas": {
+    "image": "/brand/wordmarks/salonpas.svg",
+    "source": "https://us.hisamitsu/"
+  },
+  "Burt’s Bees": {
+    "image": "/brand/logos/burts-bees.webp",
+    "source": "Existing website brand asset"
+  },
+  "Cira": {
+    "image": "/brand/logos/cira.webp",
+    "source": "Existing website brand asset"
+  },
+  "Metamucil": {
+    "image": "/brand/logos/metamucil.webp",
+    "source": "Existing website brand asset"
+  },
+  "Pura d’or": {
+    "image": "/brand/logos/pura-dor.webp",
+    "source": "Existing website brand asset"
+  },
+  "Adrien Gagnon": {
+    "image": "/brand/logos/adrien-gagnon.webp",
+    "source": "Existing website brand asset"
+  },
+  "New Nordic": {
+    "image": "/brand/logos/new-nordic.webp",
+    "source": "Existing website brand asset"
+  },
+  "Herbal Essences": {
+    "image": "/brand/logos/herbal-essences.webp",
+    "source": "Existing website brand asset"
+  }
+}

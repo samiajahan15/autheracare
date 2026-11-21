@@ -635,3 +635,28 @@
   .seasonal-care-selector h2 { font-size: 29px; margin-bottom: 14px; }
   .seasonal-care-tabs button { font-size: 11px; }
 }
+
+.brand-ticker .brand-wordmark {
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 220px; width: 220px; min-height: 88px;
+  padding: 14px 24px; text-decoration: none; color: #292929;
+}
+.brand-original-wordmark {
+  display: block; width: 100%; max-width: 172px; height: 60px;
+  object-fit: contain; filter: grayscale(1) contrast(1.25);
+  mix-blend-mode: multiply;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+.brand-wordmark-name { font-size: 23px; line-height: 1.2; font-weight: 500; letter-spacing: -.6px; }
+.brand-ticker .brand-wordmark:hover { opacity: 1; }
+.brand-wordmark:hover .brand-original-wordmark { transform: scale(1.055); opacity: .72; }
+.brand-wordmark:focus-visible { outline: 2px solid #91325e; outline-offset: -4px; border-radius: 8px; }
+.brand-ticker-track:focus-within { animation-play-state: paused; }
+@media (max-width: 600px) {
+  .brand-ticker .brand-wordmark { flex-basis: 175px; width: 175px; min-height: 74px; padding-inline: 18px; }
+  .brand-original-wordmark { height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-original-wordmark { transition: none; }
+  .brand-wordmark:hover .brand-original-wordmark { transform: none; }
+}

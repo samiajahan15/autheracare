@@ -13,6 +13,7 @@ import { sectionHref, categoryLabel } from "@/lib/catalog/sections";
 import { normalizeSearch, searchProducts } from "@/lib/catalog/search";
 import seed from "@/lib/catalog/seed.json";
 import brandLogos from "@/lib/catalog/brand-logos.json";
+import brandWordmarks from "@/lib/catalog/brand-wordmarks.json";
 import CategoryMenu from "./category-menu";
 import PriceFilter from "./price-filter";
 import WinterCareDropdown from "./winter-care-dropdown";
@@ -401,7 +402,12 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <div className="brand-ticker" aria-label="Shop by brand">
           <div className="brand-ticker-track" style={{ animationDuration: `${brands.length * 3.5}s` }}>
             {[0, 1].map(copy => <div className="brand-ticker-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-              {brands.map((b, index) => <button className={`brand-wordmark brand-mark-${index}`} key={b} tabIndex={copy === 1 ? -1 : 0} onClick={() => chooseBrand(b)} aria-label={`Shop ${b}`}>{b}</button>)}
+              {brands.map(b => {
+                const wordmark = (brandWordmarks as Record<string, { image: string }>)[b];
+                return <Link className="brand-wordmark" key={b} href={`/shop/collection?brand=${encodeURIComponent(b)}`} tabIndex={copy === 1 ? -1 : 0} aria-label={`Shop ${b}`}>
+                  {wordmark ? <Image className="brand-original-wordmark" src={wordmark.image} alt={b} width={180} height={65} unoptimized/> : <span className="brand-wordmark-name">{b}</span>}
+                </Link>;
+              })}
             </div>)}
           </div>
         </div>
