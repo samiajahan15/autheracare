@@ -42,7 +42,6 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
           <p>Sample delivery feedback &amp; illustrative ratings</p>
         </header>
         <div className={styles.carousel}
-          onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
           <button className={styles.arrow} type="button" aria-label="Previous feedback" onClick={() => advance(-1)}><ArrowLeft size={19}/></button>
