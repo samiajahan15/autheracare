@@ -7,7 +7,6 @@
 .inner { max-width: 1000px; margin: auto; }
 .heading { text-align: center; margin-bottom: 24px; }
 .heading h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(27px, 3vw, 36px); font-weight: 400; letter-spacing: -.025em; }
-.heading p { margin: 9px 0 0; font-size: 11px; color: #718495; }
 .carousel { display: flex; align-items: center; justify-content: center; gap: 24px; }
 .stack { position: relative; flex: 1; max-width: 660px; height: 268px; perspective: 1200px; }
 .card {
@@ -24,7 +23,9 @@
 }
 .card[data-rank="2"] { transform: translateY(16px) rotate(3deg) scale(.93); }
 .card[data-rank="3"], .card[data-rank="4"] { opacity: 0; pointer-events: none; }
-.card[data-rank="0"] { z-index: 6; }
+.card[data-rank="0"] { z-index: 6; transform: translateX(0) translateY(0) rotate(0) scale(1); }
+.card[data-rank="1"] { transform: translateX(24px) translateY(10px) rotate(-3deg) scale(.955); }
+.card[data-rank="4"] { transform: translateX(-110px) translateY(-12px) rotate(-9deg) scale(.96); }
 .card[data-colour="0"] { --card-fill: #e9f3ff; --card-border: #c7dcf1; }
 .card[data-colour="1"] { --card-fill: #fcebf0; --card-border: #edcdd8; }
 .card[data-colour="2"] { --card-fill: #eaf4ed; --card-border: #cbded0; }
@@ -62,3 +63,5 @@
   .product { font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .card, .arrow, .dots button::after { transition: none; } .arrow:hover { transform: none; } }
+
+.sampleLabel { display: block; margin-top: 2px; font-size: 9px; color: #718495; }

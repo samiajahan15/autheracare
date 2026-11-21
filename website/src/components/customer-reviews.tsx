@@ -18,17 +18,15 @@ const reviews = [
 
 export default function CustomerReviews({ products }: { products: Product[] }) {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (paused) return;
     const timer = window.setInterval(() => {
-      if (!document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (!document.hidden) {
         setActive(index => (index + 1) % reviews.length);
       }
-    }, 4500);
+    }, 3200);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, []);
 
   function advance(direction: number) {
     setActive(index => (index + direction + reviews.length) % reviews.length);
@@ -39,11 +37,8 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
       <div className={styles.inner}>
         <header className={styles.heading}>
           <h2 id="customer-reviews-title">Hear It from Our Customers</h2>
-          <p>Sample delivery feedback &amp; illustrative ratings</p>
         </header>
-        <div className={styles.carousel}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
+        <div className={styles.carousel}>
           <button className={styles.arrow} type="button" aria-label="Previous feedback" onClick={() => advance(-1)}><ArrowLeft size={19}/></button>
           <div className={styles.stack} aria-roledescription="carousel" aria-label="Customer feedback">
             {reviews.map((review, index) => {
@@ -57,7 +52,7 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
                   <div className={styles.cardTop}>
                     <div className={styles.reviewer}>
                       <span className={styles.avatar}><UserRound size={22} aria-hidden="true"/></span>
-                      <h3>{review.name}</h3>
+                      <div><h3>{review.name}</h3><span className={styles.sampleLabel}>Sample review</span></div>
                     </div>
                     <span className={styles.stars} role="img" aria-label="Illustrative rating: 5 out of 5 stars">
                       {Array.from({ length: 5 }, (_, star) => <Star key={star} size={15} fill="currentColor" aria-hidden="true"/>)}
