@@ -278,7 +278,9 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
                 const Icon = categoryIcons[slug];
                 return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
                   <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
-                  <span><strong>{group.title}</strong><small>{group.description}</small></span>
+                  <Image className="collection-category-photo" src={`/images/categories/${slug}.webp`} alt="" fill sizes="(max-width: 600px) 45vw, (max-width: 1000px) 30vw, 18vw"/>
+                  <Image className="collection-category-brand" src="/brand/authera-logo.png" alt="Authéra" width={100} height={40}/>
+                  <strong className="collection-category-title">{group.title}</strong>
                   <ChevronRight className="collection-category-arrow" size={16} aria-hidden="true"/>
                 </Link>;
               })}
