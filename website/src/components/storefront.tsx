@@ -344,16 +344,16 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
         <h2 id="spotlight-title">SKIN CARE SPOTLIGHT</h2>
         <div className="spotlight-grid">
           {[
-            { brand: "The Ordinary", theme: "rose", eyebrow: "THE SERUM EDIT", title: "A LITTLE CARE. A LOVELY GLOW.", text: "Make room for your daily ritual with The Ordinary’s serums and moisturizers.", images: ["/products/barrier-serum.png", "/products/ordinary-hyaluronic-product-only.webp"], names: ["Soothing & Barrier Support Serum", "Hyaluronic Acid 2% + B5"] },
-            { brand: "CeraVe", theme: "blue", eyebrow: "EVERYDAY MOISTURE", title: "YOUR HYDRATION HEROES.", text: "Discover CeraVe creams and lotions for your everyday moisturizing routine.", images: ["/products/cerave-daily-lotion-cutout.png", "/products/cerave-cream-cutout.png"], names: ["Daily Moisturizing Lotion", "Moisturizing Cream"] },
-            { brand: "Garnier", theme: "sun", eyebrow: "THE SUN CARE EDIT", title: "SUN CARE, IN YOUR ROUTINE.", text: "Explore Garnier Ombrelle Dry Touch sunscreens in SPF 45 and SPF 60.", images: ["/products/garnier-spf45-cutout.png", "/products/garnier-spf60-cutout.png"], names: ["Ombrelle Complete Dry Touch SPF 45", "Ombrelle Complete Dry Touch SPF 60"] },
+            { brand: "The Ordinary", theme: "rose", eyebrow: "THE SERUM EDIT", title: "A LITTLE CARE. A LOVELY GLOW.", images: ["/products/barrier-serum.png", "/products/ordinary-hyaluronic-product-only.webp"], names: ["Soothing & Barrier Support Serum", "Hyaluronic Acid 2% + B5"] },
+            { brand: "CeraVe", theme: "blue", eyebrow: "EVERYDAY MOISTURE", title: "YOUR HYDRATION HEROES.", images: ["/products/cerave-daily-lotion-cutout.png", "/products/cerave-cream-cutout.png"], names: ["Daily Moisturizing Lotion", "Moisturizing Cream"] },
+            { brand: "Garnier", theme: "sun", eyebrow: "THE SUN CARE EDIT", title: "SUN CARE, IN YOUR ROUTINE.", images: ["/products/garnier-spf45-cutout.png", "/products/garnier-spf60-cutout.png"], names: ["Ombrelle Complete Dry Touch SPF 45", "Ombrelle Complete Dry Touch SPF 60"] },
           ].map(edit => <article className="spotlight-card" key={edit.brand}>
             <a className={`spotlight-art spotlight-${edit.theme}`} href="#collection" onClick={() => chooseBrand(edit.brand)} aria-label={`Explore ${edit.brand} products`}>
               <span className="spotlight-eyebrow">{edit.eyebrow}</span><span className="spotlight-brand">{edit.brand}</span>
               <div className="spotlight-packshots">{edit.images.map((src, i) => <div className={`spotlight-packshot packshot-${i}`} key={src}><Image src={src} alt={`${edit.brand} ${edit.names[i]}`} fill sizes="(max-width: 700px) 40vw, 18vw"/></div>)}</div>
               <span className="spotlight-art-caption">AUTHÉRA SKINCARE · THE EVERYDAY EDIT</span>
             </a>
-            <h3>{edit.title}</h3><p>{edit.text}</p><Link className="spotlight-shop" href={`/shop/collection?brand=${encodeURIComponent(edit.brand)}`}><span>SHOP NOW<span className="screen-reader-only"> — {edit.brand}</span></span><ChevronRight size={17} aria-hidden="true"/></Link>
+            <h3>{edit.title}</h3><Link className="spotlight-shop" href={`/shop/collection?brand=${encodeURIComponent(edit.brand)}`}><span>SHOP NOW<span className="screen-reader-only"> — {edit.brand}</span></span><ChevronRight size={17} aria-hidden="true"/></Link>
           </article>)}
         </div>
       </section>
