@@ -19,18 +19,18 @@
   transform: translateY(calc(var(--rank) * 8px)) rotate(calc(var(--rank) * -2deg)) scale(calc(1 - var(--rank) * .035));
   transform-origin: center 80%;
   opacity: 1; z-index: calc(5 - var(--rank));
-  transition: transform 650ms cubic-bezier(.22,1,.36,1), opacity 450ms ease;
+  transition: transform 550ms cubic-bezier(.22,1,.36,1), opacity 400ms ease;
 }
 .card[data-rank="2"] { transform: translateY(16px) rotate(3deg) scale(.93); }
 .card[data-rank="3"], .card[data-rank="4"] { opacity: 0; pointer-events: none; }
 .card[data-rank="0"] { z-index: 6; transform: translateX(0) translateY(0) rotate(0) scale(1); }
-.card[data-rank="1"] { transform: translateX(24px) translateY(10px) rotate(-3deg) scale(.955); }
-.card[data-rank="4"] { transform: translateX(-110px) translateY(-12px) rotate(-9deg) scale(.96); }
+.card[data-rank="1"] { transform: translateX(var(--enter-x, 24px)) translateY(var(--enter-y, 10px)) rotate(var(--enter-turn, -3deg)) scale(.955); }
+.card[data-rank="4"] { transform: translateX(var(--exit-x, -110px)) translateY(var(--exit-y, -12px)) rotate(var(--exit-turn, -9deg)) scale(.96); }
 .card[data-colour="0"] { --card-fill: #e9f3ff; --card-border: #c7dcf1; }
-.card[data-colour="1"] { --card-fill: #fcebf0; --card-border: #edcdd8; }
-.card[data-colour="2"] { --card-fill: #eaf4ed; --card-border: #cbded0; }
-.card[data-colour="3"] { --card-fill: #f1ebfc; --card-border: #dcd0ee; }
-.card[data-colour="4"] { --card-fill: #fff1df; --card-border: #eedbc0; }
+.card[data-colour="1"] { --card-fill: #fcebf0; --card-border: #edcdd8; --enter-x: -26px; --enter-turn: 3deg; --exit-x: 110px; --exit-turn: 9deg; }
+.card[data-colour="2"] { --card-fill: #eaf4ed; --card-border: #cbded0; --enter-x: 0px; --enter-y: 26px; --enter-turn: 0deg; --exit-x: 0px; --exit-y: -75px; --exit-turn: 2deg; }
+.card[data-colour="3"] { --card-fill: #f1ebfc; --card-border: #dcd0ee; --enter-x: -30px; --enter-y: 16px; --enter-turn: 4deg; --exit-x: 95px; --exit-y: -35px; --exit-turn: 11deg; }
+.card[data-colour="4"] { --card-fill: #fff1df; --card-border: #eedbc0; --enter-x: 20px; --enter-y: -16px; --enter-turn: -4deg; --exit-x: -55px; --exit-y: 65px; --exit-turn: -6deg; }
 .cardTop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .reviewer { display: flex; align-items: center; gap: 10px; }
 .reviewer h3 { margin: 0; font-size: 14px; font-weight: 600; }
