@@ -4,8 +4,7 @@ import Link from "next/link";
 import type { Product } from "@/lib/catalog/types";
 import ProductImage from "./product-image";
 import ProductPrice from "./product-price";
-import { useState } from "react";
-import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import styles from "./customer-reviews.module.css";
 
 const reviews = [
@@ -17,22 +16,18 @@ const reviews = [
 ];
 
 export default function CustomerReviews({ products }: { products: Product[] }) {
-  const [first, setFirst] = useState(0);
-  const orderedReviews = [...reviews.slice(first), ...reviews.slice(0, first)];
 
   return (
     <section className={styles.section} aria-labelledby="customer-reviews-title">
       <div className={styles.inner}>
         <div className={styles.heading}>
           <h2 id="customer-reviews-title">Hear It from Our Customers</h2>
-          <div className={styles.controls}>
-            <button type="button" aria-label="Previous review" onClick={() => setFirst(index => (index + reviews.length - 1) % reviews.length)}><ArrowLeft size={20} /></button>
-            <button type="button" aria-label="Next review" onClick={() => setFirst(index => (index + 1) % reviews.length)}><ArrowRight size={20} /></button>
-          </div>
         </div>
-        <p>Sample delivery feedback</p>
-        <div className={styles.cards} aria-live="polite">
-          {orderedReviews.slice(0, 3).map(review => {
+        <p className={styles.caption}>Sample delivery feedback</p>
+        <div className={styles.viewport}>
+        <div className={styles.track}>
+        {[0, 1].map(copy => <div className={styles.cards} key={copy} data-copy={copy === 1 || undefined}>
+          {reviews.map(review => {
             const product = products.find(item => item.id === review.productId);
             return (
               <article className={styles.card} key={review.name}>
@@ -53,6 +48,8 @@ export default function CustomerReviews({ products }: { products: Product[] }) {
               </article>
             );
           })}
+        </div>)}
+        </div>
         </div>
       </div>
     </section>
