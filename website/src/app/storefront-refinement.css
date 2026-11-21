@@ -248,7 +248,7 @@
 .product-card .photo-pending{background:#f8f6f7;font-size:11px;padding:16px;line-height:1.7;text-align:center}
 .product-card .flavor-gallery-hint{font-size:10px;bottom:12px;padding:6px 10px}
 .catalog-note{border-top:1px solid #eee8eb;padding-top:22px;margin-top:30px;font-size:11px;color:#75646e}
-.winter-care-section{padding-top:56px;padding-bottom:56px;border-top:1px solid #eee3e8;border-bottom:1px solid #eee3e8;background:#fdf8fa;margin-bottom:24px}
+.winter-care-section{padding-top:28px;padding-bottom:32px;border-top:1px solid #eee3e8;border-bottom:1px solid #eee3e8;background:#fdf8fa;margin-bottom:24px}
 .winter-care-heading{max-width:620px;margin:0 0 30px;text-align:left}
 .winter-care-heading h2{font-size:38px;color:#34272d;letter-spacing:-.5px}
 .winter-care-heading p{font-size:14px;line-height:1.8;color:#75646e}
@@ -454,7 +454,7 @@
   .collection-category-links a:is(:hover, :focus-visible), .collection-category-links a:is(:hover, :focus-visible) .collection-category-products { transform: none; }
 }
 /* Distinct seasonal choices with a shared, uncluttered toolbar. */
-.seasonal-care-selector { margin-bottom: 28px; }
+.seasonal-care-selector { padding-top: 0; margin-bottom: 18px; }
 .seasonal-care-tabs {
   max-width: 880px;
   padding: 0;
@@ -468,7 +468,7 @@
   --tab-colour: #315b70;
   --tab-fill: #e2eff6;
   position: relative;
-  min-height: 58px;
+  min-height: 44px;
   border: 1px solid color-mix(in srgb, var(--tab-colour) 24%, white);
   border-radius: 14px;
   background: var(--tab-fill);
@@ -494,7 +494,7 @@
 .winter-care-navigation { gap: 12px; }
 @media (max-width: 600px) {
   .seasonal-care-tabs { gap: 6px; }
-  .seasonal-care-tabs button { min-height: 68px; padding: 9px 3px; border-radius: 12px; }
+  .seasonal-care-tabs button { min-height: 54px; padding: 7px 3px; border-radius: 10px; }
   .winter-care-toolbar { gap: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -606,4 +606,32 @@
 @media (prefers-reduced-motion: reduce) {
   .essentials-all-products a { transition: none; }
   .essentials-all-products a:hover { transform: none; }
+}
+
+/* Compact seasonal heading and coordinated collection controls. */
+.seasonal-care-eyebrow { margin-bottom: 7px; font-size: 9px; letter-spacing: 2px; }
+.seasonal-care-selector h2 { font-size: clamp(28px, 3vw, 34px); margin-bottom: 16px; padding-bottom: 0; letter-spacing: -.7px; }
+.seasonal-care-selector h2::after { display: none; }
+.seasonal-care-tabs { max-width: 750px; gap: 8px; }
+.seasonal-care-tabs button { font-size: 13px; border-radius: 11px; padding: 8px 12px; }
+.winter-care-toolbar { justify-content: flex-start; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px; border: 1px solid #dce6e4; border-radius: 14px; background: #f2f7f680; }
+.winter-care-toolbar .winter-care-filter { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 12px; color: #506b65; }
+.winter-care-toolbar .winter-care-filter > span { white-space: nowrap; }
+.winter-care-toolbar .winter-dropdown-trigger,
+.winter-care-collection-link { min-height: 42px; padding: 9px 14px; border: 1px solid #b3c9c4; border-radius: 9px; box-shadow: none; font-size: 12px; color: #294c49; background: #fff; }
+.winter-care-toolbar .winter-dropdown-trigger { min-width: 175px; }
+.winter-care-navigation { margin-left: auto; gap: 10px; }
+.winter-care-collection-link { justify-content: center; background: #315e59; border-color: #315e59; color: #fff; }
+.winter-care-collection-link:hover { background: #244b47; color: #fff; border-color: #244b47; }
+.winter-care-toolbar .winter-dropdown-trigger:hover { background: #e9f2ef; border-color: #709b90; }
+.winter-care-navigation > span { color: #647b73; font-size: 11px; }
+@media (max-width: 700px) {
+  .winter-care-toolbar { padding: 10px; gap: 10px; flex-wrap: wrap; }
+  .winter-care-toolbar .winter-care-filter { flex: 1 1 180px; }
+  .winter-care-toolbar .winter-care-filter > span { display: none; }
+  .winter-care-toolbar .winter-dropdown-trigger { min-width: 0; width: 100%; }
+  .winter-care-navigation { flex: 1 1 160px; justify-content: flex-end; }
+  .winter-care-collection-link { min-height: 44px; }
+  .seasonal-care-selector h2 { font-size: 29px; margin-bottom: 14px; }
+  .seasonal-care-tabs button { font-size: 11px; }
 }
