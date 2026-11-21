@@ -4,7 +4,7 @@
 .group { display: flex; gap: 16px; padding-right: 16px; }
 .item { flex: none; width: 195px; }
 .item > article { height: 100%; }
-.marquee:hover .track, .marquee:focus-within .track, .marquee[data-paused="true"] .track { animation-play-state: paused; }
+.marquee:focus-within .track, .marquee[data-paused="true"] .track { animation-play-state: paused; }
 @keyframes drift { to { transform: translateX(-50%); } }
 @media (max-width: 700px) { .item { width: 180px; } .group { gap: 14px; padding-right: 14px; } }
 @media (prefers-reduced-motion: reduce) {
