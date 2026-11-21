@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import LipCareWall from "./lip-care-wall";
+import HotSellingMarquee from "./hot-selling-marquee";
 import ProductImage from "./product-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -354,10 +355,10 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       </section>}
       {!categoryPage && !blogPage && <><section className="spotlight-section hot-selling-section" aria-labelledby="hot-selling-title">
         <div className="hot-selling-heading">
-          <h2 id="hot-selling-title">Hot Selling Products</h2>
+          <h2 id="hot-selling-title">Hot Selling Products <span role="img" aria-label="hot">🔥</span></h2>
           <Link className="hot-selling-browse" href="/shop/collection">Explore all products <ChevronRight size={17} aria-hidden="true"/></Link>
         </div>
-        <div className="hot-selling-products">{hotSellingProducts.map(renderProduct)}</div>
+        <HotSellingMarquee cards={hotSellingProducts.map(renderProduct)} />
       </section>
       <section className="video-section" id="videos" aria-labelledby="videos-title">
         <h2 id="videos-title">FEATURED IN VIDEOS</h2>
