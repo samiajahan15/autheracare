@@ -73,11 +73,11 @@ function InstagramIcon() {
 const categoryIcons = { beauty: Sparkles, "hair-body": Droplets, "health-wellness": Activity, "personal-care": HandHeart, lifestyle: Coffee };
 
 const categoryVisualProducts: Record<ShoppingGroup, string[]> = {
-  beauty: ["cerave", "ordinary-hyaluronic"],
-  "hair-body": ["garnier-shampoo", "cerave-shampoo"],
-  "health-wellness": ["nutiva-mct-oil", "salonpas-patches"],
+  beauty: ["cerave", "ordinary-hyaluronic", "nyx-duck-plump-lip-gloss", "ordinary-nmf", "eos-vanilla-bean-single", "bbw-butterfly"],
+  "hair-body": ["garnier-shampoo", "cerave-shampoo", "cerave-conditioner", "native", "cerave-daily-lotion", "cerave-baby-wash"],
+  "health-wellness": ["nutiva-mct-oil", "salonpas-patches", "metamucil-sugar-free-4-in-1-fibre-orange-662g", "adrien-gagnon-melatonin-10mg-dual-action-160", "new-nordic-hair-gro-120-tablets", "natures-bounty-melatonin-gummies"],
   "personal-care": ["fixodent-plus-scope", "gum-professional-clean-flosser-picks"],
-  lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "bbw-raspberry-mimosa-3-wick-candle-411g"],
+  lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "nescafe-rich-instant-coffee-475g", "ordinary-bottle", "bbw-raspberry-mimosa-3-wick-candle-411g", "bbw-tis-the-season-3-wick-candle-411g", "bbw-lakeside-morning-3-wick-candle-411g"],
 };
 const dailyRoutine = [
   { step: "Face Cleanser", id: "pdf-01-008-1-cerave-hydrating-cleanser-237-ml" },
@@ -287,11 +287,14 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
                   const product = products.find(item => item.id === id && item.image);
                   return product ? [product] : [];
                 });
-                const visualProducts = preferred.length ? preferred : products.filter(product => product.image && matchesShoppingGroup(product, slug)).slice(0, 2);
+                const candidates = [...preferred, ...products.filter(product => product.image && matchesShoppingGroup(product, slug))];
+                const visualProducts = candidates.filter((product, index) =>
+                  candidates.findIndex(item => item.image === product.image) === index
+                ).slice(0, 6);
                 return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
                   <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
                   <div className="collection-category-products" aria-hidden="true">
-                    {visualProducts.map(product => <ProductImage key={product.id} src={product.image!} alt="" width={180} height={220} sizes="(max-width: 600px) 24vw, 12vw"/>)}
+                    {visualProducts.map(product => <ProductImage key={product.id} src={product.image!} alt="" width={110} height={130} sizes="(max-width: 600px) 15vw, 7vw"/>)}
                   </div>
                   <Image className="collection-category-brand" src="/brand/authera-logo.png" alt="Authéra" width={100} height={40}/>
                   <strong className="collection-category-title">{group.title}</strong>
