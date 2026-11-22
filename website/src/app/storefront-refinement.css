@@ -686,3 +686,10 @@
   .brand-section { padding: 16px 0 12px; }
   .brand-section h2 { font-size: 19px; margin-bottom: 5px; }
 }
+
+.video-showcase { touch-action: pan-y; cursor: grab; }
+.video-showcase .video-card {
+  transform: translate(-50%, -50%) translateX(calc(var(--reel-x) + var(--reel-drag, 0px))) scale(var(--reel-scale));
+}
+.video-showcase[data-dragging] { cursor: grabbing; user-select: none; }
+.video-showcase[data-dragging] .video-card { transition: none; animation: none; }

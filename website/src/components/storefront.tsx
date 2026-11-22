@@ -30,7 +30,7 @@ import Journal from "./journal";
 import CustomerReviews from "./customer-reviews";
 import type { Product } from "@/lib/catalog/types";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { Search, ShoppingBag, Menu, X, ChevronDown, Heart, Plus, Minus, ChevronUp, ChevronRight, ShieldCheck, Snowflake, Sun, Leaf, CloudRain, Flower2, Sparkles, Droplets, Activity, HandHeart, Coffee } from "lucide-react";
 
 function CampaignVideo({ src, title, onShop }: { src: string; title: string; onShop: () => void }) {
@@ -168,6 +168,51 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
     });
   }
   const videoShowcaseRef = useRef<HTMLDivElement>(null);
+  const videoDrag = useRef<{ id: number; x: number; y: number; moved: boolean } | null>(null);
+  const suppressVideoClick = useRef(false);
+
+  function startVideoDrag(event: PointerEvent<HTMLDivElement>) {
+    if (!event.isPrimary || event.button !== 0) return;
+    const target = event.target as HTMLElement;
+    if (target.closest("button, a, input")) return;
+    const player = target.closest("video");
+    if (player && event.clientY > player.getBoundingClientRect().bottom - 44) return;
+    suppressVideoClick.current = false;
+    videoDrag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
+  }
+
+  function moveVideoDrag(event: PointerEvent<HTMLDivElement>) {
+    const gesture = videoDrag.current;
+    if (!gesture || gesture.id !== event.pointerId) return;
+    const dx = event.clientX - gesture.x;
+    const dy = event.clientY - gesture.y;
+    if (!gesture.moved) {
+      if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+        videoDrag.current = null;
+        return;
+      }
+      if (Math.abs(dx) < 10) return;
+      gesture.moved = true;
+      event.currentTarget.setPointerCapture(event.pointerId);
+      event.currentTarget.dataset.dragging = "true";
+    }
+    event.currentTarget.style.setProperty("--reel-drag", `${Math.max(-140, Math.min(140, dx))}px`);
+  }
+
+  function finishVideoDrag(event: PointerEvent<HTMLDivElement>) {
+    const gesture = videoDrag.current;
+    if (!gesture || gesture.id !== event.pointerId) return;
+    videoDrag.current = null;
+    delete event.currentTarget.dataset.dragging;
+    event.currentTarget.style.removeProperty("--reel-drag");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (!gesture.moved) return;
+    suppressVideoClick.current = true;
+    const dx = event.clientX - gesture.x;
+    if (event.type !== "pointercancel" && Math.abs(dx) >= 45) {
+      setVideoPage(page => (page + (dx < 0 ? 1 : 5)) % 6);
+    }
+  }
   useEffect(() => {
     const showcase = videoShowcaseRef.current;
     if (!showcase) return;
@@ -372,7 +417,17 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
       <section className="video-section" id="videos" aria-labelledby="videos-title">
         <h2 id="videos-title">FEATURED IN VIDEOS</h2>
         <p className="video-intro">Discover the Authéra collection, one reel at a time.</p>
-        <div className="video-showcase" ref={videoShowcaseRef}>
+        <div className="video-showcase" ref={videoShowcaseRef}
+          onPointerDown={startVideoDrag} onPointerMove={moveVideoDrag}
+          onPointerUp={finishVideoDrag} onPointerCancel={finishVideoDrag}
+          onPointerLeave={event => { if (!videoDrag.current?.moved) videoDrag.current = null; }}
+          onClickCapture={event => {
+            if (suppressVideoClick.current && event.detail > 0) {
+              event.preventDefault();
+              event.stopPropagation();
+              suppressVideoClick.current = false;
+            }
+          }}>
           {Array.from({length:6}, (_, index) => {
             const reels = [
               {brand:"CeraVe", title:"THE EVERYDAY CARE EDIT"},
