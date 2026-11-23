@@ -693,3 +693,14 @@
 }
 .video-showcase[data-dragging] { cursor: grabbing; user-select: none; }
 .video-showcase[data-dragging] .video-card { transition: none; animation: none; }
+
+.essentials-intro .shop-intro { text-align: center; }
+.essentials-intro .shop-intro > .section-kicker,
+.essentials-intro .shop-intro > p {
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+.essentials-intro .shop-intro > p { margin-top: 6px; }
