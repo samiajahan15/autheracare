@@ -4497,9 +4497,9 @@
       "size": "75 mL",
       "price": 1700,
       "image": "/products/bondi-sands-face-spf50-75ml-seller.png",
-      "description": "One 75 mL tube of Bondi Sands Face Sunscreen Lotion SPF 50+. Australian made. Sold individually for ৳1,700. Actual seller-supplied product photo.",
-      "editedImage": false,
-      "edited_image": false
+      "description": "One 75 mL tube of Bondi Sands Face Sunscreen Lotion SPF 50+. Australian made. Sold individually for ৳1,700. Studio-style image prepared from the seller-supplied product photo using AI.",
+      "editedImage": true,
+      "edited_image": true
     },
     {
       "id": "pdf-18-077-1-bondi-sands-sunscreen-lotion-spf50-500-ml",
