@@ -78,7 +78,7 @@ const categoryVisualProducts: Record<ShoppingGroup, string[]> = {
   beauty: ["cerave", "ordinary-hyaluronic", "nyx-duck-plump-lip-gloss", "ordinary-nmf", "eos-vanilla-bean-single", "bbw-butterfly"],
   "hair-body": ["garnier-shampoo", "cerave-shampoo", "cerave-conditioner", "native", "cerave-daily-lotion", "cerave-baby-wash"],
   "health-wellness": ["nutiva-mct-oil", "salonpas-patches", "metamucil-sugar-free-4-in-1-fibre-orange-662g", "adrien-gagnon-melatonin-10mg-dual-action-160", "new-nordic-hair-gro-120-tablets", "natures-bounty-melatonin-gummies"],
-  "personal-care": ["fixodent-plus-scope", "gum-professional-clean-flosser-picks"],
+  "personal-care": ["fixodent-plus-scope", "kirkland-sensitive-lactose-infant-formula-1360g", "gum-professional-clean-flosser-picks", "kirkland-procare-infant-formula-1360g"],
   lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "nescafe-rich-instant-coffee-475g", "ordinary-bottle", "bbw-raspberry-mimosa-3-wick-candle-411g", "bbw-tis-the-season-3-wick-candle-411g", "bbw-lakeside-morning-3-wick-candle-411g"],
 };
 const categoryProductCutouts: Record<string, string> = {
