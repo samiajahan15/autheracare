@@ -81,6 +81,12 @@ const categoryVisualProducts: Record<ShoppingGroup, string[]> = {
   "personal-care": ["fixodent-plus-scope", "gum-professional-clean-flosser-picks"],
   lifestyle: ["bbw-coffee-and-whiskey-3-wick-candle-411g", "nescafe-rich-instant-coffee-475g", "ordinary-bottle", "bbw-raspberry-mimosa-3-wick-candle-411g", "bbw-tis-the-season-3-wick-candle-411g", "bbw-lakeside-morning-3-wick-candle-411g"],
 };
+const categoryProductCutouts: Record<string, string> = {
+  "eos-vanilla-bean-single": "/products/motion/eos-vanilla-bean-single.webp",
+  "natures-bounty-melatonin-gummies": "/products/category-natures-bounty-cutout.webp",
+  "kirkland-procare-infant-formula-1360g": "/products/category-procare-cutout.webp",
+  "nescafe-rich-instant-coffee-475g": "/products/category-nescafe-cutout.webp",
+};
 const hotSellingProductIds = [
   "pdf-07-003-1-la-roche-posay-anthelios-50-spf-face-lotion-ultra-fluid-50-ml",
   "pdf-18-078-1-bondi-sands-face-sunscreen-lotion-spf-50-75-ml",
@@ -359,7 +365,7 @@ export default function Home({ products, catalogUnavailable = false, categoryPag
                 return <Link key={slug} href={`/shop/${slug}`} data-category={slug}>
                   <span className="collection-category-icon"><Icon size={22} strokeWidth={1.5} aria-hidden="true"/></span>
                   <div className="collection-category-products" aria-hidden="true">
-                    {visualProducts.map(product => <ProductImage key={product.id} src={product.image!} alt="" width={110} height={130} sizes="(max-width: 600px) 15vw, 7vw"/>)}
+                    {visualProducts.map(product => <ProductImage key={product.id} src={categoryProductCutouts[product.id] ?? product.image!} alt="" width={110} height={130} sizes="(max-width: 600px) 15vw, 7vw"/>)}
                   </div>
                   <Image className="collection-category-brand" src="/brand/authera-logo.png" alt="Authéra" width={100} height={40}/>
                   <strong className="collection-category-title">{group.title}</strong>
