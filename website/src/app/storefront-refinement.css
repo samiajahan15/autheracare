@@ -32,7 +32,7 @@
   z-index: -1;
   background: linear-gradient(#fffdf9c7, #fff9f166);
 }
-.essentials-intro .collection-category-links { margin-top: clamp(64px, 7vw, 100px); margin-bottom: 0; }
+.essentials-intro .collection-category-links { margin-top: clamp(88px, 9vw, 132px); margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   .essentials-intro-video { display: none; }
 }
