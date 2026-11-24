@@ -74,7 +74,10 @@
     "Pantene",
     "Kirkland Signature",
     "Fino",
-    "Marc Anthony"
+    "Marc Anthony",
+    "Sensodyne",
+    "Colgate",
+    "Crest"
   ],
   "products": [
     {
@@ -3953,7 +3956,8 @@
       "name": "Soft-Picks Advanced",
       "category": "Oral care",
       "size": "270 picks (3 × 90)",
-      "editedImage": false
+      "editedImage": true,
+      "image": "/products/gum-soft-picks-advanced-270-studio.webp"
     },
     {
       "id": "pdf-19-090-1-kalaya-muscles-joint-pain-relief-cream-6-extra-strength-with-arnica-2120-150-120-g-50-g",
@@ -4523,6 +4527,60 @@
       "editedImage": false,
       "size": "1.36 kg",
       "description": "Kirkland Signature iron-fortified infant formula. The supplied package is labelled “For Babies Sensitive to Lactose” and shows a 1.36 kg container. Container only; the feeding bottle shown beside the package is not included. Confirm price and current availability before ordering."
+    },
+    {
+      "id": "pdf-18-081-1-sensodyne-pronamel-kids-paste-75-ml",
+      "brand": "Sensodyne",
+      "name": "Pronamel Kids Gentle Mint Toothpaste",
+      "category": "Oral care",
+      "size": "75 mL",
+      "image": "/products/sensodyne-pronamel-kids-gentle-mint-75ml-studio.webp",
+      "editedImage": true
+    },
+    {
+      "id": "sensodyne-whitening-tartar-control-4x145ml",
+      "brand": "Sensodyne",
+      "name": "Whitening + Tartar Control Toothpaste – 4-Pack",
+      "category": "Oral care",
+      "size": "4 × 145 mL",
+      "image": "/products/sensodyne-whitening-tartar-control-4x145ml-studio.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-18-085-1-colgate-sensitive-pro-relief-120-ml",
+      "brand": "Colgate",
+      "name": "Sensitive Pro-Relief Repair & Prevent Toothpaste",
+      "category": "Oral care",
+      "size": "120 mL",
+      "image": "/products/colgate-sensitive-pro-relief-repair-prevent-120ml-studio.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-18-080-1-crest-scope-advanced-paste-170-ml",
+      "brand": "Crest",
+      "name": "Complete Plus Scope Outlast Toothpaste",
+      "category": "Oral care",
+      "size": "170 mL",
+      "image": "/products/crest-complete-plus-scope-170ml-studio.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-18-079-1-crest-3d-white-paste-135-ml",
+      "brand": "Crest",
+      "name": "3D White Advanced Arctic Fresh Toothpaste",
+      "category": "Oral care",
+      "size": "135 mL",
+      "image": "/products/crest-3d-white-advanced-arctic-fresh-135ml-studio.webp",
+      "editedImage": true
+    },
+    {
+      "id": "pdf-18-084-1-sensodyne-pronamel-115-ml",
+      "brand": "Sensodyne",
+      "name": "Pronamel Daily Protection Toothpaste",
+      "category": "Oral care",
+      "size": "115 mL",
+      "image": "/products/sensodyne-pronamel-daily-protection-115ml-studio.webp",
+      "editedImage": true
     }
   ]
 }
