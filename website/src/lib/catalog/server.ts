@@ -17,7 +17,7 @@ export async function getCatalog(): Promise<{ products: Product[]; source: "supa
     if (error) throw error;
     return { source: "supabase", products: deduplicateProducts((data ?? []).map(row => ({
       ...row, category: row.category as Product["category"],
-      image: productImageSource(row.image ?? undefined), editedImage: row.edited_image,
+      image: productImageSource(row.image ?? (row.id === "qtips-cotton-swabs-500" ? "/products/qtips-cotton-swabs-500-studio.webp" : undefined)), editedImage: row.edited_image || row.id === "qtips-cotton-swabs-500",
       size: row.size ?? undefined, price: row.price == null ? undefined : Number(row.price),
       description: row.description ?? undefined,
     }))) };
