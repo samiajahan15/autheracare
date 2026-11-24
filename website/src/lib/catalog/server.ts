@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { getSupabaseConfig } from "@/lib/supabase/config";
 import seed from "./seed.json";
 import oralCareProducts from "./oral-care-products.json";
+import additionalProducts from "./additional-products.json";
 import type { Product } from "./types";
 import { productImageSource } from "./product-image";
 import { deduplicateProducts } from "./deduplicate";
@@ -27,13 +28,14 @@ export async function getCatalog(): Promise<{ products: Product[]; source: "supa
       size: row.size ?? undefined, price: row.price == null ? undefined : Number(row.price),
       description: row.description ?? undefined,
     }));
-    const oralCareById = new Map((oralCareProducts as Product[]).map(product => [product.id, product]));
+    const curatedProducts = [...oralCareProducts, ...additionalProducts] as Product[];
+    const curatedById = new Map(curatedProducts.map(product => [product.id, product]));
     return { source: "supabase", products: deduplicateProducts([
       ...databaseProducts.map(product => {
-        const updated = oralCareById.get(product.id);
+        const updated = curatedById.get(product.id);
         return updated ? { ...product, name: updated.name, image: updated.image, editedImage: true } : product;
       }),
-      ...(oralCareProducts as Product[]).filter(product => !databaseProducts.some(existing => existing.id === product.id)),
+      ...curatedProducts.filter(product => !databaseProducts.some(existing => existing.id === product.id)),
     ]) };
   } catch (error) {
     console.error("Supabase catalog unavailable:", error instanceof Error ? error.message : "Database query failed");

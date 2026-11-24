@@ -567,17 +567,6 @@
       "description": "One cream Vanilla Bean lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
     },
     {
-      "id": "eos-raspberry-rose-single",
-      "brand": "EOS",
-      "name": "Shea Natural Smooth Lip Balm – Raspberry Rosé (Single)",
-      "category": "Lip care",
-      "image": "/products/eos-raspberry-rose-single.png",
-      "editedImage": true,
-      "size": "1 lip balm · 4 g",
-      "price": 320,
-      "description": "One pink Raspberry Rosé lip balm, sold individually for ৳320. The 9-pack box pictured is for reference and is not included with this single product."
-    },
-    {
       "id": "eos-spritz-lip-balm",
       "brand": "EOS",
       "name": "Spritz Shea Natural Smooth Lip Balm 9-Pack Combo",
@@ -4581,6 +4570,16 @@
       "size": "115 mL",
       "image": "/products/sensodyne-pronamel-daily-protection-115ml-studio.webp",
       "editedImage": true
+    },
+    {
+      "id": "ogx-coconut-miracle-oil-100ml",
+      "brand": "OGX",
+      "name": "Extra Strength Damage Remedy + Coconut Miracle Oil Penetrating Oil",
+      "category": "Hair care",
+      "size": "100 mL",
+      "image": "/products/ogx-coconut-miracle-oil-100ml-product-only.webp",
+      "editedImage": true,
+      "description": "OGX Extra Strength Damage Remedy + Coconut Miracle Oil Penetrating Oil. One 100 mL bottle. Confirm current price and availability before ordering."
     }
   ]
 }

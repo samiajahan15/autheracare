@@ -565,5 +565,20 @@
   },
   "/products/kirkland-sensitive-lactose-infant-formula-1360g.png": {
     "source": "/products/kirkland-sensitive-lactose-infant-formula-1360g-studio.webp"
+  },
+  "/products/bondi-sands-spf50-500ml-pack-reference.png": {
+    "source": "/products/bondi-sands-spf50-500ml-boxed-studio.webp"
+  },
+  "/products/cerave-acne-473-product-only.webp": {
+    "source": "/products/cerave-acne-473-transparent.webp"
+  },
+  "/products/cerave-sa-473-product-only.webp": {
+    "source": "/products/cerave-sa-473-transparent.webp"
+  },
+  "/products/cerave-am-lotion-89ml-internet.jpg": {
+    "source": "/products/cerave-am-lotion-89ml-transparent.webp"
+  },
+  "/products/pdf-13-006-1-pantene-advanced-care-pro-v-5-in-1-conditioner-1-13-l.png": {
+    "source": "/products/pantene-5in1-conditioner-1130ml-product-only.webp"
   }
 }
