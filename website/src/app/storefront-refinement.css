@@ -704,3 +704,17 @@
   text-align: center;
 }
 .essentials-intro .shop-intro > p { margin-top: 6px; }
+
+/* Fill the homepage category section edge to edge while keeping cards aligned. */
+.shop-section:has(> .essentials-intro) {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: 0;
+}
+.shop-section > .essentials-intro {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  padding-inline: max(clamp(20px, 4vw, 64px), calc((100% - 1280px) / 2));
+}

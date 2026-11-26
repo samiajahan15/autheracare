@@ -4580,6 +4580,46 @@
       "image": "/products/ogx-coconut-miracle-oil-100ml-product-only.webp",
       "editedImage": true,
       "description": "OGX Extra Strength Damage Remedy + Coconut Miracle Oil Penetrating Oil. One 100 mL bottle. Confirm current price and availability before ordering."
+    },
+    {
+      "id": "aveeno-baby-daily-cream-coconut-shea-354ml",
+      "brand": "Aveeno",
+      "name": "Baby Daily Cream – Coconut Oil & Shea Butter",
+      "category": "Body care",
+      "size": "354 mL",
+      "image": "/products/aveeno-baby-daily-cream-coconut-shea-354ml-product-only.webp",
+      "editedImage": true,
+      "description": "Aveeno Baby Daily Cream with coconut oil and shea butter. One 354 mL pump bottle. Confirm current price and availability before ordering."
+    },
+    {
+      "id": "bbw-neapolitan-ice-cream-lip-mask-15g",
+      "brand": "Bath & Body Works",
+      "name": "Neapolitan Ice Cream Lip Mask",
+      "category": "Lip care",
+      "size": "15 g",
+      "image": "/products/bbw-neapolitan-ice-cream-lip-mask-15g-product-only.webp",
+      "editedImage": true,
+      "description": "Bath & Body Works Neapolitan Ice Cream Lip Mask. One 15 g jar. Confirm current price and availability before ordering."
+    },
+    {
+      "id": "bbw-pink-pineapple-sunrise-lip-mask-15g",
+      "brand": "Bath & Body Works",
+      "name": "Pink Pineapple Sunrise Lip Mask",
+      "category": "Lip care",
+      "size": "15 g",
+      "image": "/products/bbw-pink-pineapple-sunrise-lip-mask-15g-product-only.webp",
+      "editedImage": true,
+      "description": "Bath & Body Works Pink Pineapple Sunrise Lip Mask. One 15 g jar. Confirm current price and availability before ordering."
+    },
+    {
+      "id": "bbw-strawberry-pound-cake-lip-mask-15g",
+      "brand": "Bath & Body Works",
+      "name": "Strawberry Pound Cake Lip Mask",
+      "category": "Lip care",
+      "size": "15 g",
+      "image": "/products/bbw-strawberry-pound-cake-lip-mask-15g-product-only.webp",
+      "editedImage": true,
+      "description": "Bath & Body Works Strawberry Pound Cake Lip Mask. One 15 g jar. Confirm current price and availability before ordering."
     }
   ]
 }
